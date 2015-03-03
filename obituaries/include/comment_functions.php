@@ -9,21 +9,20 @@
  */
 
 if (!defined('XOOPS_ROOT_PATH')) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 function obituaries_com_update($userId, $total_num)
 {
-	include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
-	global $hBdUsersObituaries;
-	if(!is_object($hBdUsersObituaries)) {
-		$hBdUsersObituaries = xoops_getmodulehandler('users_obituaries', OBITUARIES_DIRNAME);
-	}
-	$hBdUsersObituaries->updateCommentsCount($userId, $total_num);
+    include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
+    global $hBdUsersObituaries;
+    if(!is_object($hBdUsersObituaries)) {
+        $hBdUsersObituaries = xoops_getmodulehandler('users_obituaries', OBITUARIES_DIRNAME);
+    }
+    $hBdUsersObituaries->updateCommentsCount($userId, $total_num);
 }
 
 function obituaries_com_approve(&$comment)
 {
-	// notification mail here
+    // notification mail here
 }
-?>

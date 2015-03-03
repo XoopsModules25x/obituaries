@@ -99,4 +99,4 @@ interface obituaries_Text_CAPTCHA_Numeral_Interface
     // }}}
 }
 // }}}
-?>
+;

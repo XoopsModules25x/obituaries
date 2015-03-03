@@ -55,4 +55,3 @@ $breadcrumb = obituaries_utils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
 include_once XOOPS_ROOT_PATH.'/include/comment_view.php';
 require_once XOOPS_ROOT_PATH.'/footer.php';
-?>

@@ -9,7 +9,7 @@ require_once XOOPS_ROOT_PATH.'/header.php';
 require_once XOOPS_ROOT_PATH.'/class/pagenav.php';
 
 $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
-$limit = obituaries_utils::getModuleOption('perpage');	// Nombre maximum d'�l�ments � afficher
+$limit = obituaries_utils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
 $users = array();
 
 if(isset($_GET['op']) && $_GET['op'] == 'today') {    // Les utilisateurs dont l'anniversaire est aujourd'hui
@@ -45,9 +45,7 @@ $metaDescription = $pageTitle;
 $metaKeywords = '';
 obituaries_utils::setMetas($pageTitle, $metaDescription, $metaKeywords);
 
-
 $path = array(OBITUARIES_URL.'index.php' => _AM_OBITUARIES_USERS_LIST);
 $breadcrumb = obituaries_utils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
 require_once XOOPS_ROOT_PATH.'/footer.php';
-?>

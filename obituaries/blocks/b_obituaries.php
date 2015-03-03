@@ -1,7 +1,7 @@
 <?php
 function b_obituaries_show($options) {
-	global $xoopsUser;
-	$block = array();
+    global $xoopsUser;
+    $block = array();
     include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
     $start = 0;
     $limit = intval($options[0]);
@@ -18,22 +18,23 @@ function b_obituaries_show($options) {
         $block['obituaries_today_more'] = false;
     }
 
-	if (is_object($xoopsUser)) {
-		$block['obituaries_today_mypage'] = true;
-	} else {
-	    $block['obituaries_today_mypage'] = false;
-	}
-	$block['obituaries_display_picture'] = intval($options[1]);
+    if (is_object($xoopsUser)) {
+        $block['obituaries_today_mypage'] = true;
+    } else {
+        $block['obituaries_today_mypage'] = false;
+    }
+    $block['obituaries_display_picture'] = intval($options[1]);
     $block['obituaries_picture_width'] = $options[2];
-	return $block;
+
+    return $block;
 }
 
 function b_obituaries_edit($options)
 {
-	include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
-	$form = '';
-	$form .= "<table border='0'>";
-	$form .= '<tr><td>'._MB_OBITUARIES_MAX_ITEMS."</td><td><input type='text' name='options[]' id='options' value='".$options[0]."' /></td></tr>\n";
+    include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
+    $form = '';
+    $form .= "<table border='0'>";
+    $form .= '<tr><td>'._MB_OBITUARIES_MAX_ITEMS."</td><td><input type='text' name='options[]' id='options' value='".$options[0]."' /></td></tr>\n";
     $form .= "<tr><td>"._MB_OBITUARIES_DISPLAY_PICTURE."</td><td><input type='radio' id='options[]' name='options[]' value='1'";
     if ($options[1] == 1) {
         $form .= " checked='checked'";
@@ -43,13 +44,14 @@ function b_obituaries_edit($options)
         $form .= " checked='checked'";
     }
     $form .= " />&nbsp;"._NO."</td></tr>\n";
-	$form .= '<tr><td>'._MB_OBITUARIES_PICTURE_WIDTH."</td><td><input type='text' name='options[]' id='options' value='".$options[2]."' /></td></tr>\n";
+    $form .= '<tr><td>'._MB_OBITUARIES_PICTURE_WIDTH."</td><td><input type='text' name='options[]' id='options' value='".$options[2]."' /></td></tr>\n";
     $form .= "</table>\n";
-	return $form;
+
+    return $form;
 }
 
 function b_obituaries_random_show($options) {
-	$block = array();
+    $block = array();
     include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
     $start = 0;
     $limit = intval($options[0]);
@@ -61,17 +63,18 @@ function b_obituaries_random_show($options) {
         }
     }
 
-	$block['obituaries_display_picture'] = intval($options[1]);
+    $block['obituaries_display_picture'] = intval($options[1]);
     $block['obituaries_picture_width'] = $options[2];
-	return $block;
+
+    return $block;
 }
 
 function b_obituaries_random_edit($options)
 {
-	include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
-	$form = '';
-	$form .= "<table border='0'>";
-	$form .= '<tr><td>'._MB_OBITUARIES_MAX_ITEMS."</td><td><input type='text' name='options[]' id='options' value='".$options[0]."' /></td></tr>\n";
+    include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
+    $form = '';
+    $form .= "<table border='0'>";
+    $form .= '<tr><td>'._MB_OBITUARIES_MAX_ITEMS."</td><td><input type='text' name='options[]' id='options' value='".$options[0]."' /></td></tr>\n";
     $form .= "<tr><td>"._MB_OBITUARIES_DISPLAY_PICTURE."</td><td><input type='radio' id='options[]' name='options[]' value='1'";
     if ($options[1] == 1) {
         $form .= " checked='checked'";
@@ -81,13 +84,14 @@ function b_obituaries_random_edit($options)
         $form .= " checked='checked'";
     }
     $form .= " />&nbsp;"._NO."</td></tr>\n";
-	$form .= '<tr><td>'._MB_OBITUARIES_PICTURE_WIDTH."</td><td><input type='text' name='options[]' id='options' value='".$options[2]."' /></td></tr>\n";
+    $form .= '<tr><td>'._MB_OBITUARIES_PICTURE_WIDTH."</td><td><input type='text' name='options[]' id='options' value='".$options[2]."' /></td></tr>\n";
     $form .= "</table>\n";
-	return $form;
+
+    return $form;
 }
 
 function b_obituaries_last_show($options) {
-	$block = array();
+    $block = array();
     include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
     $start = 0;
     $limit = intval($options[0]);
@@ -107,17 +111,18 @@ function b_obituaries_last_show($options) {
         }
     }
 
-	$block['obituaries_display_picture'] = intval($options[1]);
+    $block['obituaries_display_picture'] = intval($options[1]);
     $block['obituaries_picture_width'] = $options[2];
-	return $block;
+
+    return $block;
 }
 
 function b_obituaries_last_edit($options)
 {
-	include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
-	$form = '';
-	$form .= "<table border='0'>";
-	$form .= '<tr><td>'._MB_OBITUARIES_MAX_ITEMS."</td><td><input type='text' name='options[]' id='options' value='".$options[0]."' /></td></tr>\n";
+    include XOOPS_ROOT_PATH.'/modules/obituaries/include/common.php';
+    $form = '';
+    $form .= "<table border='0'>";
+    $form .= '<tr><td>'._MB_OBITUARIES_MAX_ITEMS."</td><td><input type='text' name='options[]' id='options' value='".$options[0]."' /></td></tr>\n";
     $form .= "<tr><td>"._MB_OBITUARIES_DISPLAY_PICTURE."</td><td><input type='radio' id='options[]' name='options[]' value='1'";
     if ($options[1] == 1) {
         $form .= " checked='checked'";
@@ -127,9 +132,8 @@ function b_obituaries_last_edit($options)
         $form .= " checked='checked'";
     }
     $form .= " />&nbsp;"._NO."</td></tr>\n";
-	$form .= '<tr><td>'._MB_OBITUARIES_PICTURE_WIDTH."</td><td><input type='text' name='options[]' id='options' value='".$options[2]."' /></td></tr>\n";
+    $form .= '<tr><td>'._MB_OBITUARIES_PICTURE_WIDTH."</td><td><input type='text' name='options[]' id='options' value='".$options[2]."' /></td></tr>\n";
     $form .= "</table>\n";
-	return $form;
-}
 
-?>
+    return $form;
+}

@@ -13,5 +13,3 @@ define("_MB_OBITUARIES_RANDOM","Random obituaries");
 
 //aaded by mowafag
 define("_MB_OBITUARIES_LAST","Last obituaries");
-
-?>
