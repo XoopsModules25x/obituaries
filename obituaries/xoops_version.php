@@ -1,6 +1,6 @@
 <?php
 if (!defined('XOOPS_ROOT_PATH')) {
-	die("XOOPS root path not defined");
+    die("XOOPS root path not defined");
 }
 
 $modversion['name'] = _MI_OBITUARIES_TITRE;
@@ -48,7 +48,7 @@ $modversion['blocks'][$cptb]['name'] = _MI_OBITUARIES_TITRE;
 $modversion['blocks'][$cptb]['description'] = '_MI_OBITUARIES_DESC';
 $modversion['blocks'][$cptb]['show_func'] = 'b_obituaries_show';
 $modversion['blocks'][$cptb]['edit_func'] = 'b_obituaries_edit';
-$modversion['blocks'][$cptb]['options'] = '5|0|130';	
+$modversion['blocks'][$cptb]['options'] = '5|0|130';
 $modversion['blocks'][$cptb]['template'] = 'obituaries_block_obituaries.html';
 
 $cptb++;
@@ -76,7 +76,6 @@ $modversion['hasSearch'] = 1;
 $modversion['search']['file'] = 'include/search.inc.php';
 $modversion['search']['func'] = 'obituaries_search';
 
-
 // ********************************************************************************************************************
 // Templates **********************************************************************************************************
 // ********************************************************************************************************************
@@ -93,7 +92,6 @@ $modversion['templates'][$cptt]['description'] = "Display a user page";
 $cptt++;
 $modversion['templates'][$cptt]['file'] = 'obituaries_users.html';
 $modversion['templates'][$cptt]['description'] = "List of Users";
-
 
 // ********************************************************************************************************************
 // Menu ***************************************************************************************************************
@@ -121,7 +119,6 @@ $modversion['config'][$cpto]['description'] = '';
 $modversion['config'][$cpto]['formtype'] = 'textbox';
 $modversion['config'][$cpto]['valuetype'] = 'int';
 $modversion['config'][$cpto]['default'] = 150;
-
 
 /**
  * Images height
@@ -232,11 +229,10 @@ $modversion['config'][$cpto]['description'] = '';
 $modversion['config'][$cpto]['formtype'] = 'select';
 $modversion['config'][$cpto]['valuetype'] = 'int';
 $modversion['config'][$cpto]['options'] = array(
-											_MI_OBITUARIES_SORT_ORDER1 => 1,
-											_MI_OBITUARIES_SORT_ORDER2 => 2
-											);
+                                            _MI_OBITUARIES_SORT_ORDER1 => 1,
+                                            _MI_OBITUARIES_SORT_ORDER2 => 2
+                                            );
 $modversion['config'][$cpto]['default'] = 1;
-
 
 // ********************************************************************************************************************
 // Comments ***********************************************************************************************************
@@ -249,4 +245,3 @@ $modversion['comments']['pageName'] = 'user.php';
 $modversion['comments']['callbackFile'] = 'include/comment_functions.php';
 $modversion['comments']['callback']['approve'] = 'obituaries_com_approve';
 $modversion['comments']['callback']['update'] = 'obituaries_com_update';
-?>
