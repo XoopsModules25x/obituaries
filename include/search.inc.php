@@ -53,7 +53,7 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid){
     $sql .= $more.' ORDER BY obituaries_date DESC';
     $i = 0;
     $ret = array();
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
     $result = $xoopsDB->query($sql,$limit,$offset);
     while ($myrow = $xoopsDB->fetchArray($result)) {
         $ret[$i]['image'] = 'images/crown.png';
