@@ -1,5 +1,5 @@
 <?php
-require_once XOOPS_ROOT_PATH.'/modules/obituaries/class/NumeralInterface.php';
+require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/NumeralInterface.php';
 // {{{ Class Text_CAPTCHA_Numeral
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                        |
@@ -40,6 +40,7 @@ require_once XOOPS_ROOT_PATH.'/modules/obituaries/class/NumeralInterface.php';
 // | Author: David Coallier <davidc@agoraproduction.com>                  |
 // +----------------------------------------------------------------------+
 //
+
 /**
  * Class used for numeral captchas
  *
@@ -99,7 +100,7 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      * @access private
      * @var string $operator The operation's operator
      */
-    private  $operator = '';
+    private $operator = '';
 
     /**
      * Mathematical Operation
@@ -176,22 +177,21 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
     /**
      * Constructor with different levels of mathematical operations sets
      *
-     * @param constant $complexityType
+     * @param constant|int $complexityType
      */
     public function __construct($complexityType = self::TEXT_CAPTCHA_NUMERAL_COMPLEXITY_ELEMENTARY)
     {
-
         switch ($complexityType) {
-                case 2:
-                     $this->operators = array('+', '-', '*');
-                     break;
-                case 4:
-                     $this->operators = array('+', '-', '*', '%', '/');
-                     break;
-                case 1:
-                default:
-                     $this->operators = array('-', '+');
-                     break;
+            case 2:
+                $this->operators = array('+', '-', '*');
+                break;
+            case 4:
+                $this->operators = array('+', '-', '*', '%', '/');
+                break;
+            case 1:
+            default:
+                $this->operators = array('-', '+');
+                break;
         }
 
         $this->generateFirstNumber();
@@ -209,7 +209,7 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      * can be bigger, smaller, etc.
      *
      * @access private
-     * @param integer $minValue The minimum value
+     * @param int|string $minValue The minimum value
      */
     private function setRangeMinimum($minValue = '1')
     {
@@ -274,6 +274,7 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      * @access private
      * @param integer $answerValue The answer value
      * @see    $this->answer
+     * @return $this
      */
     private function setAnswer($answerValue)
     {
@@ -330,9 +331,7 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      */
     private function setOperation()
     {
-        $this->operation = $this->getFirstNumber() . ' ' .
-                           $this->operator . ' ' .
-                           $this->getSecondNumber();
+        $this->operation = $this->getFirstNumber() . ' ' . $this->operator . ' ' . $this->getSecondNumber();
 
         return $this;
     }
@@ -377,7 +376,7 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      * This method will multiply two numbers
      *
      * @access private
-     * @see $this->firstNumber, $this->secondNumber, $this->setAnswer
+     * @see    $this->firstNumber, $this->secondNumber, $this->setAnswer
      *
      */
     private function doMultiplication()
@@ -392,8 +391,8 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      * This function executes a division based on the two
      * numbers.
      *
-     * @param integer $firstNumber The first number of the operation.
-     *                             This is by default set to null.
+     * @param integer $firstNumber  The first number of the operation.
+     *                              This is by default set to null.
      *
      * @param integer $secondNumber The second number of the operation
      *                              This is by default set to null.
@@ -425,10 +424,7 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
             return;
         }
 
-        $this->setFirstNumber($firstNumber)
-             ->setSecondNumber($secondNumber)
-             ->setOperation()
-             ->setAnswer($this->getFirstNumber() / $this->getSecondNumber());
+        $this->setFirstNumber($firstNumber)->setSecondNumber($secondNumber)->setOperation()->setAnswer($this->getFirstNumber() / $this->getSecondNumber());
     }
     // }}}
     // {{{ private function doModulus
@@ -439,12 +435,12 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      *
      *
      * @access private
-     * @see $this->firstNumber, $this->secondNumber, $this->setAnswer()
+     * @see    $this->firstNumber, $this->secondNumber, $this->setAnswer()
      *
      */
     private function doModulus()
     {
-       $this->setAnswer($this->getFirstNumber() % $this->getSecondNumber());
+        $this->setAnswer($this->getFirstNumber() % $this->getSecondNumber());
     }
     // }}}
     // {{{ private function doSubstract
@@ -463,16 +459,14 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      */
     private function doSubstract()
     {
-         $first  = $this->getFirstNumber();
-         $second = $this->getSecondNumber();
+        $first  = $this->getFirstNumber();
+        $second = $this->getSecondNumber();
 
         /**
          * Check if firstNumber is smaller than secondNumber
          */
         if ($first < $second) {
-            $this->setFirstNumber($second)
-                 ->setSecondNumber($first)
-                 ->setOperation();
+            $this->setFirstNumber($second)->setSecondNumber($first)->setOperation();
         }
 
         $answer = $this->getFirstNumber() - $this->getSecondNumber();
@@ -496,24 +490,24 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
         $this->setOperation();
 
         switch ($this->operator) {
-        case '+':
-            $this->doAdd();
-            break;
-        case '-':
-            $this->doSubstract();
-            break;
-        case '*':
-            $this->doMultiplication();
-            break;
-        case '%':
-            $this->doModulus();
-            break;
-        case '/':
-            $this->doDivision();
-            break;
-        default:
-            $this->doAdd();
-            break;
+            case '+':
+                $this->doAdd();
+                break;
+            case '-':
+                $this->doSubstract();
+                break;
+            case '*':
+                $this->doMultiplication();
+                break;
+            case '%':
+                $this->doModulus();
+                break;
+            case '/':
+                $this->doDivision();
+                break;
+            default:
+                $this->doAdd();
+                break;
         }
     }
     // }}}
@@ -579,4 +573,3 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
     // }}}
 }
 // }}}
-;

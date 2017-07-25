@@ -40,6 +40,7 @@
 // +----------------------------------------------------------------------+
 // }}}
 // {{{ Text_CAPTCHA_Numeral_Interface
+
 /**
  * Text CAPTCHA Numeral Interface
  *
@@ -99,4 +100,3 @@ interface obituaries_Text_CAPTCHA_Numeral_Interface
     // }}}
 }
 // }}}
-;

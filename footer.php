@@ -1,3 +1,3 @@
 <?php
 // insertion du pied de page
-require '../../footer.php';
+require_once __DIR__ . '/../../footer.php';
