@@ -3,7 +3,7 @@
 
 $modversion['version']       = 2.32;
 $modversion['module_status'] = 'Beta 1';
-$modversion['release_date']  = '2014/04/23';
+$modversion['release_date']  = '2017/07/23';
 $modversion['name']          = _MI_OBITUARIES_TITRE;
 $modversion['description']   = _MI_OBITUARIES_DESC;
 $modversion['author']        = 'Mariane Antoun based on Birthday module by Herve Thouzard';
@@ -14,9 +14,6 @@ $modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
 $modversion['official']      = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
 $modversion['image']         = 'assets/images/logoModule.png';
 $modversion['dirname']       = basename(__DIR__);
-//$modversion['dirmoduleadmin']      = '/Frameworks/moduleclasses/moduleadmin';
-//$modversion['icons16']             = '../../Frameworks/moduleclasses/icons/16';
-//$modversion['icons32']             = '../../Frameworks/moduleclasses/icons/32';
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org/';
@@ -33,6 +30,14 @@ $modversion['hasAdmin']    = 1;
 $modversion['adminindex']  = 'admin/index.php';
 $modversion['adminmenu']   = 'admin/menu.php';
 $modversion['system_menu'] = 1;
+
+// ------------------- Help files ------------------- //
+$modversion['helpsection'] = array(
+    ['name' => _MI_OBITUARIES_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_OBITUARIES_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_OBITUARIES_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_OBITUARIES_SUPPORT, 'link' => 'page=support'],
+);
 
 // ********************************************************************************************************************
 // Blocks *************************************************************************************************************

@@ -42,3 +42,16 @@ define('_MI_OBITUARIES_SORT_ORDER2', 'By name');
 define('_MI_OBITUARIES_OBITUARIES', 'Obituaries');
 define('_MI_OBITUARIES_MAINTAIN', 'Maintain cache/tables');
 define('_MI_OBITUARIES_ABOUT', 'About');
+//2.32
+//Help
+define('_MI_OBITUARIES_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_OBITUARIES_HELP_HEADER', __DIR__.'/help/helpheader.tpl');
+define('_MI_OBITUARIES_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_OBITUARIES_OVERVIEW', 'Overview');
+
+//define('_MI_OBITUARIES_HELP_DIR', __DIR__);
+
+//help multi-page
+define('_MI_OBITUARIES_DISCLAIMER', 'Disclaimer');
+define('_MI_OBITUARIES_LICENSE', 'License');
+define('_MI_OBITUARIES_SUPPORT', 'Support');
