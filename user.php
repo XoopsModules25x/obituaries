@@ -30,7 +30,7 @@ if (isset($_GET['obituaries_id'])) {
 $user = null;
 switch ($case) {
     case 0:    // Unknow user
-        obituaries_utils::redirect(_OBITUARIES_ERROR2, 'index.php', 3);
+        ObituariesUtils::redirect(_OBITUARIES_ERROR2, 'index.php', 3);
         break;
 
     case 1:    // obituaries_id
@@ -44,13 +44,13 @@ switch ($case) {
 }
 if (is_object($user)) {
     $xoopsTpl->assign('obituaries_user', $user->toArray());
-    $pageTitle       = $user->getFullName() . ' - ' . obituaries_utils::getModuleName();
+    $pageTitle       = $user->getFullName() . ' - ' . ObituariesUtils::getModuleName();
     $metaDescription = $pageTitle;
-    $metaKeywords    = obituaries_utils::createMetaKeywords($user->getVar('obituaries_description'));
-    obituaries_utils::setMetas($pageTitle, $metaDescription, $metaKeywords);
+    $metaKeywords    = ObituariesUtils::createMetaKeywords($user->getVar('obituaries_description'));
+    ObituariesUtils::setMetas($pageTitle, $metaDescription, $metaKeywords);
 }
-$path       = array(OBITUARIES_URL . 'user.php' => $user->getFullName());
-$breadcrumb = obituaries_utils::breadcrumb($path);
+$path       = [OBITUARIES_URL . 'user.php' => $user->getFullName()];
+$breadcrumb = ObituariesUtils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
 require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';

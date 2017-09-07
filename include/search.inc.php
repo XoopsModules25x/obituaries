@@ -17,7 +17,7 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
-    require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/users_obituaries.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/ObituariesUsers.php';
 
     // Recherche dans les produits
     $sql = 'SELECT obituaries_id, obituaries_firstname, obituaries_lastname, obituaries_date, obituaries_uid FROM ' . $xoopsDB->prefix('users_obituaries') . ' WHERE (obituaries_id <> 0 ';
@@ -26,9 +26,9 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
     }
     $sql .= ') ';
 
-    $tmpObject = new users_obituaries();
+    $tmpObject = new ObituariesUsers();
     $datas     = $tmpObject->getVars();
-    $tblFields = array();
+    $tblFields = [];
     $cnt       = 0;
     foreach ($datas as $key => $value) {
         if ($value['data_type'] == XOBJ_DTYPE_TXTBOX || $value['data_type'] == XOBJ_DTYPE_TXTAREA) {
@@ -59,7 +59,7 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
     }
     $sql    .= $more . ' ORDER BY obituaries_date DESC';
     $i      = 0;
-    $ret    = array();
+    $ret    = [];
     $myts   = MyTextSanitizer::getInstance();
     $result = $xoopsDB->query($sql, $limit, $offset);
     while ($myrow = $xoopsDB->fetchArray($result)) {

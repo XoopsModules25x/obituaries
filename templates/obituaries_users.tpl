@@ -4,7 +4,7 @@
     <br>
     <p align="center">
         <a href="<{$xoops_url}>/modules/obituaries/index.php"><img
-                    src="<{$xoops_url}>/modules/obituaries/assets/images/logo.png" alt=""></a>
+                    src="<{$xoops_url}>/modules/obituaries/assets/images/logoModule.png" alt=""></a>
     </p>
     <br>
     <br>
@@ -18,7 +18,7 @@
         <{/foreach}>
     </ul>
 <{else}>
-    <h3><{$smarty.const._OBITUARIES_ERROR3}></h3>
+    <h3><{$smarty.const._AM_OBITUARIES_ERROR3}></h3>
 <{/if}>
 
 <{if isset($pagenav)}>

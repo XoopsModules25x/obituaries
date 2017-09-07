@@ -23,11 +23,11 @@ if (isset($_POST['op'])) {
 }
 
 // Lecture de certains param�tres de l'application ********************************************************************
-$limit         = obituaries_utils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
+$limit         = ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
 $baseurl       = OBITUARIES_URL . 'admin/' . basename(__FILE__);    // URL de ce script
-$conf_msg      = obituaries_utils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
-$images_width  = obituaries_utils::getModuleOption('images_width');
-$images_height = obituaries_utils::getModuleOption('images_height');
+$conf_msg      = ObituariesUtils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
+$images_width  = ObituariesUtils::getModuleOption('images_width');
+$images_height = ObituariesUtils::getModuleOption('images_height');
 $destname      = '';
 
 $cacheFolder = XOOPS_UPLOAD_PATH . '/' . OBITUARIES_DIRNAME;
@@ -41,9 +41,10 @@ switch ($op) {
     case 'default':    // List obituariess and show form to add a someone
         // ****************************************************************************************************************
         xoops_cp_header();
-        // echo '<h1>'.obituaries_utils::getModuleName().'</h1>';
+        // echo '<h1>'.ObituariesUtils::getModuleName().'</h1>';
         $adminObject->displayNavigation(basename(__FILE__));
         $start      = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+        /** @var \ObituariesUsersHandler $hBdUsersObituaries */
         $itemsCount = $hBdUsersObituaries->getCount();
         if ($itemsCount > $limit) {
             $pagenav = new XoopsPageNav($itemsCount, $limit, $start, 'start');
@@ -55,7 +56,7 @@ switch ($op) {
             $class = '';
             //          $items = $hBdUsersObituaries->getItems($start, $limit, 'obituaries_lastname');
 
-            $tblItems = array();
+            $tblItems = [];
             //$critere = new Criteria($this->keyName, 0 ,'<>');
             $critere = new Criteria('obituaries_id', 0, '<>');
             $critere->setLimit($limit);
@@ -63,7 +64,7 @@ switch ($op) {
             $critere->setSort('obituaries_lastname');
             //                  $critere->setOrder($order);
             //                  $tblItems = $this->getObjects($critere, $idAsKey);
-            $items = $hBdUsersObituaries->getObjects($start, $limit, 'obituaries_lastname');
+            $items = $hBdUsersObituaries->getAllUsers($start, $limit, 'obituaries_lastname');
 
             echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
             echo "<tr><th align='center'>" . _AM_OBITUARIES_DATE . "</th><th align='center'>" . _AM_OBITUARIES_USERNAME . "</th><th align='center'>" . _AM_OBITUARIES_LASTNAME . ',  ' . _AM_OBITUARIES_FIRSTNAME . "</th><th align='center'>" . _AM_OBITUARIES_ACTION . '</th></tr>';
@@ -80,7 +81,7 @@ switch ($op) {
                 $action_delete = "<a href='$baseurl?op=delete&id=" . $id . "' title='" . _DELETE . "'" . $conf_msg . '>' . $birdthday_icones['delete'] . '</a>';
 
                 echo "<tr class='" . $class . "'>\n";
-                echo "<td align='center'>" . obituaries_utils::SQLDateToHuman($item->getVar('obituaries_date')) . '</td>';
+                echo "<td align='center'>" . ObituariesUtils::SQLDateToHuman($item->getVar('obituaries_date')) . '</td>';
                 echo "<td align='center'>" . $uname . '</td>';
                 echo "<td align='center'>" . $item->getFullName() . '</td>';
                 echo "<td align='center'>" . $action_edit . ' ' . $action_delete . '</td>';
@@ -103,7 +104,7 @@ switch ($op) {
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
         require_once __DIR__ . '/../xoops_version.php';
-        $tables = array();
+        $tables = [];
         foreach ($modversion['tables'] as $table) {
             $tables[] = $xoopsDB->prefix($table);
         }
@@ -113,9 +114,9 @@ switch ($op) {
             $xoopsDB->queryF('ANALYZE TABLE ' . $list);
             $xoopsDB->queryF('OPTIMIZE TABLE ' . $list);
         }
-        obituaries_utils::updateCache();
+        ObituariesUtils::updateCache();
         $hBdUsersObituaries->forceCacheClean();
-        obituaries_utils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
+        ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
         break;
 
     // ****************************************************************************************************************
@@ -125,13 +126,13 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if (empty($id)) {
-            obituaries_utils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
+            ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
         // Item exits ?
         $item = null;
         $item = $hBdUsersObituaries->get($id);
         if (!is_object($item)) {
-            obituaries_utils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
+            ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
         $form = $hBdUsersObituaries->getForm($item, $baseurl);
         $form->display();
@@ -140,13 +141,13 @@ switch ($op) {
     // ****************************************************************************************************************
     case 'saveedit':    // Enregistrement des modifications
         // ****************************************************************************************************************
-        xoops_cp_header();
+       xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
         $result = $hBdUsersObituaries->saveUser();
         if ($result) {
-            obituaries_utils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
+            ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
-            obituaries_utils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
+            ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
         break;
 
@@ -155,19 +156,19 @@ switch ($op) {
         // ****************************************************************************************************************
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if (empty($id)) {
-            obituaries_utils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
+            ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
         // Item exits ?
         $item = null;
         $item = $hBdUsersObituaries->get($id);
         if (!is_object($item)) {
-            obituaries_utils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
+            ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
         $result = $hBdUsersObituaries->deleteUser($item);
         if ($result) {
-            obituaries_utils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
+            ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
-            obituaries_utils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
+            ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
 
 }

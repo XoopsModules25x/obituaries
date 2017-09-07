@@ -7,7 +7,7 @@
  * Version :
  * ****************************************************************************
  */
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 if (!defined('OBITUARIES_DIRNAME')) {
     define('OBITUARIES_DIRNAME', 'obituaries');
@@ -22,14 +22,14 @@ if (!defined('OBITUARIES_DIRNAME')) {
 $myts = MyTextSanitizer::getInstance();
 
 // Chargement des handler et des autres classes
-require_once OBITUARIES_PATH . 'class/obituaries_utils.php';
+require_once OBITUARIES_PATH . 'class/ObituariesUtils.php';
 
 // Check that the class exists before trying to use it
 //    if (!class_exists('PEAR')) {
 //require_once OBITUARIES_PATH.'class/PEAR.php';
 //}
 
-$hBdUsersObituaries = xoops_getModuleHandler('users_obituaries', OBITUARIES_DIRNAME);
+$hBdUsersObituaries = xoops_getModuleHandler('users', OBITUARIES_DIRNAME);
 
 // D�finition des images
 if (!defined('_OBITUARIES_EDIT')) {
@@ -42,8 +42,8 @@ if (!defined('_OBITUARIES_EDIT')) {
         require_once OBITUARIES_PATH . 'language/english/main.php';
     }
 
-    $birdthday_icones = array(
+    $birdthday_icones = [
         'edit'   => "<img src='" . OBITUARIES_IMAGES_URL . "edit.png' alt='" . _AM_OBITUARIES_EDIT . "' align='middle'>",
         'delete' => "<img src='" . OBITUARIES_IMAGES_URL . "delete.png' alt='" . _AM_OBITUARIES_DELETE . "' align='middle'>"
-    );
+    ];
 }

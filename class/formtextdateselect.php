@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team, Kazumi Ono (AKA onokazu)
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 /**
  * @package     kernel
  * @subpackage  form
@@ -37,12 +37,22 @@
  */
 class BD_XoopsFormTextDateSelect extends XoopsFormText
 {
+    /**
+     * BD_XoopsFormTextDateSelect constructor.
+     * @param string $caption
+     * @param string $name
+     * @param int    $size
+     * @param int    $value
+     */
     public function __construct($caption, $name, $size = 15, $value = 0)
     {
         $value = !is_numeric($value) ? time() : (int)$value;
         parent::__construct($caption, $name, $size, 25, $value);
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $ele_name  = $this->getName();

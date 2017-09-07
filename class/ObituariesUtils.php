@@ -7,7 +7,7 @@
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * A set of useful and common functions
@@ -19,7 +19,7 @@
  * Note: You should be able to use it without the need to instanciate it.
  *
  */
-class obituaries_utils
+class ObituariesUtils
 {
     const MODULE_NAME = 'obituaries';
 
@@ -31,7 +31,7 @@ class obituaries_utils
      * @static
      * @staticvar   object
      */
-    public function getInstance()
+    public static function getInstance()
     {
         static $instance;
         if (null === $instance) {
@@ -47,11 +47,11 @@ class obituaries_utils
      * @param  string $option module option's name
      * @return mixed  option's value
      */
-    public function getModuleOption($option)
+    public static function getModuleOption($option)
     {
         global $xoopsModuleConfig, $xoopsModule;
         $repmodule = self::MODULE_NAME;
-        static $tbloptions = array();
+        static $tbloptions = [];
         if (is_array($tbloptions) && array_key_exists($option, $tbloptions)) {
             return $tbloptions[$option];
         }
@@ -85,7 +85,7 @@ class obituaries_utils
      *
      * @return boolean need to say it ?
      */
-    public function isX22()
+    public static function isX22()
     {
         $x22 = false;
         $xv  = str_replace('XOOPS ', '', XOOPS_VERSION);
@@ -101,7 +101,7 @@ class obituaries_utils
      *
      * @return boolean need to say it ?
      */
-    public function isX23()
+    public static function isX23()
     {
         $x23 = false;
         $xv  = str_replace('XOOPS ', '', XOOPS_VERSION);
@@ -123,7 +123,7 @@ class obituaries_utils
      * @param string  $supplemental
      * @return object The editor to use
      */
-    public function &getWysiwygForm(
+    public static function &getWysiwygForm(
         $caption,
         $name,
         $value = '',
@@ -133,7 +133,7 @@ class obituaries_utils
     ) {
         $editor                   = false;
         $x22                      = self::isX22();
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = $name;
         $editor_configs['value']  = $value;
         $editor_configs['rows']   = 35;
@@ -192,13 +192,13 @@ class obituaries_utils
             case 'tinyeditor':
                 if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php')) {
                     require_once XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php';
-                    $editor = new XoopsFormTinyeditorTextArea(array(
+                    $editor = new XoopsFormTinyeditorTextArea([
                                                                   'caption' => $caption,
                                                                   'name'    => $name,
                                                                   'value'   => $value,
                                                                   'width'   => '100%',
                                                                   'height'  => '400px'
-                                                              ));
+                                                              ]);
                 }
                 break;
 
@@ -224,7 +224,7 @@ class obituaries_utils
      * @param  boolean $form    Is this a confirmation for a form ?
      * @return string  the javascript code to insert in the link (or in the form)
      */
-    public function javascriptLinkConfirm($message, $form = false)
+    public static function javascriptLinkConfirm($message, $form = false)
     {
         if (!$form) {
             return "onclick=\"javascript:return confirm('" . str_replace("'", ' ', $message) . "')\"";
@@ -242,7 +242,7 @@ class obituaries_utils
      * @param  string $metaKeywords    Page's meta keywords
      * @return void
      */
-    public function setMetas($pageTitle = '', $metaDescription = '', $metaKeywords = '')
+    public static function setMetas($pageTitle = '', $metaDescription = '', $metaKeywords = '')
     {
         global $xoTheme, $xoTheme, $xoopsTpl;
         $xoopsTpl->assign('xoops_pagetitle', $pageTitle);
@@ -266,11 +266,11 @@ class obituaries_utils
     /**
      * Remove module's cache
      */
-    public function updateCache()
+    public static function updateCache()
     {
         global $xoopsModule;
         $folder  = $xoopsModule->getVar('dirname');
-        $tpllist = array();
+        $tpllist = [];
         require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
         require_once XOOPS_ROOT_PATH . '/class/template.php';
         $tplfileHandler = xoops_getHandler('tplfile');
@@ -280,7 +280,7 @@ class obituaries_utils
         foreach ($tpllist as $onetemplate) {    // Remove cache for each page.
             if ($onetemplate->getVar('tpl_type') == 'module') {
                 //  Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
-                $files_del = array();
+                $files_del = [];
                 $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');
                 if (count($files_del) > 0 && is_array($files_del)) {
                     foreach ($files_del as $one_file) {
@@ -300,7 +300,7 @@ class obituaries_utils
      * @param string $url            The place where to go
      * @param        integer         timeout Time to wait before to redirect
      */
-    public function redirect($message = '', $url = 'index.php', $time = 2)
+    public static function redirect($message = '', $url = 'index.php', $time = 2)
     {
         redirect_header($url, $time, $message);
     }
@@ -310,7 +310,7 @@ class obituaries_utils
      *
      * @return object The module
      */
-    protected function _getModule()
+    protected static function _getModule()
     {
         static $mymodule;
         if (!isset($mymodule)) {
@@ -331,7 +331,7 @@ class obituaries_utils
      * Returns the module's name (as defined by the user in the module manager) with cache
      * @return string Module's name
      */
-    public function getModuleName()
+    public static function getModuleName()
     {
         static $moduleName;
         if (!isset($moduleName)) {
@@ -348,7 +348,7 @@ class obituaries_utils
      * @param  string $title Text to use
      * @return string Formated text
      */
-    public function makeHrefTitle($title)
+    public static function makeHrefTitle($title)
     {
         $s = "\"'";
         $r = '  ';
@@ -361,7 +361,7 @@ class obituaries_utils
      *
      * @return booleean Admin or not
      */
-    public function isAdmin()
+    public static function isAdmin()
     {
         global $xoopsUser, $xoopsModule;
         if (is_object($xoopsUser)) {
@@ -388,7 +388,7 @@ class obituaries_utils
      *
      * @return string Date in the Mysql format
      */
-    public function getCurrentSQLDate()
+    public static function getCurrentSQLDate()
     {
         return date('Y-m-d');    // 2007-05-02
     }
@@ -400,7 +400,7 @@ class obituaries_utils
      * @param string  $format
      * @return string The date in a human form
      */
-    public function SQLDateToHuman($date, $format = 's')
+    public static function SQLDateToHuman($date, $format = 's')
     {
         if ($date != '0000-00-00' && xoops_trim($date) != '') {
             return formatTimestamp(strtotime($date), $format);
@@ -415,7 +415,7 @@ class obituaries_utils
      * @param  integer $timestamp The timestamp to use
      * @return string  The date in the Mysql format
      */
-    public function timestampToMysqlDate($timestamp)
+    public static function timestampToMysqlDate($timestamp)
     {
         return date('Y-m-d', (int)$timestamp);
     }
@@ -425,7 +425,7 @@ class obituaries_utils
      *
      * @return boolean Yes = we need to add them, false = no
      */
-    public function needsAsterisk()
+    public static function needsAsterisk()
     {
         if (self::isX22() || self::isX23()) {
             return false;
@@ -450,14 +450,14 @@ class obituaries_utils
      * @return object The modified form
      * @internal param string $caracter The character to use to mark fields
      */
-    public function &formMarkRequiredFields(&$sform)
+    public static function &formMarkRequiredFields(&$sform)
     {
         if (self::needsAsterisk()) {
-            $tblRequired = array();
+            $tblRequired = [];
             foreach ($sform->getRequired() as $item) {
                 $tblRequired[] = $item->_name;
             }
-            $tblElements = array();
+            $tblElements = [];
             $tblElements =& $sform->getElements();
             $cnt         = count($tblElements);
             for ($i = 0; $i < $cnt; ++$i) {
@@ -478,7 +478,7 @@ class obituaries_utils
      * @param  boolean $trimName Do we need to create a short unique name ?
      * @return string  The unique filename to use (with its extension)
      */
-    public function createUploadName($folder, $fileName, $trimName = false)
+    public static function createUploadName($folder, $fileName, $trimName = false)
     {
         $workingfolder = $folder;
         if (xoops_substr($workingfolder, strlen($workingfolder) - 1, 1) != '/') {
@@ -513,12 +513,12 @@ class obituaries_utils
      * @param  string $content Content from which we have to create metakeywords
      * @return string The list of meta keywords
      */
-    public function createMetaKeywords($content)
+    public static function createMetaKeywords($content)
     {
         $keywordscount = 50;
         $keywordsorder = 0;
 
-        $tmp = array();
+        $tmp = [];
         // Search for the "Minimum keyword length"
         if (isset($_SESSION['obituaries_keywords_limit'])) {
             $limit = $_SESSION['obituaries_keywords_limit'];
@@ -533,7 +533,7 @@ class obituaries_utils
         $content         = $myts->undoHtmlSpecialChars($content);
         $content         = strip_tags($content);
         $content         = strtolower($content);
-        $search_pattern  = array(
+        $search_pattern  = [
             '&nbsp;',
             "\t",
             "\r\n",
@@ -561,8 +561,8 @@ class obituaries_utils
             '_',
             '\\',
             '*'
-        );
-        $replace_pattern = array(
+        ];
+        $replace_pattern = [
             ' ',
             ' ',
             ' ',
@@ -590,7 +590,7 @@ class obituaries_utils
             '',
             '',
             ''
-        );
+        ];
         $content         = str_replace($search_pattern, $replace_pattern, $content);
         $keywords        = explode(' ', $content);
         switch ($keywordsorder) {
@@ -646,7 +646,7 @@ class obituaries_utils
      * @param null     $uploadMaxSize
      * @return mixed True si l'upload s'est bien déroulé sinon le message d'erreur correspondant
      */
-    public function uploadFile($indice, $dstpath = XOOPS_UPLOAD_PATH, $mimeTypes = null, $uploadMaxSize = null)
+    public static function uploadFile($indice, $dstpath = XOOPS_UPLOAD_PATH, $mimeTypes = null, $uploadMaxSize = null)
     {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         global $destname;
@@ -699,7 +699,7 @@ class obituaries_utils
      * @param bool    $keep_original
      * @return int
      */
-    public function resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false)
+    public static function resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false)
     {
         if (!is_readable($src_path)) {
             return 0;
@@ -778,7 +778,7 @@ class obituaries_utils
         }
     }
 
-    public function close_tags($string)
+    public static function close_tags($string)
     {
         // match opened tags
         if (preg_match_all('/<([a-z\:\-]+)[^\/]>/', $string, $start_tags)) {
@@ -786,7 +786,7 @@ class obituaries_utils
 
             // match closed tags
             if (preg_match_all('/<\/([a-z]+)>/', $string, $end_tags)) {
-                $complete_tags = array();
+                $complete_tags = [];
                 $end_tags      = $end_tags[1];
 
                 foreach ($start_tags as $key => $val) {
@@ -810,7 +810,7 @@ class obituaries_utils
         return $string;
     }
 
-    public function truncate_tagsafe($string, $length = 80, $etc = '...', $break_words = false)
+    public static function truncate_tagsafe($string, $length = 80, $etc = '...', $break_words = false)
     {
         if ($length == 0) {
             return '';
@@ -835,7 +835,7 @@ class obituaries_utils
      * @param $text
      * @return string
      */
-    public function makeInfotips($text)
+    public static function makeInfotips($text)
     {
         $infotips = self::getModuleOption('infotips');
         if ($infotips > 0) {
@@ -854,10 +854,10 @@ class obituaries_utils
      * @param  string $raquo Le séparateur par défaut à utiliser
      * @return string le breadcrumb
      */
-    public function breadcrumb($path, $raquo = ' &raquo; ')
+    public static function breadcrumb($path, $raquo = ' &raquo; ')
     {
         $breadcrumb        = '';
-        $workingBreadcrumb = array();
+        $workingBreadcrumb = [];
         if (is_array($path)) {
             $moduleName          = self::getModuleName();
             $workingBreadcrumb[] = "<a href='" . OBITUARIES_URL . "' title='" . self::makeHrefTitle($moduleName) . "'>" . $moduleName . '</a>';

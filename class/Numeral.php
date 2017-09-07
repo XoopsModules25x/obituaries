@@ -88,7 +88,7 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      * @access private
      * @var array $operators The operations for the captcha
      */
-    private $operators = array();
+    private $operators = [];
 
     /**
      * Operator to use
@@ -183,14 +183,14 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
     {
         switch ($complexityType) {
             case 2:
-                $this->operators = array('+', '-', '*');
+                $this->operators = ['+', '-', '*'];
                 break;
             case 4:
-                $this->operators = array('+', '-', '*', '%', '/');
+                $this->operators = ['+', '-', '*', '%', '/'];
                 break;
             case 1:
             default:
-                $this->operators = array('-', '+');
+                $this->operators = ['-', '+'];
                 break;
         }
 
@@ -400,11 +400,11 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
      */
     private function doDivision($firstNumber = null, $secondNumber = null)
     {
-        if (is_null($firstNumber)) {
+        if (null === $firstNumber) {
             $firstNumber = $this->getFirstNumber();
         }
 
-        if (is_null($secondNumber)) {
+        if (null === $secondNumber) {
             $secondNumber = $this->getSecondNumber();
         }
 

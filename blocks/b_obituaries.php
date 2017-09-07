@@ -1,8 +1,12 @@
 <?php
+/**
+ * @param $options
+ * @return array
+ */
 function b_obituaries_show($options)
 {
     global $xoopsUser;
-    $block = array();
+    $block = [];
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $start      = 0;
     $limit      = (int)$options[0];
@@ -30,6 +34,10 @@ function b_obituaries_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function b_obituaries_edit($options)
 {
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
@@ -51,9 +59,13 @@ function b_obituaries_edit($options)
     return $form;
 }
 
+/**
+ * @param $options
+ * @return array
+ */
 function b_obituaries_random_show($options)
 {
-    $block = array();
+    $block = [];
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $start = 0;
     $limit = (int)$options[0];
@@ -71,6 +83,10 @@ function b_obituaries_random_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function b_obituaries_random_edit($options)
 {
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
@@ -92,14 +108,18 @@ function b_obituaries_random_edit($options)
     return $form;
 }
 
+/**
+ * @param $options
+ * @return array
+ */
 function b_obituaries_last_show($options)
 {
-    $block = array();
+    $block = [];
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $start = 0;
     $limit = (int)$options[0];
 
-    if (obituaries_utils::getModuleOption('userslist_sortorder') == 1) {    // Sort by date
+    if (ObituariesUtils::getModuleOption('userslist_sortorder') == 1) {    // Sort by date
         $sort  = 'obituaries_date';
         $order = 'DESC';
     } else {
@@ -120,6 +140,10 @@ function b_obituaries_last_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function b_obituaries_last_edit($options)
 {
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';

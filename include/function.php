@@ -1,8 +1,13 @@
 <?php
+/**
+ * @param     $name
+ * @param int $select
+ * @return string
+ */
 function listejour($name, $select = 1)
 {
     $select--; // pour avoir l'incdiee ds le tableau
-    $j     = array(
+    $j     = [
         '01',
         '02',
         '03',
@@ -34,7 +39,7 @@ function listejour($name, $select = 1)
         '29',
         '30',
         '31'
-    );
+    ];
     $stop  = count($j);
     $liste = "<select name='$name'>";
     for ($i = 0; $i < $stop; ++$i) {
@@ -49,10 +54,15 @@ function listejour($name, $select = 1)
     return $liste;
 }
 
+/**
+ * @param     $name
+ * @param int $select
+ * @return string
+ */
 function listemois($name, $select = 1)
 {
     $select--; // pour avoir l'indice ds le tableau
-    $nom   = array(
+    $nom   = [
         'Janvier',
         'Février',
         'Mars',
@@ -65,8 +75,8 @@ function listemois($name, $select = 1)
         'Octobre',
         'Novembre',
         'Décembre'
-    );
-    $m     = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
+    ];
+    $m     = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     $liste = "<select name=\"$name\">";
     for ($i = 0, $iMax = count($m); $i < $iMax; ++$i) {
         if ($select == $i) {
@@ -80,6 +90,12 @@ function listemois($name, $select = 1)
     return $liste;
 }
 
+/**
+ * @param        $name
+ * @param        $fin
+ * @param string $select
+ * @return string
+ */
 function listeannee($name, $fin, $select = '1930')
 {
     $liste = "<select name=\"$name\">";

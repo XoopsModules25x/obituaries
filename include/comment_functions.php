@@ -10,18 +10,21 @@
  * @param $total_num
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 function obituaries_com_update($userId, $total_num)
 {
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     global $hBdUsersObituaries;
     if (!is_object($hBdUsersObituaries)) {
-        $hBdUsersObituaries = xoops_getModuleHandler('users_obituaries', OBITUARIES_DIRNAME);
+        $hBdUsersObituaries = xoops_getModuleHandler('users', OBITUARIES_DIRNAME);
     }
     $hBdUsersObituaries->updateCommentsCount($userId, $total_num);
 }
 
+/**
+ * @param $comment
+ */
 function obituaries_com_approve(&$comment)
 {
     // notification mail here

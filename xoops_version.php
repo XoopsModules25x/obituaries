@@ -1,5 +1,5 @@
 <?php
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $modversion['version']       = 2.32;
 $modversion['module_status'] = 'Beta 1';
@@ -21,7 +21,7 @@ $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 // ********************************************************************************************************************
 // Administration *****************************************************************************************************
@@ -32,12 +32,12 @@ $modversion['adminmenu']   = 'admin/menu.php';
 $modversion['system_menu'] = 1;
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
+$modversion['helpsection'] = [
     ['name' => _MI_OBITUARIES_OVERVIEW, 'link' => 'page=help'],
     ['name' => _MI_OBITUARIES_DISCLAIMER, 'link' => 'page=disclaimer'],
     ['name' => _MI_OBITUARIES_LICENSE, 'link' => 'page=license'],
     ['name' => _MI_OBITUARIES_SUPPORT, 'link' => 'page=support'],
-);
+];
 
 // ********************************************************************************************************************
 // Blocks *************************************************************************************************************
@@ -214,7 +214,7 @@ xoops_load('XoopsEditorHandler');
 $editorHandler = XoopsEditorHandler::getInstance();
 $editorList    = array_flip($editorHandler->getList());
 
-$modversion['config'][$cpto] = array(
+$modversion['config'][$cpto] = [
     'name'        => 'form_options',
     'title'       => '_MI_BIRTHDAY_FORM_OPTIONS',
     'description' => '_MI_BIRTHDAY_FORM_OPTIONS_DESC',
@@ -222,7 +222,7 @@ $modversion['config'][$cpto] = array(
     'valuetype'   => 'text',
     'options'     => $editorList,
     'default'     => 'dhtml'
-);
+];
 /**
  * Sort order
  */
@@ -232,10 +232,10 @@ $modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_SORT_ORDER';
 $modversion['config'][$cpto]['description'] = '';
 $modversion['config'][$cpto]['formtype']    = 'select';
 $modversion['config'][$cpto]['valuetype']   = 'int';
-$modversion['config'][$cpto]['options']     = array(
+$modversion['config'][$cpto]['options']     = [
     _MI_OBITUARIES_SORT_ORDER1 => 1,
     _MI_OBITUARIES_SORT_ORDER2 => 2
-);
+];
 $modversion['config'][$cpto]['default']     = 1;
 
 // ********************************************************************************************************************
