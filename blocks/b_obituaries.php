@@ -45,11 +45,11 @@ function b_obituaries_edit($options)
     $form .= "<table border='0'>";
     $form .= '<tr><td>' . _MB_OBITUARIES_MAX_ITEMS . "</td><td><input type='text' name='options[]' id='options' value='" . $options[0] . "'></td></tr>\n";
     $form .= '<tr><td>' . _MB_OBITUARIES_DISPLAY_PICTURE . "</td><td><input type='radio' id='options[]' name='options[]' value='1'";
-    if ($options[1] == 1) {
+    if (1 == $options[1]) {
         $form .= ' checked';
     }
     $form .= '>&nbsp;' . _YES . "<input type='radio' id='options[]' name='options[]' value='0'";
-    if ($options[1] == 0) {
+    if (0 == $options[1]) {
         $form .= ' checked';
     }
     $form .= '>&nbsp;' . _NO . "</td></tr>\n";
@@ -94,11 +94,11 @@ function b_obituaries_random_edit($options)
     $form .= "<table border='0'>";
     $form .= '<tr><td>' . _MB_OBITUARIES_MAX_ITEMS . "</td><td><input type='text' name='options[]' id='options' value='" . $options[0] . "'></td></tr>\n";
     $form .= '<tr><td>' . _MB_OBITUARIES_DISPLAY_PICTURE . "</td><td><input type='radio' id='options[]' name='options[]' value='1'";
-    if ($options[1] == 1) {
+    if (1 == $options[1]) {
         $form .= ' checked';
     }
     $form .= '>&nbsp;' . _YES . "<input type='radio' id='options[]' name='options[]' value='0'";
-    if ($options[1] == 0) {
+    if (0 == $options[1]) {
         $form .= ' checked';
     }
     $form .= '>&nbsp;' . _NO . "</td></tr>\n";
@@ -119,7 +119,7 @@ function b_obituaries_last_show($options)
     $start = 0;
     $limit = (int)$options[0];
 
-    if (ObituariesUtils::getModuleOption('userslist_sortorder') == 1) {    // Sort by date
+    if (1 == ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
         $sort  = 'obituaries_date';
         $order = 'DESC';
     } else {
@@ -151,11 +151,11 @@ function b_obituaries_last_edit($options)
     $form .= "<table border='0'>";
     $form .= '<tr><td>' . _MB_OBITUARIES_MAX_ITEMS . "</td><td><input type='text' name='options[]' id='options' value='" . $options[0] . "'></td></tr>\n";
     $form .= '<tr><td>' . _MB_OBITUARIES_DISPLAY_PICTURE . "</td><td><input type='radio' id='options[]' name='options[]' value='1'";
-    if ($options[1] == 1) {
+    if (1 == $options[1]) {
         $form .= ' checked';
     }
     $form .= '>&nbsp;' . _YES . "<input type='radio' id='options[]' name='options[]' value='0'";
-    if ($options[1] == 0) {
+    if (0 == $options[1]) {
         $form .= ' checked';
     }
     $form .= '>&nbsp;' . _NO . "</td></tr>\n";

@@ -48,7 +48,7 @@ class ObituariesUsers extends XoopsObject
      */
     public function getPictureUrl()
     {
-        if (xoops_trim($this->getVar('obituaries_photo')) != '') {
+        if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
             return ObituariesUtils::getModuleOption('folder_url') . '/' . $this->getVar('obituaries_photo');
         } else {
             return '';
@@ -61,7 +61,7 @@ class ObituariesUsers extends XoopsObject
      */
     public function getPicturePath()
     {
-        if (xoops_trim($this->getVar('obituaries_photo')) != '') {
+        if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
             return ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo');
         } else {
             return '';
@@ -76,7 +76,7 @@ class ObituariesUsers extends XoopsObject
     public function pictureExists()
     {
         $return = false;
-        if (xoops_trim($this->getVar('obituaries_photo')) != ''
+        if ('' != xoops_trim($this->getVar('obituaries_photo'))
             && file_exists(ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'))) {
             $return = true;
         }
@@ -327,7 +327,7 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
 
         $sform->addElement($options_tray4);
 
-        if ($edit && trim($item->getVar('obituaries_photo')) != '' && $item->pictureExists()) {
+        if ($edit && '' != trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
             $pictureTray = new XoopsFormElementTray(_AM_OBITUARIES_CURRENT_PICTURE, '<br>');
             $pictureTray->addElement(new XoopsFormLabel('', "<img src='" . $item->getPictureUrl() . "' alt='' border='0'>"));
             $deleteCheckbox = new XoopsFormCheckBox('', 'delpicture');
@@ -375,8 +375,8 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
             global $xoopsUser;
             $item->setVar('obituaries_uid', $xoopsUser->getVar('uid'));
         }
-        if (isset($_POST['delpicture']) && (int)$_POST['delpicture'] == 1) {
-            if (trim($item->getVar('obituaries_photo')) != '' && $item->pictureExists()) {
+        if (isset($_POST['delpicture']) && 1 == (int)$_POST['delpicture']) {
+            if ('' != trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
                 $item->deletePicture();
             }
             $item->setVar('obituaries_photo', '');
@@ -385,15 +385,15 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
         $uploadFolder = ObituariesUtils::getModuleOption('folder_path');
 
         $return = ObituariesUtils::uploadFile(0, $uploadFolder);
-        if ($return === true) {
+        if (true === $return) {
             $newDestName = ObituariesUtils::createUploadName($uploadFolder, basename($destname), true);
 
             $retval = ObituariesUtils::resizePicture($uploadFolder . '/' . $destname, $uploadFolder . '/' . $newDestName, $images_width, $images_height);
-            if ($retval == 1 || $retval == 3) {
+            if (1 == $retval || 3 == $retval) {
                 $item->setVar('obituaries_photo', $newDestName);
             }
         } else {
-            if ($return !== false) {
+            if (false !== $return) {
                 echo $return;
             }
         }

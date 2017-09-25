@@ -89,7 +89,7 @@ class ObituariesUtils
     {
         $x22 = false;
         $xv  = str_replace('XOOPS ', '', XOOPS_VERSION);
-        if (substr($xv, 2, 1) == '2') {
+        if ('2' == substr($xv, 2, 1)) {
             $x22 = true;
         }
 
@@ -105,7 +105,7 @@ class ObituariesUtils
     {
         $x23 = false;
         $xv  = str_replace('XOOPS ', '', XOOPS_VERSION);
-        if (substr($xv, 2, 1) == '3') {
+        if ('3' == substr($xv, 2, 1)) {
             $x23 = true;
         }
 
@@ -278,7 +278,7 @@ class ObituariesUtils
         xoops_template_clear_module_cache($xoopsModule->getVar('mid'));            // Clear module's blocks cache
 
         foreach ($tpllist as $onetemplate) {    // Remove cache for each page.
-            if ($onetemplate->getVar('tpl_type') == 'module') {
+            if ('module' == $onetemplate->getVar('tpl_type')) {
                 //  Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
                 $files_del = [];
                 $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');
@@ -316,7 +316,7 @@ class ObituariesUtils
         if (!isset($mymodule)) {
             global $xoopsModule;
             if (isset($xoopsModule) && is_object($xoopsModule)
-                && $xoopsModule->getVar('dirname') == OBITUARIES_DIRNAME) {
+                && OBITUARIES_DIRNAME == $xoopsModule->getVar('dirname')) {
                 $mymodule =& $xoopsModule;
             } else {
                 $hModule  = xoops_getHandler('module');
@@ -402,7 +402,7 @@ class ObituariesUtils
      */
     public static function SQLDateToHuman($date, $format = 's')
     {
-        if ($date != '0000-00-00' && xoops_trim($date) != '') {
+        if ('0000-00-00' != $date && '' != xoops_trim($date)) {
             return formatTimestamp(strtotime($date), $format);
         } else {
             return '';
@@ -430,10 +430,10 @@ class ObituariesUtils
         if (self::isX22() || self::isX23()) {
             return false;
         }
-        if (strpos(strtolower(XOOPS_VERSION), 'impresscms') !== false) {
+        if (false !== strpos(strtolower(XOOPS_VERSION), 'impresscms')) {
             return false;
         }
-        if (strpos(strtolower(XOOPS_VERSION), 'legacy') === false) {
+        if (false === strpos(strtolower(XOOPS_VERSION), 'legacy')) {
             $xv = xoops_trim(str_replace('XOOPS ', '', XOOPS_VERSION));
             if ((int)substr($xv, 4, 2) >= 17) {
                 return false;
@@ -481,7 +481,7 @@ class ObituariesUtils
     public static function createUploadName($folder, $fileName, $trimName = false)
     {
         $workingfolder = $folder;
-        if (xoops_substr($workingfolder, strlen($workingfolder) - 1, 1) != '/') {
+        if ('/' != xoops_substr($workingfolder, strlen($workingfolder) - 1, 1)) {
             $workingfolder .= '/';
         }
         $ext  = basename($fileName);
@@ -609,7 +609,7 @@ class ObituariesUtils
                 break;
         }
         // Remove black listed words
-        if (xoops_trim(self::getModuleOption('metagen_blacklist')) != '') {
+        if ('' != xoops_trim(self::getModuleOption('metagen_blacklist'))) {
             $metagen_blacklist = str_replace("\r", '', self::getModuleOption('metagen_blacklist'));
             $metablack         = explode("\n", $metagen_blacklist);
             array_walk($metablack, 'trim');
@@ -655,15 +655,15 @@ class ObituariesUtils
             $fldname = '';
             $fldname = $_FILES[$_POST['xoops_upload_file'][$indice]];
             $fldname = get_magic_quotes_gpc() ? stripslashes($fldname['name']) : $fldname['name'];
-            if (xoops_trim($fldname != '')) {
+            if (xoops_trim('' != $fldname)) {
                 $destname = self::createUploadName($dstpath, $fldname, true);
-                if ($mimeTypes === null) {
+                if (null === $mimeTypes) {
                     $permittedtypes = explode("\n", str_replace("\r", '', self::getModuleOption('mimetypes')));
                     array_walk($permittedtypes, 'trim');
                 } else {
                     $permittedtypes = $mimeTypes;
                 }
-                if ($uploadMaxSize === null) {
+                if (null === $uploadMaxSize) {
                     $uploadSize = self::getModuleOption('maxuploadsize');
                 } else {
                     $uploadSize = $uploadMaxSize;
@@ -812,7 +812,7 @@ class ObituariesUtils
 
     public static function truncate_tagsafe($string, $length = 80, $etc = '...', $break_words = false)
     {
-        if ($length == 0) {
+        if (0 == $length) {
             return '';
         }
 

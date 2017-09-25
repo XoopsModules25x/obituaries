@@ -408,14 +408,14 @@ class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral
             $secondNumber = $this->getSecondNumber();
         }
 
-        if ($secondNumber == 0) {
+        if (0 == $secondNumber) {
             ++$secondNumber;
             $this->doDivision($firstNumber, $secondNumber);
 
             return;
         }
 
-        if ($firstNumber % $secondNumber != 0) {
+        if (0 != $firstNumber % $secondNumber) {
             --$firstNumber;
             --$secondNumber;
 

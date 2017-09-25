@@ -69,7 +69,7 @@ switch ($op) {
             echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
             echo "<tr><th align='center'>" . _AM_OBITUARIES_DATE . "</th><th align='center'>" . _AM_OBITUARIES_USERNAME . "</th><th align='center'>" . _AM_OBITUARIES_LASTNAME . ',  ' . _AM_OBITUARIES_FIRSTNAME . "</th><th align='center'>" . _AM_OBITUARIES_ACTION . '</th></tr>';
             foreach ($items as $item) {
-                $class = ($class == 'even') ? 'odd' : 'even';
+                $class = ('even' == $class) ? 'odd' : 'even';
                 $id    = $item->getVar('obituaries_id');
                 $user  = null;
                 $user  = $item->getXoopsUser();
