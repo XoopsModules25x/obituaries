@@ -207,8 +207,8 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
      * Cr�ation du formulaire de saisie
      *
      * @param  ObituariesUsers $item           L'�l�ment � ajouter/modifier
-     * @param  string           $baseurl        L'url de destination
-     * @param  boolean          $withUserSelect Indique s'il faut inclure la liste de s�lection de l'utilisateur
+     * @param  string          $baseurl        L'url de destination
+     * @param  boolean         $withUserSelect Indique s'il faut inclure la liste de s�lection de l'utilisateur
      * @return object           Le formulaire � utiliser
      */
     public function getForm(ObituariesUsers $item, $baseurl, $withUserSelect = true)

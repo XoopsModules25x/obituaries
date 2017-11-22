@@ -33,10 +33,10 @@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'
             calendar.hide();
         } else {
             var cal = new Calendar(true, "<?php if (isset($jstime)) {
-    echo $jstime;
-} else {
-    echo 'null';
-}?>", selected, closeHandler);
+                echo $jstime;
+            } else {
+                echo 'null';
+            }?>", selected, closeHandler);
             calendar = cal;
             cal.setRange(1900, 2100);
             calendar.create();

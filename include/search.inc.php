@@ -6,18 +6,18 @@
  * Created on 11 juil. 08 at 14:53:56
  * Version :
  * ****************************************************************************
- * @param $queryarray
- * @param $andor
- * @param $limit
- * @param $offset
- * @param $userid
+ * @param array $queryarray
+ * @param       $andor
+ * @param       $limit
+ * @param       $offset
+ * @param       $userid
  * @return array
  */
 function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
-    require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/ObituariesUsers.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/users.php';
 
     // Recherche dans les produits
     $sql = 'SELECT obituaries_id, obituaries_firstname, obituaries_lastname, obituaries_date, obituaries_uid FROM ' . $xoopsDB->prefix('users_obituaries') . ' WHERE (obituaries_id <> 0 ';
@@ -41,9 +41,9 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
         }
     }
 
-    $count = count($queryarray);
-    $more  = '';
-    if (is_array($queryarray) && $count > 0) {
+    //    $count = count($queryarray);
+    $more = '';
+    if (is_array($queryarray) && count($queryarray) > 0) {
         $cnt  = 0;
         $sql  .= ' AND (';
         $more = ')';

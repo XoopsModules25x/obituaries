@@ -129,8 +129,8 @@ class ObituariesUtils
         $value = '',
         $width = '100%',
         $height = '400px',
-        $supplemental = ''
-    ) {
+        $supplemental = '')
+    {
         $editor                   = false;
         $x22                      = self::isX22();
         $editor_configs           = [];
@@ -282,7 +282,7 @@ class ObituariesUtils
                 //  Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
                 $files_del = [];
                 $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');
-                if (count($files_del) > 0 && is_array($files_del)) {
+                if (is_array($files_del) && count($files_del) > 0) {
                     foreach ($files_del as $one_file) {
                         if (is_file($one_file)) {
                             unlink($one_file);
@@ -296,8 +296,8 @@ class ObituariesUtils
     /**
      * Redirect user with a message
      *
-     * @param string $message        message to display
-     * @param string $url            The place where to go
+     * @param string $message message to display
+     * @param string $url     The place where to go
      * @param        integer         timeout Time to wait before to redirect
      */
     public static function redirect($message = '', $url = 'index.php', $time = 2)

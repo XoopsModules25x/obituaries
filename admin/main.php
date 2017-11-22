@@ -43,7 +43,7 @@ switch ($op) {
         xoops_cp_header();
         // echo '<h1>'.ObituariesUtils::getModuleName().'</h1>';
         $adminObject->displayNavigation(basename(__FILE__));
-        $start      = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+        $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
         /** @var \ObituariesUsersHandler $hBdUsersObituaries */
         $itemsCount = $hBdUsersObituaries->getCount();
         if ($itemsCount > $limit) {
@@ -141,7 +141,7 @@ switch ($op) {
     // ****************************************************************************************************************
     case 'saveedit':    // Enregistrement des modifications
         // ****************************************************************************************************************
-       xoops_cp_header();
+        xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
         $result = $hBdUsersObituaries->saveUser();
         if ($result) {

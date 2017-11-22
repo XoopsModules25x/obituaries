@@ -1,19 +1,19 @@
 <?php
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
-$modversion['version']       = 2.32;
-$modversion['module_status'] = 'Beta 1';
-$modversion['release_date']  = '2017/07/23';
-$modversion['name']          = _MI_OBITUARIES_TITRE;
-$modversion['description']   = _MI_OBITUARIES_DESC;
-$modversion['author']        = 'Mariane Antoun based on Birthday module by Herve Thouzard';
-$modversion['credits']       = 'XOOPS Project';
-$modversion['help']          = 'page=help';
-$modversion['license']       = 'GNU GPL 2.0';
-$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']      = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
-$modversion['image']         = 'assets/images/logoModule.png';
-$modversion['dirname']       = basename(__DIR__);
+$modversion['version']             = 2.40;
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2017/11/23';
+$modversion['name']                = _MI_OBITUARIES_TITRE;
+$modversion['description']         = _MI_OBITUARIES_DESC;
+$modversion['author']              = 'Mariane Antoun based on Birthday module by Herve Thouzard';
+$modversion['credits']             = 'XOOPS Project';
+$modversion['help']                = 'page=help';
+$modversion['license']             = 'GNU GPL 2.0';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']            = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
+$modversion['image']               = 'assets/images/logoModule.png';
+$modversion['dirname']             = basename(__DIR__);
 $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org/';
