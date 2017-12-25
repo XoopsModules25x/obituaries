@@ -33,4 +33,4 @@ define('_AM_OBITUARIES_SAVE_OK', 'Data was saved successfuly');
 define('_AM_OBITUARIES_SAVE_PB', 'There was a problem when saving data');
 define('_AM_OBITUARIES_XOOPS_PROFILE', 'Xoops Profile');
 define('_AM_OBITUARIES_USERS_LIST', 'Deceased List');
-define('_CM_POSTCOMMENT', 'Post your Condolences');
+define('_CM_OBITUARIES_POSTCOMMENT', 'Post your Condolences');

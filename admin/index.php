@@ -20,6 +20,8 @@
  * ****************************************************************************
  */
 
+use Xoopsmodules\obituaries;
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once __DIR__ . '/admin_header.php';
 
@@ -27,7 +29,26 @@ xoops_cp_header();
 
 $adminObject = \Xmf\Module\Admin::getInstance();
 
+//check or upload folders
+$configurator = include __DIR__ . '/../include/config.php';
+foreach (array_keys($configurator->uploadFolders) as $i) {
+    $utility::createFolder($configurator->uploadFolders[$i]);
+    $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
+}
+
 $adminObject->displayNavigation(basename(__FILE__));
+
+//------------- Test Data ----------------------------
+if ($helper->getConfig('displaySampleButton')) {
+    xoops_loadLanguage('admin/modulesadmin', 'system');
+    require_once __DIR__ . '/../testdata/index.php';
+    $adminObject->addItemButton(_AM_SYSTEM_MODULES_INSTALL_TESTDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
+    $adminObject->displayButton('left', '');
+}
+//------------- End Test Data ----------------------------
+
 $adminObject->displayIndex();
+
+echo $utility::getServerStats();
 
 require_once __DIR__ . '/admin_footer.php';

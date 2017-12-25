@@ -42,7 +42,7 @@ function tableExists($tablename)
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_obituaries(XoopsModule $module)
+function xoops_module_pre_update_obituaries(\XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
     /** @var obituaries\Helper $helper */
@@ -64,7 +64,7 @@ function xoops_module_pre_update_obituaries(XoopsModule $module)
  * @return bool true if update successful, false if not
  */
 
-function xoops_module_update_obituaries(XoopsModule $module, $previousVersion = null)
+function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion = null)
 {
     $moduleDirName = basename(dirname(__DIR__));
     $capsDirName   = strtoupper($moduleDirName);
@@ -127,7 +127,7 @@ function xoops_module_update_obituaries(XoopsModule $module, $previousVersion = 
             foreach (array_keys($configurator->oldFolders) as $i) {
                 $tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
                 /* @var $folderHandler XoopsObjectHandler */
-                $folderHandler = XoopsFile::getHandler('folder', $tempFolder);
+                $folderHandler = \XoopsFile::getHandler('folder', $tempFolder);
                 $folderHandler->delete($tempFolder);
             }
         }

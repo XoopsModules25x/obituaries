@@ -3,6 +3,8 @@
 
 include __DIR__ . '/preloads/autoloader.php';
 
+
+
 $modversion['version']             = 2.40;
 $modversion['module_status']       = 'Beta 1';
 $modversion['release_date']        = '2017/11/23';
@@ -144,7 +146,7 @@ $modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_FOLDER_PATH';
 $modversion['config'][$cpto]['description'] = '';
 $modversion['config'][$cpto]['formtype']    = 'textbox';
 $modversion['config'][$cpto]['valuetype']   = 'text';
-$modversion['config'][$cpto]['default']     = XOOPS_UPLOAD_PATH;
+$modversion['config'][$cpto]['default']     = XOOPS_UPLOAD_PATH . '/' . basename(__DIR__);
 
 /**
  * Folder's url (where to save pictures)
@@ -155,7 +157,7 @@ $modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_FOLDER_URL';
 $modversion['config'][$cpto]['description'] = '';
 $modversion['config'][$cpto]['formtype']    = 'textbox';
 $modversion['config'][$cpto]['valuetype']   = 'text';
-$modversion['config'][$cpto]['default']     = XOOPS_UPLOAD_URL;
+$modversion['config'][$cpto]['default']     = XOOPS_UPLOAD_URL . '/' . basename(__DIR__);
 
 /**
  * Items count per page
@@ -194,26 +196,10 @@ $modversion['config'][$cpto]['default']     = 1048576;
 /**
  * Editor to use
  */
-//++$cpto;
-//$modversion['config'][$cpto]['name'] = 'form_options';
-//$modversion['config'][$cpto]['title'] = "_MI_OBITUARIES_FORM_OPTIONS";
-//$modversion['config'][$cpto]['description'] = '_MI_OBITUARIES_FORM_OPTIONS_DESC';
-//$modversion['config'][$cpto]['formtype'] = 'select';
-//$modversion['config'][$cpto]['valuetype'] = 'text';
-//$modversion['config'][$cpto]['options'] = array(
-//                                          _MI_OBITUARIES_FORM_DHTML=>'dhtml',
-//                                          _MI_OBITUARIES_FORM_COMPACT=>'textarea',
-//                                          _MI_OBITUARIES_FORM_SPAW=>'spaw',
-//                                          _MI_OBITUARIES_FORM_HTMLAREA=>'htmlarea',
-//                                          _MI_OBITUARIES_FORM_KOIVI=>'koivi',
-//                                          _MI_OBITUARIES_FORM_FCK=>'fck',
-//                                          _MI_OBITUARIES_FORM_TINYEDITOR=>'tinyeditor'
-//                                          );
-//$modversion['config'][$cpto]['default'] = 'dhtml';
 
 ++$cpto;
 xoops_load('XoopsEditorHandler');
-$editorHandler = XoopsEditorHandler::getInstance();
+$editorHandler = \XoopsEditorHandler::getInstance();
 $editorList    = array_flip($editorHandler->getList());
 
 $modversion['config'][$cpto] = [

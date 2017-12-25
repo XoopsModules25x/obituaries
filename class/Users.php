@@ -10,6 +10,7 @@
  */
 
 use Xmf\Request;
+use Xoopsmodules\obituaries;
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
@@ -50,7 +51,7 @@ class Users extends \XoopsObject
     public function getPictureUrl()
     {
         if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
-            return ObituariesUtils::getModuleOption('folder_url') . '/' . $this->getVar('obituaries_photo');
+            return obituaries\ObituariesUtils::getModuleOption('folder_url') . '/' . $this->getVar('obituaries_photo');
         } else {
             return '';
         }
@@ -63,7 +64,7 @@ class Users extends \XoopsObject
     public function getPicturePath()
     {
         if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
-            return ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo');
+            return obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo');
         } else {
             return '';
         }
@@ -78,7 +79,7 @@ class Users extends \XoopsObject
     {
         $return = false;
         if ('' != xoops_trim($this->getVar('obituaries_photo'))
-            && file_exists(ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'))) {
+            && file_exists(obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'))) {
             $return = true;
         }
 
@@ -92,7 +93,7 @@ class Users extends \XoopsObject
     public function deletePicture()
     {
         if ($this->pictureExists()) {
-            @unlink(ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'));
+            @unlink(obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'));
         }
         $this->setVar('obituaries_photo', '');
     }
@@ -104,7 +105,7 @@ class Users extends \XoopsObject
      */
     public function getHrefTitle()
     {
-        return ObituariesUtils::makeHrefTitle(xoops_trim($this->getVar('obituaries_lastname')) . ' ' . xoops_trim($this->getVar('obituaries_firstname')));
+        return obituaries\ObituariesUtils::makeHrefTitle(xoops_trim($this->getVar('obituaries_lastname')) . ' ' . xoops_trim($this->getVar('obituaries_firstname')));
     }
 
     /**

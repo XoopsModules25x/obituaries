@@ -7,6 +7,9 @@
  * Version :
  * ****************************************************************************
  */
+
+use Xoopsmodules\obituaries;
+
 require_once __DIR__ . '/../../../include/cp_header.php';
 require_once __DIR__ . '/../include/common.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
@@ -23,11 +26,11 @@ if (isset($_POST['op'])) {
 }
 
 // Lecture de certains param�tres de l'application ********************************************************************
-$limit         = ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
+$limit         =  obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
 $baseurl       = OBITUARIES_URL . 'admin/' . basename(__FILE__);    // URL de ce script
-$conf_msg      = ObituariesUtils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
-$images_width  = ObituariesUtils::getModuleOption('images_width');
-$images_height = ObituariesUtils::getModuleOption('images_height');
+$conf_msg      =  obituaries\ObituariesUtils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
+$images_width  =  obituaries\ObituariesUtils::getModuleOption('images_width');
+$images_height =  obituaries\ObituariesUtils::getModuleOption('images_height');
 $destname      = '';
 
 $cacheFolder = XOOPS_UPLOAD_PATH . '/' . OBITUARIES_DIRNAME;
@@ -47,7 +50,7 @@ switch ($op) {
         /** @var \UsersHandler $usersHandler */
         $itemsCount = $usersHandler->getCount();
         if ($itemsCount > $limit) {
-            $pagenav = new XoopsPageNav($itemsCount, $limit, $start, 'start');
+            $pagenav = new \XoopsPageNav($itemsCount, $limit, $start, 'start');
         }
         if (isset($pagenav) && is_object($pagenav)) {
             echo "<div align='right'>" . $pagenav->renderNav() . '</div>';
@@ -57,8 +60,8 @@ switch ($op) {
             //          $items = $usersHandler->getItems($start, $limit, 'obituaries_lastname');
 
             $tblItems = [];
-            //$critere = new Criteria($this->keyName, 0 ,'<>');
-            $critere = new Criteria('obituaries_id', 0, '<>');
+            //$critere = new \Criteria($this->keyName, 0 ,'<>');
+            $critere = new \Criteria('obituaries_id', 0, '<>');
             $critere->setLimit($limit);
             $critere->setStart($start);
             $critere->setSort('obituaries_lastname');
@@ -81,7 +84,7 @@ switch ($op) {
                 $action_delete = "<a href='$baseurl?op=delete&id=" . $id . "' title='" . _DELETE . "'" . $conf_msg . '>' . $birdthday_icones['delete'] . '</a>';
 
                 echo "<tr class='" . $class . "'>\n";
-                echo "<td align='center'>" . ObituariesUtils::SQLDateToHuman($item->getVar('obituaries_date')) . '</td>';
+                echo "<td align='center'>" .  obituaries\ObituariesUtils::SQLDateToHuman($item->getVar('obituaries_date')) . '</td>';
                 echo "<td align='center'>" . $uname . '</td>';
                 echo "<td align='center'>" . $item->getFullName() . '</td>';
                 echo "<td align='center'>" . $action_edit . ' ' . $action_delete . '</td>';
@@ -114,9 +117,9 @@ switch ($op) {
             $xoopsDB->queryF('ANALYZE TABLE ' . $list);
             $xoopsDB->queryF('OPTIMIZE TABLE ' . $list);
         }
-        ObituariesUtils::updateCache();
+         obituaries\ObituariesUtils::updateCache();
         $usersHandler->forceCacheClean();
-        ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
+         obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
         break;
 
     // ****************************************************************************************************************
@@ -126,13 +129,13 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if (empty($id)) {
-            ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
+             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
         // Item exits ?
         $item = null;
         $item = $usersHandler->get($id);
         if (!is_object($item)) {
-            ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
+             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
         $form = $usersHandler->getForm($item, $baseurl);
         $form->display();
@@ -145,9 +148,9 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $result = $usersHandler->saveUser();
         if ($result) {
-            ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
+             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
-            ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
+             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
         break;
 
@@ -156,19 +159,19 @@ switch ($op) {
         // ****************************************************************************************************************
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if (empty($id)) {
-            ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
+             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
         // Item exits ?
         $item = null;
         $item = $usersHandler->get($id);
         if (!is_object($item)) {
-            ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
+             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
         $result = $usersHandler->deleteUser($item);
         if ($result) {
-            ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
+             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
-            ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
+             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
 
 }

@@ -10,6 +10,7 @@
  */
 
 use Xmf\Request;
+use Xoopsmodules\obituaries;
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
@@ -41,7 +42,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
      */
     public function getFromUid($uid)
     {
-        $criteria = new Criteria('obituaries_uid', (int)$uid, '=');
+        $criteria = new \Criteria('obituaries_uid', (int)$uid, '=');
         if ($this->getCount($criteria) > 0) {
             $temp = [];
             $temp = $this->getObjects($criteria);
@@ -79,24 +80,24 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $title       = _AM_OBITUARIES_ADD_ITEM;
         }
         // Formulaire de cr�ation
-        $sform = new XoopsThemeForm($title, 'frmadd', $baseurl);
+        $sform = new \XoopsThemeForm($title, 'frmadd', $baseurl);
         $sform->setExtra('enctype="multipart/form-data"');
-        $sform->addElement(new XoopsFormHidden('op', 'saveedit'));
-        $sform->addElement(new XoopsFormHidden('obituaries_id', $item->getVar('obituaries_id')));
+        $sform->addElement(new \XoopsFormHidden('op', 'saveedit'));
+        $sform->addElement(new \XoopsFormHidden('obituaries_id', $item->getVar('obituaries_id')));
         if ($withUserSelect) {
-            $selectUser = new XoopsFormSelectUser(_AM_OBITUARIES_USERNAME, 'obituaries_uid', true, $item->getVar('obituaries_uid', 'e'));
+            $selectUser = new \XoopsFormSelectUser(_AM_OBITUARIES_USERNAME, 'obituaries_uid', true, $item->getVar('obituaries_uid', 'e'));
             $selectUser->setDescription(_AM_OBITUARIES_USE_ANONYMOUS);
             $sform->addElement($selectUser);
         }
         $date = strtotime($item->getVar('obituaries_date'));
-        $sform->addElement(new XoopsFormTextDateSelect(_AM_OBITUARIES_DATE, 'obituaries_date', 15, $date));
-        $sform->addElement(new XoopsFormText(_AM_OBITUARIES_FIRSTNAME, 'obituaries_firstname', 50, 150, $item->getVar('obituaries_firstname', 'e')), false);
-        $sform->addElement(new XoopsFormText(_AM_OBITUARIES_LASTNAME, 'obituaries_lastname', 50, 150, $item->getVar('obituaries_lastname', 'e')), false);
+        $sform->addElement(new \XoopsFormTextDateSelect(_AM_OBITUARIES_DATE, 'obituaries_date', 15, $date));
+        $sform->addElement(new \XoopsFormText(_AM_OBITUARIES_FIRSTNAME, 'obituaries_firstname', 50, 150, $item->getVar('obituaries_firstname', 'e')), false);
+        $sform->addElement(new \XoopsFormText(_AM_OBITUARIES_LASTNAME, 'obituaries_lastname', 50, 150, $item->getVar('obituaries_lastname', 'e')), false);
 
-        //      $editor1 = ObituariesUtils::getWysiwygForm(_OBITUARIES_DESCRIPTION, 'obituaries_description', $item->getVar('obituaries_description', 'e'), 15, 60, 'description_hidden');
-        //        $editor2 = ObituariesUtils::getWysiwygForm(_OBITUARIES_SURVIVORS, 'obituaries_survivors', $item->getVar('obituaries_survivors', 'e'), 15, 60, 'survivors_hidden');
-        //      $editor3 = ObituariesUtils::getWysiwygForm(_OBITUARIES_SERVICE, 'obituaries_service', $item->getVar('obituaries_service', 'e'), 15, 60, 'service_hidden');
-        //      $editor4 = ObituariesUtils::getWysiwygForm(_OBITUARIES_MEMORIAL, 'obituaries_memorial', $item->getVar('obituaries_memorial', 'e'), 15, 60, 'memorial_hidden');
+        //      $editor1 = obituaries\ObituariesUtils::getWysiwygForm(_OBITUARIES_DESCRIPTION, 'obituaries_description', $item->getVar('obituaries_description', 'e'), 15, 60, 'description_hidden');
+        //        $editor2 = obituaries\ObituariesUtils::getWysiwygForm(_OBITUARIES_SURVIVORS, 'obituaries_survivors', $item->getVar('obituaries_survivors', 'e'), 15, 60, 'survivors_hidden');
+        //      $editor3 = obituaries\ObituariesUtils::getWysiwygForm(_OBITUARIES_SERVICE, 'obituaries_service', $item->getVar('obituaries_service', 'e'), 15, 60, 'service_hidden');
+        //      $editor4 = obituaries\ObituariesUtils::getWysiwygForm(_OBITUARIES_MEMORIAL, 'obituaries_memorial', $item->getVar('obituaries_memorial', 'e'), 15, 60, 'memorial_hidden');
         //      if ($editor1) {
         //            $sform->addElement($editor1, false);
         //        }
@@ -111,7 +112,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         //        }
         //
 
-        $options_tray1 = new XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');
+        $options_tray1 = new \XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');
 
         if (class_exists('XoopsFormEditor')) {
             $options['name']        = 'obituaries_description';
@@ -120,15 +121,15 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $options['cols']        = '100%';
             $options['width']       = '100%';
             $options['height']      = '600px';
-            $obituaries_description = new XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
+            $obituaries_description = new \XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
             $options_tray1->addElement($obituaries_description);
         } else {
-            $obituaries_description = new XoopsFormDhtmlTextArea('', 'obituaries_description', $item->getVar('obituaries_description', 'e'), '100%', '100%');
+            $obituaries_description = new \XoopsFormDhtmlTextArea('', 'obituaries_description', $item->getVar('obituaries_description', 'e'), '100%', '100%');
             $options_tray1->addElement($obituaries_description);
         }
         $sform->addElement($options_tray1);
 
-        $options_tray2 = new XoopsFormElementTray(_AM_OBITUARIES_SURVIVORS, '<br>');
+        $options_tray2 = new \XoopsFormElementTray(_AM_OBITUARIES_SURVIVORS, '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']      = 'obituaries_survivors';
             $options['value']     = $item->getVar('obituaries_survivors', 'e');
@@ -136,15 +137,15 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $options['cols']      = '100%';
             $options['width']     = '100%';
             $options['height']    = '600px';
-            $obituaries_survivors = new XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
+            $obituaries_survivors = new \XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
             $options_tray2->addElement($obituaries_survivors);
         } else {
-            $obituaries_survivors = new XoopsFormDhtmlTextArea('', 'contents_contents', $item->getVar('obituaries_survivors', 'e'), '100%', '100%');
+            $obituaries_survivors = new \XoopsFormDhtmlTextArea('', 'contents_contents', $item->getVar('obituaries_survivors', 'e'), '100%', '100%');
             $options_tray2->addElement($obituaries_survivors);
         }
         $sform->addElement($options_tray2);
 
-        $options_tray3 = new XoopsFormElementTray(_AM_OBITUARIES_SERVICE, '<br>');
+        $options_tray3 = new \XoopsFormElementTray(_AM_OBITUARIES_SERVICE, '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']    = 'obituaries_service';
             $options['value']   = $item->getVar('obituaries_service', 'e');
@@ -152,15 +153,15 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $options['cols']    = '100%';
             $options['width']   = '100%';
             $options['height']  = '600px';
-            $obituaries_service = new XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
+            $obituaries_service = new \XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
             $options_tray3->addElement($obituaries_service);
         } else {
-            $obituaries_service = new XoopsFormDhtmlTextArea('', 'obituaries_service', $item->getVar('obituaries_service', 'e'), '100%', '100%');
+            $obituaries_service = new \XoopsFormDhtmlTextArea('', 'obituaries_service', $item->getVar('obituaries_service', 'e'), '100%', '100%');
             $options_tray3->addElement($obituaries_service);
         }
         $sform->addElement($options_tray3);
 
-        $options_tray4 = new XoopsFormElementTray(_AM_OBITUARIES_MEMORIAL, '<br>');
+        $options_tray4 = new \XoopsFormElementTray(_AM_OBITUARIES_MEMORIAL, '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']     = 'obituaries_memorial';
             $options['value']    = $item->getVar('obituaries_memorial', 'e');
@@ -168,31 +169,31 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $options['cols']     = '100%';
             $options['width']    = '100%';
             $options['height']   = '600px';
-            $obituaries_memorial = new XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
+            $obituaries_memorial = new \XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
             $options_tray4->addElement($obituaries_memorial);
         } else {
-            $obituaries_memorial = new XoopsFormDhtmlTextArea('', 'obituaries_memorial', $item->getVar('obituaries_memorial', 'e'), '100%', '100%');
+            $obituaries_memorial = new \XoopsFormDhtmlTextArea('', 'obituaries_memorial', $item->getVar('obituaries_memorial', 'e'), '100%', '100%');
             $options_tray4->addElement($obituaries_memorial);
         }
 
         $sform->addElement($options_tray4);
 
         if ($edit && '' != trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
-            $pictureTray = new XoopsFormElementTray(_AM_OBITUARIES_CURRENT_PICTURE, '<br>');
-            $pictureTray->addElement(new XoopsFormLabel('', "<img src='" . $item->getPictureUrl() . "' alt='' border='0'>"));
-            $deleteCheckbox = new XoopsFormCheckBox('', 'delpicture');
+            $pictureTray = new \XoopsFormElementTray(_AM_OBITUARIES_CURRENT_PICTURE, '<br>');
+            $pictureTray->addElement(new \XoopsFormLabel('', "<img src='" . $item->getPictureUrl() . "' alt='' border='0'>"));
+            $deleteCheckbox = new \XoopsFormCheckBox('', 'delpicture');
             $deleteCheckbox->addOption(1, _DELETE);
             $pictureTray->addElement($deleteCheckbox);
             $sform->addElement($pictureTray);
             unset($pictureTray, $deleteCheckbox);
         }
-        $sform->addElement(new XoopsFormFile(_AM_OBITUARIES_PICTURE, 'attachedfile', ObituariesUtils::getModuleOption('maxuploadsize')), false);
+        $sform->addElement(new \XoopsFormFile(_AM_OBITUARIES_PICTURE, 'attachedfile', obituaries\ObituariesUtils::getModuleOption('maxuploadsize')), false);
 
-        $button_tray = new XoopsFormElementTray('', '');
-        $submit_btn  = new XoopsFormButton('', 'post', $labelSubmit, 'submit');
+        $button_tray = new \XoopsFormElementTray('', '');
+        $submit_btn  = new \XoopsFormButton('', 'post', $labelSubmit, 'submit');
         $button_tray->addElement($submit_btn);
         $sform->addElement($button_tray);
-        $sform = ObituariesUtils::formMarkRequiredFields($sform);
+        $sform = obituaries\ObituariesUtils::formMarkRequiredFields($sform);
 
         return $sform;
     }
@@ -206,8 +207,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     public function saveUser($withCurrentUser = false)
     {
         global $destname;
-        $images_width  = ObituariesUtils::getModuleOption('images_width');
-        $images_height = ObituariesUtils::getModuleOption('images_height');
+        $images_width  = obituaries\ObituariesUtils::getModuleOption('images_width');
+        $images_height = obituaries\ObituariesUtils::getModuleOption('images_height');
         $id            = isset($_POST['obituaries_id']) ? (int)$_POST['obituaries_id'] : 0;
         if (!empty($id)) {
             $edit = true;
@@ -232,13 +233,13 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $item->setVar('obituaries_photo', '');
         }
 
-        $uploadFolder = ObituariesUtils::getModuleOption('folder_path');
+        $uploadFolder = obituaries\ObituariesUtils::getModuleOption('folder_path');
 
-        $return = ObituariesUtils::uploadFile(0, $uploadFolder);
+        $return = obituaries\ObituariesUtils::uploadFile(0, $uploadFolder);
         if (true === $return) {
-            $newDestName = ObituariesUtils::createUploadName($uploadFolder, basename($destname), true);
+            $newDestName = obituaries\ObituariesUtils::createUploadName($uploadFolder, basename($destname), true);
 
-            $retval = ObituariesUtils::resizePicture($uploadFolder . '/' . $destname, $uploadFolder . '/' . $newDestName, $images_width, $images_height);
+            $retval = obituaries\ObituariesUtils::resizePicture($uploadFolder . '/' . $destname, $uploadFolder . '/' . $newDestName, $images_width, $images_height);
             if (1 == $retval || 3 == $retval) {
                 $item->setVar('obituaries_photo', $newDestName);
             }
@@ -254,7 +255,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
 
         $res = $this->insert($item);
         if ($res) {
-            ObituariesUtils::updateCache();
+            obituaries\ObituariesUtils::updateCache();
         }
 
         return $res;
@@ -271,7 +272,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         $user->deletePicture();
         $res = $this->delete($user, true);
         if ($res) {
-            ObituariesUtils::updateCache();
+            obituaries\ObituariesUtils::updateCache();
         }
 
         return $res;
@@ -292,7 +293,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         $user          = null;
         $user          = $this->get($userId);
         if (is_object($user)) {
-            $criteria = new Criteria('obituaries_id', $userId, '=');
+            $criteria = new \Criteria('obituaries_id', $userId, '=');
             $this->updateAll('prod_comments', $commentsCount, $criteria, true);
         }
     }
@@ -307,9 +308,9 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
      */
     public function getTodayObituariess($start = 0, $limit = 0, $sort = 'obituaries_lastname', $order = 'ASC')
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('day(obituaries_date)', date('j'), '='));
-        $criteria->add(new Criteria('month(obituaries_date)', date('n'), '='));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('day(obituaries_date)', date('j'), '='));
+        $criteria->add(new \Criteria('month(obituaries_date)', date('n'), '='));
         $criteria->setStart($start);
         if ($limit > 0) {
             $criteria->setLimit($limit);
@@ -331,7 +332,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         //disable cache for this one
         $this->setCachingOptions(['caching' => false]);
 
-        $criteria = new CriteriaCompo(null);
+        $criteria = new \CriteriaCompo(null);
         $criteria->setStart($start);
         if ($limit > 0) {
             $criteria->setLimit($limit);
@@ -351,7 +352,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
      */
     public function getLastObituariess($start = 0, $limit = 0, $sort = 'obituaries_date', $order = 'DESC')
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setStart($start);
         if ($limit > 0) {
             $criteria->setLimit($limit);
@@ -368,9 +369,9 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
      */
     public function getTodayObituariessCount()
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('day(obituaries_date)', date('j'), '='));
-        $criteria->add(new Criteria('month(obituaries_date)', date('n'), '='));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('day(obituaries_date)', date('j'), '='));
+        $criteria->add(new \Criteria('month(obituaries_date)', date('n'), '='));
 
         return $this->getCount($criteria);
     }
@@ -396,8 +397,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
      */
     public function getAllUsers($start = 0, $limit = 0, $sort = 'obituaries_lastname', $order = 'ASC')
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('obituaries_id', 0, '<>'));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('obituaries_id', 0, '<>'));
         $criteria->setStart($start);
         if ($limit > 0) {
             $criteria->setLimit($limit);

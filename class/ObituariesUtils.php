@@ -149,10 +149,10 @@ class ObituariesUtils
                 if (!$x22) {
                     if (is_readable(XOOPS_ROOT_PATH . '/class/spaw/formspaw.php')) {
                         require_once XOOPS_ROOT_PATH . '/class/spaw/formspaw.php';
-                        $editor = new XoopsFormSpaw($caption, $name, $value);
+                        $editor = new \XoopsFormSpaw($caption, $name, $value);
                     }
                 } else {
-                    $editor = new XoopsFormEditor($caption, 'spaw', $editor_configs);
+                    $editor = new \XoopsFormEditor($caption, 'spaw', $editor_configs);
                 }
                 break;
 
@@ -160,10 +160,10 @@ class ObituariesUtils
                 if (!$x22) {
                     if (is_readable(XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php')) {
                         require_once XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php';
-                        $editor = new XoopsFormFckeditor($caption, $name, $value);
+                        $editor = new \XoopsFormFckeditor($caption, $name, $value);
                     }
                 } else {
-                    $editor = new XoopsFormEditor($caption, 'fckeditor', $editor_configs);
+                    $editor = new \XoopsFormEditor($caption, 'fckeditor', $editor_configs);
                 }
                 break;
 
@@ -171,29 +171,29 @@ class ObituariesUtils
                 if (!$x22) {
                     if (is_readable(XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php')) {
                         require_once XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php';
-                        $editor = new XoopsFormHtmlarea($caption, $name, $value);
+                        $editor = new \XoopsFormHtmlarea($caption, $name, $value);
                     }
                 } else {
-                    $editor = new XoopsFormEditor($caption, 'htmlarea', $editor_configs);
+                    $editor = new \XoopsFormEditor($caption, 'htmlarea', $editor_configs);
                 }
                 break;
 
             case 'dhtml':
                 if (!$x22) {
-                    $editor = new XoopsFormDhtmlTextArea($caption, $name, $value, 10, 50, $supplemental);
+                    $editor = new \XoopsFormDhtmlTextArea($caption, $name, $value, 10, 50, $supplemental);
                 } else {
-                    $editor = new XoopsFormEditor($caption, 'dhtmltextarea', $editor_configs);
+                    $editor = new \XoopsFormEditor($caption, 'dhtmltextarea', $editor_configs);
                 }
                 break;
 
             case 'textarea':
-                $editor = new XoopsFormTextArea($caption, $name, $value);
+                $editor = new \XoopsFormTextArea($caption, $name, $value);
                 break;
 
             case 'tinyeditor':
                 if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php')) {
                     require_once XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php';
-                    $editor = new XoopsFormTinyeditorTextArea([
+                    $editor = new \XoopsFormTinyeditorTextArea([
                                                                   'caption' => $caption,
                                                                   'name'    => $name,
                                                                   'value'   => $value,
@@ -207,10 +207,10 @@ class ObituariesUtils
                 if (!$x22) {
                     if (is_readable(XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php')) {
                         require_once XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php';
-                        $editor = new XoopsFormWysiwygTextArea($caption, $name, $value, '100%', '250px', '');
+                        $editor = new \XoopsFormWysiwygTextArea($caption, $name, $value, '100%', '250px', '');
                     }
                 } else {
-                    $editor = new XoopsFormEditor($caption, 'koivi', $editor_configs);
+                    $editor = new \XoopsFormEditor($caption, 'koivi', $editor_configs);
                 }
                 break;
         }
@@ -669,7 +669,7 @@ class ObituariesUtils
                 } else {
                     $uploadSize = $uploadMaxSize;
                 }
-                $uploader = new XoopsMediaUploader($dstpath, $permittedtypes, $uploadSize);
+                $uploader = new \XoopsMediaUploader($dstpath, $permittedtypes, $uploadSize);
                 //$uploader->allowUnknownTypes = true;
                 $uploader->setTargetFileName($destname);
                 if ($uploader->fetchMedia($_POST['xoops_upload_file'][$indice])) {

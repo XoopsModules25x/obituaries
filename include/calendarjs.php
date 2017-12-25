@@ -32,7 +32,7 @@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'
         if (calendar != null) {
             calendar.hide();
         } else {
-            var cal = new Calendar(true, "<?php if (isset($jstime)) {
+            var cal = new \Calendar(true, "<?php if (isset($jstime)) {
                 echo $jstime;
             } else {
                 echo 'null';

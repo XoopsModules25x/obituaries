@@ -119,7 +119,7 @@ function b_obituaries_last_show($options)
     $start = 0;
     $limit = (int)$options[0];
 
-    if (1 == ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
+    if (1 ==  obituaries\ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
         $sort  = 'obituaries_date';
         $order = 'DESC';
     } else {
