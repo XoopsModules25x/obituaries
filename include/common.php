@@ -19,7 +19,7 @@ if (!defined('OBITUARIES_DIRNAME')) {
     define('OBITUARIES_IMAGES_PATH', OBITUARIES_PATH . 'assets/images/');
     define('OBITUARIES_THUMB', 'thumb_');
 }
-$myts = MyTextSanitizer::getInstance();
+$myts = \MyTextSanitizer::getInstance();
 
 // Chargement des handler et des autres classes
 require_once OBITUARIES_PATH . 'class/ObituariesUtils.php';

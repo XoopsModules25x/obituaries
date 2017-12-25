@@ -1,7 +1,7 @@
 <?php
 /**
  * ****************************************************************************
- * Birthday - MODULE FOR XOOPS
+ * Obituaries - MODULE FOR XOOPS
  * Copyright (c) Hervé Thouzard (http://www.herve-thouzard.com)
  *
  * You may not change or alter any portion of this comment or credits
@@ -13,7 +13,7 @@
  *
  * @copyright       Hervé Thouzard (http://www.herve-thouzard.com)
  * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         birthday
+ * @package         Obituaries
  * @author          Hervé Thouzard (http://www.herve-thouzard.com)
  *
  * Version :

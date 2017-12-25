@@ -1,9 +1,9 @@
-<?php
+<?php namespace Xoopsmodules\obituaries;
 
 /**
- * Class MyalbumUtil
+ * Class Utility
  */
-class ObituariesUtility extends XoopsObject
+class Utility extends \XoopsObject
 {
     /**
      * Function responsible for checking if a directory exists, we can also write in and create an index.html file
