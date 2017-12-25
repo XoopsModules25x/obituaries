@@ -15,11 +15,11 @@
 function obituaries_com_update($userId, $total_num)
 {
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
-    global $hBdUsersObituaries;
-    if (!is_object($hBdUsersObituaries)) {
-        $hBdUsersObituaries = xoops_getModuleHandler('users', OBITUARIES_DIRNAME);
+    global $usersHandler;
+    if (!is_object($usersHandler)) {
+        $usersHandler = xoops_getModuleHandler('users', OBITUARIES_DIRNAME);
     }
-    $hBdUsersObituaries->updateCommentsCount($userId, $total_num);
+    $usersHandler->updateCommentsCount($userId, $total_num);
 }
 
 /**

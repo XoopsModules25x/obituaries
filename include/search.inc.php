@@ -17,7 +17,7 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
-    require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/users.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/Users.php';
 
     // Recherche dans les produits
     $sql = 'SELECT obituaries_id, obituaries_firstname, obituaries_lastname, obituaries_date, obituaries_uid FROM ' . $xoopsDB->prefix('users_obituaries') . ' WHERE (obituaries_id <> 0 ';
@@ -26,7 +26,7 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
     }
     $sql .= ') ';
 
-    $tmpObject = new ObituariesUsers();
+    $tmpObject = new Users();
     $datas     = $tmpObject->getVars();
     $tblFields = [];
     $cnt       = 0;

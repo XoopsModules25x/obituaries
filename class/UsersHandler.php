@@ -1,4 +1,5 @@
-<?php
+<?php namespace Xoopsmodules\obituaries;
+
 /**
  * ****************************************************************************
  * Obituaries - MODULE FOR XOOPS
@@ -17,170 +18,19 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 //  require_once XOOPS_ROOT_PATH.'/modules/obituaries/class/PersistableObjectHandler.php';
 //}
 
-/**
- * Class ObituariesUsers
- */
-class ObituariesUsers extends XoopsObject
-{
-    /**
-     * ObituariesUsers constructor.
-     */
-    public function __construct()
-    {
-        $this->initVar('obituaries_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('obituaries_uid', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('obituaries_date', XOBJ_DTYPE_TIMESTAMP, null, false);
-        $this->initVar('obituaries_photo', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('obituaries_description', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('obituaries_survivors', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('obituaries_service', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('obituaries_memorial', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('obituaries_firstname', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('obituaries_lastname', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('obituaries_comments', XOBJ_DTYPE_INT, null, false);
-        // Pour autoriser le html
-        $this->initVar('dohtml', XOBJ_DTYPE_INT, 1, false);
-    }
-
-    /**
-     * Retourne l'URL de l'image
-     * @return string L'URL
-     */
-    public function getPictureUrl()
-    {
-        if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
-            return ObituariesUtils::getModuleOption('folder_url') . '/' . $this->getVar('obituaries_photo');
-        } else {
-            return '';
-        }
-    }
-
-    /**
-     * Retourne le chemin de l'image
-     * @return string Le chemin
-     */
-    public function getPicturePath()
-    {
-        if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
-            return ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo');
-        } else {
-            return '';
-        }
-    }
-
-    /**
-     * Indique si l'image existe
-     *
-     * @return boolean Vrai si l'image existe sinon faux
-     */
-    public function pictureExists()
-    {
-        $return = false;
-        if ('' != xoops_trim($this->getVar('obituaries_photo'))
-            && file_exists(ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'))) {
-            $return = true;
-        }
-
-        return $return;
-    }
-
-    /**
-     * Supprime l'image associ�e
-     * @return void
-     */
-    public function deletePicture()
-    {
-        if ($this->pictureExists()) {
-            @unlink(ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'));
-        }
-        $this->setVar('obituaries_photo', '');
-    }
-
-    /**
-     * Rentourne la chaine � envoyer dans une balise <a> pour l'attribut href
-     *
-     * @return string
-     */
-    public function getHrefTitle()
-    {
-        return ObituariesUtils::makeHrefTitle(xoops_trim($this->getVar('obituaries_lastname')) . ' ' . xoops_trim($this->getVar('obituaries_firstname')));
-    }
-
-    /**
-     * Retourne l'utilisateur Xoops li� � l'enregistrement courant
-     *
-     */
-    public function getXoopsUser()
-    {
-        $ret = null;
-        static $memberHandler;
-        if ($this->getVar('obituaries_uid') > 0) {
-            if (!isset($memberHandler)) {
-                $memberHandler = xoops_getHandler('member');
-            }
-            $user = $memberHandler->getUser($this->getVar('obituaries_uid'));
-            if (is_object($user)) {
-                $ret = $user;
-            }
-        }
-
-        return $ret;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullName()
-    {
-        return xoops_trim($this->getVar('obituaries_lastname')) . ' ' . xoops_trim($this->getVar('obituaries_firstname'));
-    }
-
-    /**
-     * Retourne les �l�ments format�s pour affichage
-     *
-     * @param  string $format Le format � utiliser
-     * @return array  Les donn�es formatt�es
-     */
-    public function toArray($format = 's')
-    {
-        $ret = [];
-        foreach ($this->vars as $k => $v) {
-            $ret[$k] = $this->getVar($k, $format);
-        }
-        $ret['obituaries_full_imgurl'] = $this->getPictureUrl();
-        $ret['obituaries_href_title']  = $this->getHrefTitle();
-        $user                          = null;
-        $user                          = $this->getXoopsUser();
-        if (is_object($user)) {
-            $ret['obituaries_user_name']        = $user->getVar('name');
-            $ret['obituaries_user_uname']       = $user->getVar('uname');
-            $ret['obituaries_user_email']       = $user->getVar('email');
-            $ret['obituaries_user_url']         = $user->getVar('url');
-            $ret['obituaries_user_user_avatar'] = $user->getVar('user_avatar');
-            $ret['obituaries_user_user_from']   = $user->getVar('user_from');
-        }
-
-        $ret['obituaries_picture_url'] = $this->getPictureUrl();
-
-        $ret['obituaries_formated_date'] = formatTimestamp(strtotime($this->getVar('obituaries_date')), 's');
-        $ret['obituaries_fullname']      = $this->getFullName();
-
-        return $ret;
-    }
-}
 
 /**
- * Class ObituariesUsersHandler
+ * Class UsersHandler
  */
-class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_XoopsPersistableObjectHandler
+class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPersistableObjectHandler
 {
     /**
-     * ObituariesUsersHandler constructor.
+     * UsersHandler constructor.
      * @param null|\XoopsDatabase $db
      */
     public function __construct($db)
     {    //                             Table           Classe          Id              Description
-        parent::__construct($db, 'users_obituaries', 'ObituariesUsers', 'obituaries_id', 'obituaries_lastname');
+        parent::__construct($db, 'users_obituaries', Users::class, 'obituaries_id', 'obituaries_lastname');
     }
 
     /**
@@ -206,12 +56,12 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
     /**
      * Cr�ation du formulaire de saisie
      *
-     * @param  ObituariesUsers $item           L'�l�ment � ajouter/modifier
+     * @param  Users $item           L'�l�ment � ajouter/modifier
      * @param  string          $baseurl        L'url de destination
      * @param  boolean         $withUserSelect Indique s'il faut inclure la liste de s�lection de l'utilisateur
      * @return object           Le formulaire � utiliser
      */
-    public function getForm(ObituariesUsers $item, $baseurl, $withUserSelect = true)
+    public function getForm(Users $item, $baseurl, $withUserSelect = true)
     {
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/formtextdateselect.php';
@@ -413,10 +263,10 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
     /**
      * Suppression d'un utilisateur
      *
-     * @param  ObituariesUsers $user L'utilisateur � supprimer
+     * @param  Users $user L'utilisateur � supprimer
      * @return boolean          Le r�sultat de la suppression
      */
-    public function deleteUser(ObituariesUsers $user)
+    public function deleteUser(Users $user)
     {
         $user->deletePicture();
         $res = $this->delete($user, true);
@@ -453,7 +303,7 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return array Objets de type ObituariesUsers
+     * @return array Objets de type Users
      */
     public function getTodayObituariess($start = 0, $limit = 0, $sort = 'obituaries_lastname', $order = 'ASC')
     {
@@ -474,7 +324,7 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
      * Return random obituarues
      * @param int $start
      * @param int $limit
-     * @return array Objets de type ObituariesUsers
+     * @return array Objets de type Users
      */
     public function getRandomObituariess($start = 0, $limit = 0)
     {
@@ -497,7 +347,7 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return array Objets de type ObituariesUsers
+     * @return array Objets de type Users
      */
     public function getLastObituariess($start = 0, $limit = 0, $sort = 'obituaries_date', $order = 'DESC')
     {
@@ -542,7 +392,7 @@ class ObituariesUsersHandler extends XoopsPersistableObjectHandler //Obituaries_
      * @param  integer $limit Nombre maximum d'enregistrements
      * @param  string  $sort  Champ � utiliser pour le tri
      * @param  string  $order Ordre de tri
-     * @return array   Objets de type ObituariesUsers
+     * @return array   Objets de type Users
      */
     public function getAllUsers($start = 0, $limit = 0, $sort = 'obituaries_lastname', $order = 'ASC')
     {

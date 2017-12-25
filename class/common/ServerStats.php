@@ -1,4 +1,4 @@
-<?php namespace Xoopsmodules\xxxxx\common;
+<?php namespace Xoopsmodules\obituaries\common;
 
 /*
  You may not change or alter any portion of this comment or credits

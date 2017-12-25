@@ -34,12 +34,12 @@ switch ($case) {
         break;
 
     case 1:    // obituaries_id
-        $user = $hBdUsersObituaries->get($uid);
+        $user = $usersHandler->get($uid);
         break;
 
     case 2:    // obituaries_uid
     case 3:    // uid
-        $user = $hBdUsersObituaries->getFromUid($uid);
+        $user = $usersHandler->getFromUid($uid);
         break;
 }
 if (is_object($user)) {

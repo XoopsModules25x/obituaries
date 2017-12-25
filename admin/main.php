@@ -44,8 +44,8 @@ switch ($op) {
         // echo '<h1>'.ObituariesUtils::getModuleName().'</h1>';
         $adminObject->displayNavigation(basename(__FILE__));
         $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
-        /** @var \ObituariesUsersHandler $hBdUsersObituaries */
-        $itemsCount = $hBdUsersObituaries->getCount();
+        /** @var \UsersHandler $usersHandler */
+        $itemsCount = $usersHandler->getCount();
         if ($itemsCount > $limit) {
             $pagenav = new XoopsPageNav($itemsCount, $limit, $start, 'start');
         }
@@ -54,7 +54,7 @@ switch ($op) {
         }
         if ($itemsCount > 0) {
             $class = '';
-            //          $items = $hBdUsersObituaries->getItems($start, $limit, 'obituaries_lastname');
+            //          $items = $usersHandler->getItems($start, $limit, 'obituaries_lastname');
 
             $tblItems = [];
             //$critere = new Criteria($this->keyName, 0 ,'<>');
@@ -64,7 +64,7 @@ switch ($op) {
             $critere->setSort('obituaries_lastname');
             //                  $critere->setOrder($order);
             //                  $tblItems = $this->getObjects($critere, $idAsKey);
-            $items = $hBdUsersObituaries->getAllUsers($start, $limit, 'obituaries_lastname');
+            $items = $usersHandler->getAllUsers($start, $limit, 'obituaries_lastname');
 
             echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
             echo "<tr><th align='center'>" . _AM_OBITUARIES_DATE . "</th><th align='center'>" . _AM_OBITUARIES_USERNAME . "</th><th align='center'>" . _AM_OBITUARIES_LASTNAME . ',  ' . _AM_OBITUARIES_FIRSTNAME . "</th><th align='center'>" . _AM_OBITUARIES_ACTION . '</th></tr>';
@@ -93,8 +93,8 @@ switch ($op) {
             }
             echo "<br><br>\n";
         }
-        $item = $hBdUsersObituaries->create(true);
-        $form = $hBdUsersObituaries->getForm($item, $baseurl);
+        $item = $usersHandler->create(true);
+        $form = $usersHandler->getForm($item, $baseurl);
         $form->display();
         break;
 
@@ -115,7 +115,7 @@ switch ($op) {
             $xoopsDB->queryF('OPTIMIZE TABLE ' . $list);
         }
         ObituariesUtils::updateCache();
-        $hBdUsersObituaries->forceCacheClean();
+        $usersHandler->forceCacheClean();
         ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
         break;
 
@@ -130,11 +130,11 @@ switch ($op) {
         }
         // Item exits ?
         $item = null;
-        $item = $hBdUsersObituaries->get($id);
+        $item = $usersHandler->get($id);
         if (!is_object($item)) {
             ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
-        $form = $hBdUsersObituaries->getForm($item, $baseurl);
+        $form = $usersHandler->getForm($item, $baseurl);
         $form->display();
         break;
 
@@ -143,7 +143,7 @@ switch ($op) {
         // ****************************************************************************************************************
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
-        $result = $hBdUsersObituaries->saveUser();
+        $result = $usersHandler->saveUser();
         if ($result) {
             ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
@@ -160,11 +160,11 @@ switch ($op) {
         }
         // Item exits ?
         $item = null;
-        $item = $hBdUsersObituaries->get($id);
+        $item = $usersHandler->get($id);
         if (!is_object($item)) {
             ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
-        $result = $hBdUsersObituaries->deleteUser($item);
+        $result = $usersHandler->deleteUser($item);
         if ($result) {
             ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {

@@ -1,4 +1,5 @@
-<?php
+<?php namespace Xoopsmodules\obituaries;
+
 // {{{ Disclaimer
 // +----------------------------------------------------------------------+
 // | PHP version 5                                                       |
@@ -52,7 +53,7 @@
  * @package  Text_CAPTCHA_Numeral
  * @category CAPTCHA
  */
-interface obituaries_Text_CAPTCHA_Numeral_Interface
+interface Text_CAPTCHA_Numeral_Interface
 {
     // {{{ public function getOperation
     /**

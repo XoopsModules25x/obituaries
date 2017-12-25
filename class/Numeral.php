@@ -1,4 +1,5 @@
-<?php
+<?php namespace Xoopsmodules\obituaries;
+
 require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/NumeralInterface.php';
 // {{{ Class Text_CAPTCHA_Numeral
 // +----------------------------------------------------------------------+
@@ -53,7 +54,7 @@ require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/NumeralInterface.php';
  * @package  Text_CAPTCHA_Numeral
  * @category CAPTCHA
  */
-class obituaries_Text_CAPTCHA_Numeral implements obituaries_Text_CAPTCHA_Numeral_Interface
+class Text_CAPTCHA_Numeral implements Text_CAPTCHA_Numeral_Interface
 {
     // {{{ Variables
     /**

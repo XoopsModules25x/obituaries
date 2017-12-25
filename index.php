@@ -13,13 +13,13 @@ $limit = ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�
 $users = [];
 
 if (isset($_GET['op']) && 'today' === $_GET['op']) {    // Les utilisateurs dont l'anniversaire est aujourd'hui
-    $itemsCount = $hBdUsersObituaries->getTodayObituariessCount();
+    $itemsCount = $usersHandler->getTodayObituariessCount();
     if ($itemsCount > $limit) {
         $pagenav = new XoopsPageNav($itemsCount, $limit, $start, 'start', 'op=today');
     }
-    $users = $hBdUsersObituaries->getTodayObituariess($start, $limit);
+    $users = $usersHandler->getTodayObituariess($start, $limit);
 } else {    // Tous les utilisateurs
-    $itemsCount = $hBdUsersObituaries->getAllUsersCount();
+    $itemsCount = $usersHandler->getAllUsersCount();
     if ($itemsCount > $limit) {
         $pagenav = new XoopsPageNav($itemsCount, $limit, $start, 'start');
     }
@@ -30,7 +30,7 @@ if (isset($_GET['op']) && 'today' === $_GET['op']) {    // Les utilisateurs dont
         $sort  = 'obituaries_lastname';
         $order = 'ASC';
     }
-    $users = $hBdUsersObituaries->getAllUsers($start, $limit, $sort, $order);
+    $users = $usersHandler->getAllUsers($start, $limit, $sort, $order);
 }
 if (count($users) > 0) {
     foreach ($users as $user) {

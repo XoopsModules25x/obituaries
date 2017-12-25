@@ -10,8 +10,8 @@ function b_obituaries_show($options)
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $start      = 0;
     $limit      = (int)$options[0];
-    $itemsCount = $hBdUsersObituaries->getTodayObituariessCount();
-    $users      = $hBdUsersObituaries->getTodayObituariess($start, $limit);
+    $itemsCount = $usersHandler->getTodayObituariessCount();
+    $users      = $usersHandler->getTodayObituariess($start, $limit);
     if (count($users) > 0) {
         foreach ($users as $user) {
             $block['obituaries_today_users'][] = $user->toArray();
@@ -70,7 +70,7 @@ function b_obituaries_random_show($options)
     $start = 0;
     $limit = (int)$options[0];
 
-    $users = $hBdUsersObituaries->getRandomObituariess($start, $limit);
+    $users = $usersHandler->getRandomObituariess($start, $limit);
     if (count($users) > 0) {
         foreach ($users as $user) {
             $block['obituaries_random_users'][] = $user->toArray();
@@ -126,7 +126,7 @@ function b_obituaries_last_show($options)
         $sort  = 'obituaries_lastname';
         $order = 'ASC';
     }
-    $users = $hBdUsersObituaries->getLastObituariess($start, $limit, $sort, $order);
+    $users = $usersHandler->getLastObituariess($start, $limit, $sort, $order);
 
     if (count($users) > 0) {
         foreach ($users as $user) {
