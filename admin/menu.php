@@ -11,10 +11,11 @@
 
 use Xoopsmodules\obituaries;
 
-require_once __DIR__ . '/../class/Helper.php';
-//require_once __DIR__ . '/../include/common.php';
+include __DIR__ . '/../preloads/autoloader.php';
+
 $helper = obituaries\Helper::getInstance();
 
+// get path to icons
 $pathIcon32    = \Xmf\Module\Admin::menuIconPath('');
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 

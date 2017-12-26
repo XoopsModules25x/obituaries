@@ -21,16 +21,17 @@
  */
 
 use Xoopsmodules\obituaries;
+use Xoopsmodules\obituaries\common;
 
-require_once __DIR__ . '/../../../include/cp_header.php';
 require_once __DIR__ . '/admin_header.php';
 
 xoops_cp_header();
 
 $adminObject = \Xmf\Module\Admin::getInstance();
 
-//check or upload folders
-$configurator = include __DIR__ . '/../include/config.php';
+//check for upload folders
+$utility = new obituaries\Utility();
+$configurator = new common\Configurator();
 foreach (array_keys($configurator->uploadFolders) as $i) {
     $utility::createFolder($configurator->uploadFolders[$i]);
     $adminObject->addConfigBoxLine($configurator->uploadFolders[$i], 'folder');
@@ -45,6 +46,7 @@ if ($helper->getConfig('displaySampleButton')) {
     $adminObject->addItemButton(_AM_SYSTEM_MODULES_INSTALL_TESTDATA, '__DIR__ . /../../testdata/index.php?op=load', 'add');
     $adminObject->displayButton('left', '');
 }
+
 //------------- End Test Data ----------------------------
 
 $adminObject->displayIndex();

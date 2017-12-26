@@ -17,12 +17,13 @@
  * @author       XOOPS Development Team
  */
 
-//require_once __DIR__ . '/setup.php';
+use Xoopsmodules\obituaries;
+use Xoopsmodules\obituaries\common;
 
 /**
  *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
@@ -30,9 +31,13 @@ function xoops_module_pre_install_obituaries(\XoopsModule $module)
 {
 
     include __DIR__ . '/../preloads/autoloader.php';
-    /** @var \Utility $utility */
-    $utility = new \Xoopsmodules\obituaries\Utility();
+    /** @var obituaries\Utility $utility */
+    $utility = new obituaries\Utility();
+
+    //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);
+
+    // check for minimum PHP version
     $phpSuccess   = $utility::checkVerPhp($module);
 
     if (false !== $xoopsSuccess && false !==  $phpSuccess) {
@@ -54,22 +59,24 @@ function xoops_module_pre_install_obituaries(\XoopsModule $module)
  */
 function xoops_module_install_obituaries(\XoopsModule $module)
 {
-    require_once  __DIR__ . '/../../../mainfile.php';
-    require_once  __DIR__ . '/../include/config.php';
+    include __DIR__ . '/../preloads/autoloader.php';
 
     $moduleDirName = basename(dirname(__DIR__));
 
+    /** @var obituaries\Helper $helper */
+    /** @var obituaries\Utility $utility */
+   /** @var common\Configurator $configurator */
     $helper       = obituaries\Helper::getInstance();
     $utility      = new obituaries\Utility();
-    $configurator = new obituaries\Configurator();
+    $configurator = new common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
 
-    // default Permission Settings ----------------------
-    global $xoopsModule;
-    $moduleId     = $xoopsModule->getVar('mid');
+    // default Permission Settings ----------------------   
+    $moduleId     = $module->getVar('mid');
     $moduleId2    = $helper->getModule()->mid();
+    //$moduleName = $module->getVar('name');
     $gpermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
     $gpermHandler->addRight($moduleDirName . '_approve', 1, XOOPS_GROUP_ADMIN, $moduleId);
@@ -82,42 +89,34 @@ function xoops_module_install_obituaries(\XoopsModule $module)
     if (count($configurator->uploadFolders) > 0) {
         //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
         foreach (array_keys($configurator->uploadFolders) as $i) {
-            $utilityClass::createFolder($configurator->uploadFolders[$i]);
+            $utility::createFolder($configurator->uploadFolders[$i]);
         }
     }
 
     //  ---  COPY blank.png FILES ---------------
-    if (count($configurator->blankFiles) > 0) {
+    if (count($configurator->copyBlankFiles) > 0) {
         $file = __DIR__ . '/../assets/images/blank.png';
-        foreach (array_keys($configurator->blankFiles) as $i) {
-            $dest = $configurator->blankFiles[$i] . '/blank.png';
-            $utilityClass::copyFile($file, $dest);
+        foreach (array_keys($configurator->copyBlankFiles) as $i) {
+            $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
+            $utility::copyFile($file, $dest);
         }
     }
+
+
+    //  ---  COPY test folder files ---------------
+    if (count($configurator->copyTestFolders) > 0) {
+        //        $file = __DIR__ . '/../testdata/images/';
+        foreach (array_keys($configurator->copyTestFolders) as $i) {
+            $src  = $configurator->copyTestFolders[$i][0];
+            $dest = $configurator->copyTestFolders[$i][1];
+            $utility::xcopy($src, $dest);
+        }
+    }
+
+
     //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
-    $xoopsDB->queryF($sql);
+    $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $GLOBALS['xoopsDB']->queryF($sql);
 
     return true;
 }
-
-//======================================================
-
-$indexFile = 'index.html';
-$blankFile = $GLOBALS['xoops']->path('modules/randomquote/assets/images/icons/blank.gif');
-
-//Creation du dossier "uploads" pour le module à la racine du site
-$module_uploads = $GLOBALS['xoops']->path('uploads/randomquote');
-if (!is_dir($module_uploads)) {
-    mkdir($module_uploads, 0777);
-}
-chmod($module_uploads, 0777);
-copy($indexFile, $GLOBALS['xoops']->path('uploads/randomquote/index.html'));
-
-//Creation du fichier citas dans uploads
-$module_uploads = $GLOBALS['xoops']->path('uploads/randomquote/citas');
-if (!is_dir($module_uploads)) {
-    mkdir($module_uploads, 0777);
-}
-chmod($module_uploads, 0777);
-copy($indexFile, $GLOBALS['xoops']->path('uploads/randomquote/citas/index.html'));

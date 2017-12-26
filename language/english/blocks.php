@@ -12,4 +12,4 @@ define('_MB_OBITUARIES_PICTURE_WIDTH', 'Picture width ( pixel )');
 define('_MB_OBITUARIES_RANDOM', 'Random obituaries');
 
 //aaded by mowafag
-define('_MB_OBITUARIES_LAST', 'Last obituaries');
+define('_MB_OBITUARIES_LAST', 'Recent obituaries');

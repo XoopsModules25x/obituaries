@@ -112,7 +112,11 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         //        }
         //
 
-        $options_tray1 = new \XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');
+        /** @var obituaries\Helper $helper */
+        $helper = obituaries\Helper::getInstance();
+
+//        $options_tray1 = new \XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');
+        $options_tray1 = new \XoopsFormElementTray($helper->getConfig('title1'), '<br>');
 
         if (class_exists('XoopsFormEditor')) {
             $options['name']        = 'obituaries_description';
@@ -129,7 +133,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         }
         $sform->addElement($options_tray1);
 
-        $options_tray2 = new \XoopsFormElementTray(_AM_OBITUARIES_SURVIVORS, '<br>');
+//        $options_tray2 = new \XoopsFormElementTray(_AM_OBITUARIES_SURVIVORS, '<br>');
+        $options_tray2 = new \XoopsFormElementTray($helper->getConfig('title2'), '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']      = 'obituaries_survivors';
             $options['value']     = $item->getVar('obituaries_survivors', 'e');
@@ -145,7 +150,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         }
         $sform->addElement($options_tray2);
 
-        $options_tray3 = new \XoopsFormElementTray(_AM_OBITUARIES_SERVICE, '<br>');
+//        $options_tray3 = new \XoopsFormElementTray(_AM_OBITUARIES_SERVICE, '<br>');
+        $options_tray3 = new \XoopsFormElementTray($helper->getConfig('title3'), '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']    = 'obituaries_service';
             $options['value']   = $item->getVar('obituaries_service', 'e');
@@ -161,7 +167,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         }
         $sform->addElement($options_tray3);
 
-        $options_tray4 = new \XoopsFormElementTray(_AM_OBITUARIES_MEMORIAL, '<br>');
+//        $options_tray4 = new \XoopsFormElementTray(_AM_OBITUARIES_MEMORIAL, '<br>');
+        $options_tray4 = new \XoopsFormElementTray($helper->getConfig('title4'), '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']     = 'obituaries_memorial';
             $options['value']    = $item->getVar('obituaries_memorial', 'e');

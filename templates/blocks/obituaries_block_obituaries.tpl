@@ -1,4 +1,4 @@
-<{if count($block.obituaries_today_users) >0 }>
+<{if ($block.obituaries_today_users|@count)}>
     <table cellspacing="1" class="outer">
         <{foreach item=user from=$block.obituaries_today_users}>
             <tr class="<{cycle values="even,odd"}>" valign="middle">

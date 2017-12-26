@@ -14,16 +14,16 @@
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author     XOOPS Development Team
+ * @author       XOOPS Development Team
  */
 
-$moduleDirName = basename(dirname(__DIR__));
-$moduleDirNameUpper   = strtoupper($moduleDirName);
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = strtoupper($moduleDirName);
 
 //Configurator
 return (object)[
-    'name'          => strtoupper($moduleDirName) .' Module Configurator',
-    'paths'         => [
+    'name'           => strtoupper($moduleDirName) . ' Module Configurator',
+    'paths'          => [
         'dirname'    => $moduleDirName,
         'admin'      => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/admin',
         'modPath'    => XOOPS_ROOT_PATH . '/modules/' . $moduleDirName,
@@ -31,25 +31,29 @@ return (object)[
         'uploadPath' => XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
         'uploadUrl'  => XOOPS_UPLOAD_URL . '/' . $moduleDirName,
     ],
-    'uploadFolders' => [
-        constant($moduleDirNameUpper . '_UPLOAD_PATH'),
-        constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/category',
-        constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/screenshots',
+    'uploadFolders'  => [
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
-    'copyBlankFiles'     => [
-        constant($moduleDirNameUpper . '_UPLOAD_PATH'),
-        constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/category',
-        constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/screenshots',
+    'copyBlankFiles' => [
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
+        XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
         //XOOPS_UPLOAD_PATH . '/flags'
     ],
 
     'copyTestFolders' => [
-        //        constant($moduleDirNameUpper . '_UPLOAD_PATH'),
-        //[
-        //    constant($moduleDirNameUpper . '_PATH') . '/testdata/images',
-        //    constant($moduleDirNameUpper . '_UPLOAD_PATH') . '/images',
-        //]
+//        XOOPS_UPLOAD_PATH . '/' . $moduleDirName,
+        [
+            XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/images',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/images',
+        ],
+        [
+            XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/testdata/thumbs',
+            XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/thumbs',
+        ]
     ],
 
     'templateFolders' => [
@@ -75,6 +79,6 @@ return (object)[
         '/images',
     ],
     'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . constant($moduleDirNameUpper . '_AUTHOR_LOGOIMG') . '\' alt=\'XOOPS Project\' /></a>',
+                     <img src='" . XOOPS_URL . '/modules/' . $moduleDirName . '_AUTHOR_LOGOIMG' . '\' alt=\'XOOPS Project\' /></a>',
 ];
 

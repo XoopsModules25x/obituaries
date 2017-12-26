@@ -14,13 +14,15 @@ define('_AM_OBITUARIES_DELETE', 'Delete');
 define('_AM_OBITUARIES_ADD', 'Add');
 define('_AM_OBITUARIES_DATE', 'Date');
 define('_AM_OBITUARIES_USERNAME', 'User');
-define('_AM_OBITUARIES_FIRSTNAME', 'Last name');
-define('_AM_OBITUARIES_LASTNAME', 'First name');
+define('_AM_OBITUARIES_FIRSTNAME', 'First name');
+define('_AM_OBITUARIES_LASTNAME', 'Last name');
 define('_AM_OBITUARIES_PHOTO', 'Photo');
+
 define('_AM_OBITUARIES_DESCRIPTION', 'Short Biography');
 define('_AM_OBITUARIES_SURVIVORS', 'Names of Survivors');
 define('_AM_OBITUARIES_SERVICE', 'Service Announcement');
 define('_AM_OBITUARIES_MEMORIAL', 'Memorial Contributions');
+
 define('_AM_OBITUARIES_ERROR1', "Sorry but you don't have the right to modify your file");
 define('_AM_OBITUARIES_ERROR2', 'Error, unknow user');
 define('_AM_OBITUARIES_ERROR3', "Sorry, there's no deceased");

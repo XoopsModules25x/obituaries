@@ -6,8 +6,10 @@
 
 use Xoopsmodules\obituaries;
 
-require_once __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'obituaries_users.tpl';
+
+require_once __DIR__ . '/header.php';
+
 require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
@@ -51,4 +53,5 @@ obituaries\ObituariesUtils::setMetas($pageTitle, $metaDescription, $metaKeywords
 $path       = [OBITUARIES_URL . 'index.php' => _AM_OBITUARIES_USERS_LIST];
 $breadcrumb =  obituaries\ObituariesUtils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
+
 require_once XOOPS_ROOT_PATH . '/footer.php';

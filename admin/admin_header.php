@@ -1,4 +1,4 @@
-<?php
+<?php namespace bingo;
 /**
  * Obituaries module
  *
@@ -19,19 +19,15 @@
 use Xoopsmodules\obituaries;
 
 require_once __DIR__ . '/../../../include/cp_header.php';
-require_once __DIR__ . '/../include/common.php';
+
+include __DIR__ . '/../preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
+
 /** @var obituaries\Helper $helper */
 $helper = obituaries\Helper::getInstance();
-
 /** @var Xmf\Module\Admin $adminObject */
 $adminObject = \Xmf\Module\Admin::getInstance();
-
-$moduleDirName = basename(dirname(__DIR__));
-$helper        = \Xmf\Module\Helper::getHelper($moduleDirName);
-$adminObject   = \Xmf\Module\Admin::getInstance();
-
 $pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
 $pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');

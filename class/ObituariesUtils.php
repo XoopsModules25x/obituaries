@@ -124,99 +124,99 @@ class ObituariesUtils
      * @param string  $supplemental
      * @return object The editor to use
      */
-    public static function &getWysiwygForm(
-        $caption,
-        $name,
-        $value = '',
-        $width = '100%',
-        $height = '400px',
-        $supplemental = '')
-    {
-        $editor                   = false;
-        $x22                      = self::isX22();
-        $editor_configs           = [];
-        $editor_configs['name']   = $name;
-        $editor_configs['value']  = $value;
-        $editor_configs['rows']   = 35;
-        $editor_configs['cols']   = 60;
-        $editor_configs['width']  = $width;
-        $editor_configs['height'] = $height;
-
-        $editor_option = self::getModuleOption('form_options');
-
-        switch (strtolower($editor_option)) {
-            case 'spaw':
-                if (!$x22) {
-                    if (is_readable(XOOPS_ROOT_PATH . '/class/spaw/formspaw.php')) {
-                        require_once XOOPS_ROOT_PATH . '/class/spaw/formspaw.php';
-                        $editor = new \XoopsFormSpaw($caption, $name, $value);
-                    }
-                } else {
-                    $editor = new \XoopsFormEditor($caption, 'spaw', $editor_configs);
-                }
-                break;
-
-            case 'fck':
-                if (!$x22) {
-                    if (is_readable(XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php')) {
-                        require_once XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php';
-                        $editor = new \XoopsFormFckeditor($caption, $name, $value);
-                    }
-                } else {
-                    $editor = new \XoopsFormEditor($caption, 'fckeditor', $editor_configs);
-                }
-                break;
-
-            case 'htmlarea':
-                if (!$x22) {
-                    if (is_readable(XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php')) {
-                        require_once XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php';
-                        $editor = new \XoopsFormHtmlarea($caption, $name, $value);
-                    }
-                } else {
-                    $editor = new \XoopsFormEditor($caption, 'htmlarea', $editor_configs);
-                }
-                break;
-
-            case 'dhtml':
-                if (!$x22) {
-                    $editor = new \XoopsFormDhtmlTextArea($caption, $name, $value, 10, 50, $supplemental);
-                } else {
-                    $editor = new \XoopsFormEditor($caption, 'dhtmltextarea', $editor_configs);
-                }
-                break;
-
-            case 'textarea':
-                $editor = new \XoopsFormTextArea($caption, $name, $value);
-                break;
-
-            case 'tinyeditor':
-                if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php')) {
-                    require_once XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php';
-                    $editor = new \XoopsFormTinyeditorTextArea([
-                                                                  'caption' => $caption,
-                                                                  'name'    => $name,
-                                                                  'value'   => $value,
-                                                                  'width'   => '100%',
-                                                                  'height'  => '400px'
-                                                              ]);
-                }
-                break;
-
-            case 'koivi':
-                if (!$x22) {
-                    if (is_readable(XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php')) {
-                        require_once XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php';
-                        $editor = new \XoopsFormWysiwygTextArea($caption, $name, $value, '100%', '250px', '');
-                    }
-                } else {
-                    $editor = new \XoopsFormEditor($caption, 'koivi', $editor_configs);
-                }
-                break;
-        }
-
-        return $editor;
-    }
+//    public static function &getWysiwygForm(
+//        $caption,
+//        $name,
+//        $value = '',
+//        $width = '100%',
+//        $height = '400px',
+//        $supplemental = '')
+//    {
+//        $editor                   = false;
+//        $x22                      = self::isX22();
+//        $editor_configs           = [];
+//        $editor_configs['name']   = $name;
+//        $editor_configs['value']  = $value;
+//        $editor_configs['rows']   = 35;
+//        $editor_configs['cols']   = 60;
+//        $editor_configs['width']  = $width;
+//        $editor_configs['height'] = $height;
+//
+//        $editor_option = self::getModuleOption('form_options');
+//
+//        switch (strtolower($editor_option)) {
+//            case 'spaw':
+//                if (!$x22) {
+//                    if (is_readable(XOOPS_ROOT_PATH . '/class/spaw/formspaw.php')) {
+//                        require_once XOOPS_ROOT_PATH . '/class/spaw/formspaw.php';
+//                        $editor = new \XoopsFormSpaw($caption, $name, $value);
+//                    }
+//                } else {
+//                    $editor = new \XoopsFormEditor($caption, 'spaw', $editor_configs);
+//                }
+//                break;
+//
+//            case 'fck':
+//                if (!$x22) {
+//                    if (is_readable(XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php')) {
+//                        require_once XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php';
+//                        $editor = new \XoopsFormFckeditor($caption, $name, $value);
+//                    }
+//                } else {
+//                    $editor = new \XoopsFormEditor($caption, 'fckeditor', $editor_configs);
+//                }
+//                break;
+//
+//            case 'htmlarea':
+//                if (!$x22) {
+//                    if (is_readable(XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php')) {
+//                        require_once XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php';
+//                        $editor = new \XoopsFormHtmlarea($caption, $name, $value);
+//                    }
+//                } else {
+//                    $editor = new \XoopsFormEditor($caption, 'htmlarea', $editor_configs);
+//                }
+//                break;
+//
+//            case 'dhtml':
+//                if (!$x22) {
+//                    $editor = new \XoopsFormDhtmlTextArea($caption, $name, $value, 10, 50, $supplemental);
+//                } else {
+//                    $editor = new \XoopsFormEditor($caption, 'dhtmltextarea', $editor_configs);
+//                }
+//                break;
+//
+//            case 'textarea':
+//                $editor = new \XoopsFormTextArea($caption, $name, $value);
+//                break;
+//
+//            case 'tinyeditor':
+//                if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php')) {
+//                    require_once XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php';
+//                    $editor = new \XoopsFormTinyeditorTextArea([
+//                                                                  'caption' => $caption,
+//                                                                  'name'    => $name,
+//                                                                  'value'   => $value,
+//                                                                  'width'   => '100%',
+//                                                                  'height'  => '400px'
+//                                                              ]);
+//                }
+//                break;
+//
+//            case 'koivi':
+//                if (!$x22) {
+//                    if (is_readable(XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php')) {
+//                        require_once XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php';
+//                        $editor = new \XoopsFormWysiwygTextArea($caption, $name, $value, '100%', '250px', '');
+//                    }
+//                } else {
+//                    $editor = new \XoopsFormEditor($caption, 'koivi', $editor_configs);
+//                }
+//                break;
+//        }
+//
+//        return $editor;
+//    }
 
     /**
      * Create (in a link) a javascript confirmation's box

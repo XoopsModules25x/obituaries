@@ -55,21 +55,24 @@
 
         <br><br>
 
-        <b><{$smarty.const._AM_OBITUARIES_DESCRIPTION}></b> : <{$obituaries_user.obituaries_description}>
+        <{*<b><{$smarty.const._AM_OBITUARIES_DESCRIPTION}></b> : <{$obituaries_user.obituaries_description}>*}>
+        <b><{$title1}></b> : <{$obituaries_user.obituaries_description}>
+
+
 
         <br><br>
 
-        <b><{$smarty.const._AM_OBITUARIES_SURVIVORS}></b> : <{$obituaries_user.obituaries_survivors}>
+        <{*<b><{$smarty.const._AM_OBITUARIES_SURVIVORS}></b> : <{$obituaries_user.obituaries_survivors}>*}>
+        <b><{$title2}></b> : <{$obituaries_user.obituaries_survivors}>
 
         <br><br>
 
-        <b><{$smarty.const._AM_OBITUARIES_SERVICE}></b> : <{$obituaries_user.obituaries_service}>
+        <{*<b><{$smarty.const._AM_OBITUARIES_SERVICE}></b> : <{$obituaries_user.obituaries_service}>*}>
+        <b><{$title3}></b> : <{$obituaries_user.obituaries_survivors}>
 
-        <{if $obituaries_user.obituaries_memorial != ""}>
-            <br>
-            <br>
-            <b><{$smarty.const._AM_OBITUARIES_MEMORIAL}></b>
-            : <{$obituaries_user.obituaries_memorial}>
+        <{if $obituaries_user.obituaries_memorial != ""}><br><br>
+            <{*<b><{$smarty.const._AM_OBITUARIES_MEMORIAL}></b>: <{$obituaries_user.obituaries_memorial}>*}>
+            <b><{$title4}></b> : <{$obituaries_user.obituaries_survivors}>
         <{/if}>
     </div>
     <{if $obituaries_user.obituaries_uid > 0}>

@@ -17,6 +17,10 @@ require_once __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'obituaries_user.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
+/** @var obituaries\Helper $helper */
+$helper = obituaries\Helper::getInstance();
+
+
 $case = 0;
 if (isset($_GET['obituaries_id'])) {
     $uid  = (int)$_GET['obituaries_id'];
@@ -54,5 +58,11 @@ if (is_object($user)) {
 $path       = [OBITUARIES_URL . 'user.php' => $user->getFullName()];
 $breadcrumb =  obituaries\ObituariesUtils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
+
+$xoopsTpl->assign('title1', $helper->getConfig('title1'));
+$xoopsTpl->assign('title2', $helper->getConfig('title2'));
+$xoopsTpl->assign('title3', $helper->getConfig('title3'));
+$xoopsTpl->assign('title4', $helper->getConfig('title4'));
+
 require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 require_once XOOPS_ROOT_PATH . '/footer.php';

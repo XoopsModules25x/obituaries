@@ -1,9 +1,15 @@
 <?php
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
+use Xoopsmodules\obituaries;
+
 include __DIR__ . '/preloads/autoloader.php';
 
+$helper = obituaries\Helper::getInstance();
+$helper->loadLanguage('common');
 
+$moduleDirName = basename(__DIR__);
+$moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
 
 $modversion['version']             = 2.40;
 $modversion['module_status']       = 'Beta 1';
@@ -43,37 +49,44 @@ $modversion['helpsection'] = [
     ['name' => _MI_OBITUARIES_SUPPORT, 'link' => 'page=support'],
 ];
 
+//Install/Uninstall Functions
+$modversion['onInstall']   = 'include/oninstall.php';
+$modversion['onUpdate']    = 'include/onupdate.php';
+$modversion['onUninstall'] = 'include/onuninstall.php';
+
 // ********************************************************************************************************************
 // Blocks *************************************************************************************************************
 // ********************************************************************************************************************
-$cptb = 0;
 
-++$cptb;
-$modversion['blocks'][$cptb]['file']        = 'b_obituaries.php';
-$modversion['blocks'][$cptb]['name']        = _MI_OBITUARIES_TITRE;
-$modversion['blocks'][$cptb]['description'] = '_MI_OBITUARIES_DESC';
-$modversion['blocks'][$cptb]['show_func']   = 'b_obituaries_show';
-$modversion['blocks'][$cptb]['edit_func']   = 'b_obituaries_edit';
-$modversion['blocks'][$cptb]['options']     = '5|0|130';
-$modversion['blocks'][$cptb]['template']    = 'obituaries_block_obituaries.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'b_obituaries.php',
+    'name'        => _MI_OBITUARIES_TITRE,
+    'description' => '_MI_OBITUARIES_DESC',
+    'show_func'   => 'b_obituaries_show',
+    'edit_func'   => 'b_obituaries_edit',
+    'options'     => '5|0|130',
+    'template'    => 'obituaries_block_obituaries.tpl',
+];
 
-++$cptb;
-$modversion['blocks'][$cptb]['file']        = 'b_obituaries.php';
-$modversion['blocks'][$cptb]['name']        = _MI_OBITUARIES_RANDOM;
-$modversion['blocks'][$cptb]['description'] = '_MI_BD_RANDOM_DESC';
-$modversion['blocks'][$cptb]['show_func']   = 'b_obituaries_random_show';
-$modversion['blocks'][$cptb]['edit_func']   = 'b_obituaries_random_edit';
-$modversion['blocks'][$cptb]['options']     = '5|0|130';
-$modversion['blocks'][$cptb]['template']    = 'obituaries_block_random_obituaries.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'b_obituaries.php',
+    'name'        => _MI_OBITUARIES_RANDOM,
+    'description' => '_MI_BD_RANDOM_DESC',
+    'show_func'   => 'b_obituaries_random_show',
+    'edit_func'   => 'b_obituaries_random_edit',
+    'options'     => '5|0|130',
+    'template'    => 'obituaries_block_random_obituaries.tpl',
+];
 
-++$cptb;
-$modversion['blocks'][$cptb]['file']        = 'b_obituaries.php';
-$modversion['blocks'][$cptb]['name']        = _MI_OBITUARIES_LAST;
-$modversion['blocks'][$cptb]['description'] = '_MI_BD_LAST_DESC';
-$modversion['blocks'][$cptb]['show_func']   = 'b_obituaries_last_show';
-$modversion['blocks'][$cptb]['edit_func']   = 'b_obituaries_last_edit';
-$modversion['blocks'][$cptb]['options']     = '5|0|130';
-$modversion['blocks'][$cptb]['template']    = 'obituaries_block_last_obituaries.tpl';
+$modversion['blocks'][] = [
+    'file'        => 'b_obituaries.php',
+    'name'        => _MI_OBITUARIES_LAST,
+    'description' => '_MI_BD_LAST_DESC',
+    'show_func'   => 'b_obituaries_last_show',
+    'edit_func'   => 'b_obituaries_last_edit',
+    'options'     => '5|0|130',
+    'template'    => 'obituaries_block_last_obituaries.tpl',
+];
 
 // ********************************************************************************************************************
 // Search *************************************************************************************************************
@@ -118,91 +131,97 @@ $cpto = 0;
 /**
  * Images width
  */
-++$cpto;
-$modversion['config'][$cpto]['name']        = 'images_width';
-$modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_IMAGES_WIDTH';
-$modversion['config'][$cpto]['description'] = '';
-$modversion['config'][$cpto]['formtype']    = 'textbox';
-$modversion['config'][$cpto]['valuetype']   = 'int';
-$modversion['config'][$cpto]['default']     = 150;
+
+$modversion['config'][] = [
+    'name'        => 'images_width',
+    'title'       => '_MI_OBITUARIES_IMAGES_WIDTH',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 150,
+];
 
 /**
  * Images height
  */
-++$cpto;
-$modversion['config'][$cpto]['name']        = 'images_height';
-$modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_IMAGES_HEIGHT';
-$modversion['config'][$cpto]['description'] = '';
-$modversion['config'][$cpto]['formtype']    = 'textbox';
-$modversion['config'][$cpto]['valuetype']   = 'int';
-$modversion['config'][$cpto]['default']     = 150;
+$modversion['config'][] = [
+    'name'        => 'images_height',
+    'title'       => '_MI_OBITUARIES_IMAGES_HEIGHT',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 150,
+];
 
 /**
  * Folder's path (where to save pictures)
  */
-++$cpto;
-$modversion['config'][$cpto]['name']        = 'folder_path';
-$modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_FOLDER_PATH';
-$modversion['config'][$cpto]['description'] = '';
-$modversion['config'][$cpto]['formtype']    = 'textbox';
-$modversion['config'][$cpto]['valuetype']   = 'text';
-$modversion['config'][$cpto]['default']     = XOOPS_UPLOAD_PATH . '/' . basename(__DIR__);
+$modversion['config'][] = [
+    'name'        => 'folder_path',
+    'title'       => '_MI_OBITUARIES_FOLDER_PATH',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => XOOPS_UPLOAD_PATH . '/' . basename(__DIR__) . '/images',
+];
 
 /**
  * Folder's url (where to save pictures)
  */
-++$cpto;
-$modversion['config'][$cpto]['name']        = 'folder_url';
-$modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_FOLDER_URL';
-$modversion['config'][$cpto]['description'] = '';
-$modversion['config'][$cpto]['formtype']    = 'textbox';
-$modversion['config'][$cpto]['valuetype']   = 'text';
-$modversion['config'][$cpto]['default']     = XOOPS_UPLOAD_URL . '/' . basename(__DIR__);
+$modversion['config'][] = [
+    'name'        => 'folder_url',
+    'title'       => '_MI_OBITUARIES_FOLDER_URL',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => XOOPS_UPLOAD_URL . '/' . basename(__DIR__) . '/images',
+];
 
 /**
  * Items count per page
  */
-++$cpto;
-$modversion['config'][$cpto]['name']        = 'perpage';
-$modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_PERPAGE';
-$modversion['config'][$cpto]['description'] = '';
-$modversion['config'][$cpto]['formtype']    = 'textbox';
-$modversion['config'][$cpto]['valuetype']   = 'int';
-$modversion['config'][$cpto]['default']     = 15;
+$modversion['config'][] = [
+    'name'        => 'perpage',
+    'title'       => '_MI_OBITUARIES_PERPAGE',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 15,
+];
 
 /**
  * Mime Types
  * Default values : Web pictures (png, jpeg)
  */
-++$cpto;
-$modversion['config'][$cpto]['name']        = 'mimetypes';
-$modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_MIMETYPES';
-$modversion['config'][$cpto]['description'] = '';
-$modversion['config'][$cpto]['formtype']    = 'textarea';
-$modversion['config'][$cpto]['valuetype']   = 'text';
-$modversion['config'][$cpto]['default']     = "image/jpeg\nimage/pjpeg\nimage/x-png\nimage/png";
+$modversion['config'][] = [
+    'name'        => 'mimetypes',
+    'title'       => '_MI_OBITUARIES_MIMETYPES',
+    'description' => '',
+    'formtype'    => 'textarea',
+    'valuetype'   => 'text',
+    'default'     => "image/jpeg\nimage/pjpeg\nimage/x-png\nimage/png",
+];
 
 /**
  * MAX Filesize Upload in kilo bytes
  */
-++$cpto;
-$modversion['config'][$cpto]['name']        = 'maxuploadsize';
-$modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_UPLOADFILESIZE';
-$modversion['config'][$cpto]['description'] = '';
-$modversion['config'][$cpto]['formtype']    = 'textbox';
-$modversion['config'][$cpto]['valuetype']   = 'int';
-$modversion['config'][$cpto]['default']     = 1048576;
+$modversion['config'][] = [
+    'name'        => 'maxuploadsize',
+    'title'       => '_MI_OBITUARIES_UPLOADFILESIZE',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 1048576,
+];
 
 /**
  * Editor to use
  */
-
-++$cpto;
 xoops_load('XoopsEditorHandler');
 $editorHandler = \XoopsEditorHandler::getInstance();
 $editorList    = array_flip($editorHandler->getList());
 
-$modversion['config'][$cpto] = [
+$modversion['config'][] = [
     'name'        => 'form_options',
     'title'       => '_MI_BIRTHDAY_FORM_OPTIONS',
     'description' => '_MI_BIRTHDAY_FORM_OPTIONS_DESC',
@@ -211,20 +230,34 @@ $modversion['config'][$cpto] = [
     'options'     => $editorList,
     'default'     => 'dhtml'
 ];
+
 /**
  * Sort order
  */
-++$cpto;
-$modversion['config'][$cpto]['name']        = 'userslist_sortorder';
-$modversion['config'][$cpto]['title']       = '_MI_OBITUARIES_SORT_ORDER';
-$modversion['config'][$cpto]['description'] = '';
-$modversion['config'][$cpto]['formtype']    = 'select';
-$modversion['config'][$cpto]['valuetype']   = 'int';
-$modversion['config'][$cpto]['options']     = [
-    _MI_OBITUARIES_SORT_ORDER1 => 1,
-    _MI_OBITUARIES_SORT_ORDER2 => 2
+$modversion['config'][] = [
+    'name'        => 'userslist_sortorder',
+    'title'       => '_MI_OBITUARIES_SORT_ORDER',
+    'description' => '',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'options'     => [
+        _MI_OBITUARIES_SORT_ORDER1 => 1,
+        _MI_OBITUARIES_SORT_ORDER2 => 2
+    ],
+    'default'     => 1,
 ];
-$modversion['config'][$cpto]['default']     = 1;
+
+/**
+ * Make Sample button visible?
+ */
+$modversion['config'][] = [
+    'name'        => 'displaySampleButton',
+    'title'       => '_MI_PUBLISHER_SHOW_SAMPLE_BUTTON',
+    'description' => '_MI_PUBLISHER_SHOW_SAMPLE_BUTTON_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
 
 // ********************************************************************************************************************
 // Comments ***********************************************************************************************************
@@ -237,3 +270,42 @@ $modversion['comments']['pageName'] = 'user.php';
 $modversion['comments']['callbackFile']        = 'include/comment_functions.php';
 $modversion['comments']['callback']['approve'] = 'obituaries_com_approve';
 $modversion['comments']['callback']['update']  = 'obituaries_com_update';
+
+
+$modversion['config'][] = [
+    'name'        => 'title1',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_TITLE1',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => constant('CO_' . $moduleDirNameUpper . '_TITLE1'),
+];
+
+$modversion['config'][] = [
+    'name'        => 'title2',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_TITLE2',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => constant('CO_' . $moduleDirNameUpper . '_TITLE2'),
+];
+
+$modversion['config'][] = [
+    'name'        => 'title3',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_TITLE3',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => constant('CO_' . $moduleDirNameUpper . '_TITLE3'),
+];
+
+$modversion['config'][] = [
+    'name'        => 'title4',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_TITLE4',
+    'description' => '',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => constant('CO_' . $moduleDirNameUpper . '_TITLE4'),
+];
+
+

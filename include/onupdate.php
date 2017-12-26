@@ -17,11 +17,15 @@
  * @author       XOOPS Development Team
  */
 
+use Xoopsmodules\obituaries;
+
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()
 ) {
     exit('Restricted access' . PHP_EOL);
 }
+
+
 
 /**
  * @param string $tablename
@@ -32,19 +36,18 @@ function tableExists($tablename)
 {
     $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0) ? true : false;
+    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0);
 }
 
 /**
  *
  * Prepares system prior to attempting to install module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if ready to install, false if not
  */
 function xoops_module_pre_update_obituaries(\XoopsModule $module)
 {
-    $moduleDirName = basename(dirname(__DIR__));
     /** @var obituaries\Helper $helper */
     /** @var obituaries\Utility $utility */
     $helper       = obituaries\Helper::getInstance();
@@ -58,7 +61,7 @@ function xoops_module_pre_update_obituaries(\XoopsModule $module)
 /**
  *
  * Performs tasks required during update of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  * @param null        $previousVersion
  *
  * @return bool true if update successful, false if not
@@ -67,14 +70,15 @@ function xoops_module_pre_update_obituaries(\XoopsModule $module)
 function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion = null)
 {
     $moduleDirName = basename(dirname(__DIR__));
-    $capsDirName   = strtoupper($moduleDirName);
+    $moduleDirNameUpper = strtoupper($moduleDirName);
 
     /** @var obituaries\Helper $helper */
     /** @var obituaries\Utility $utility */
-    /** @var obituaries\Configurator $configurator */
+    /** @var obituaries\common\Configurator $configurator */
     $helper  = obituaries\Helper::getInstance();
     $utility = new obituaries\Utility();
-    $configurator = new obituaries\Configurator();
+    $configurator = new obituaries\common\Configurator();
+    $helper->loadLanguage('common');
 
     if ($previousVersion < 240) {
 
@@ -126,7 +130,7 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
             foreach (array_keys($configurator->oldFolders) as $i) {
                 $tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
-                /* @var $folderHandler XoopsObjectHandler */
+                /** @var XoopsObjectHandler $folderHandler */
                 $folderHandler = \XoopsFile::getHandler('folder', $tempFolder);
                 $folderHandler->delete($tempFolder);
             }
@@ -136,21 +140,21 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
         if (count($configurator->uploadFolders) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
             foreach (array_keys($configurator->uploadFolders) as $i) {
-                $utilityClass::createFolder($configurator->uploadFolders[$i]);
+                $utility::createFolder($configurator->uploadFolders[$i]);
             }
         }
 
         //  ---  COPY blank.png FILES ---------------
-        if (count($configurator->blankFiles) > 0) {
+        if (count($configurator->copyBlankFiles) > 0) {
             $file = __DIR__ . '/../assets/images/blank.png';
-            foreach (array_keys($configurator->blankFiles) as $i) {
-                $dest = $configurator->blankFiles[$i] . '/blank.png';
-                $utilityClass::copyFile($file, $dest);
+            foreach (array_keys($configurator->copyBlankFiles) as $i) {
+                $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
+                $utility::copyFile($file, $dest);
             }
         }
 
         //delete .html entries from the tpl table
-        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . '\' AND `tpl_file` LIKE \'%.html%\'';
+        $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
         $GLOBALS['xoopsDB']->queryF($sql);
 
         /** @var XoopsGroupPermHandler $gpermHandler */

@@ -15,8 +15,12 @@
  * @author          Michael Beck (aka Mamba)
  */
 
+use Xoopsmodules\obituaries;
+use Xoopsmodules\obituaries\common;
+
 require_once __DIR__ . '/../../../mainfile.php';
 
+include __DIR__ . '/../preloads/autoloader.php';
 
 $op = \Xmf\Request::getCmd('op', '');
 
@@ -30,12 +34,32 @@ switch ($op) {
 
 function loadSampleData()
 {
-    //    $moduleDirName = basename(dirname(__DIR__));
-    xoops_loadLanguage('comment');
-    $items = \Xmf\Yaml::readWrapped('quotes_data.yml');
+    $moduleDirName = basename(dirname(__DIR__));
+    $helper       = obituaries\Helper::getInstance();
+    $utility      = new obituaries\Utility();
+    $configurator = new common\Configurator();
+    // Load language files
+    $helper->loadLanguage('admin');
+    $helper->loadLanguage('modinfo');
+    $helper->loadLanguage('common');
 
-    \Xmf\Database\TableLoad::truncateTable('randomquote_quotes');
-    \Xmf\Database\TableLoad::loadTableFromArray('randomquote_quotes', $items);
+    $items = \Xmf\Yaml::readWrapped('obituaries_data.yml');
+    \Xmf\Database\TableLoad::truncateTable('users_obituaries');
+    \Xmf\Database\TableLoad::loadTableFromArray('users_obituaries', $items);
 
-    redirect_header('../admin/index.php', 1, _CM_ACTIVE);
+
+
+    //  ---  COPY test folder files ---------------
+    if (count($configurator->copyTestFolders) > 0) {
+        //        $file = __DIR__ . '/../testdata/images/';
+        foreach (array_keys($configurator->copyTestFolders) as $i) {
+            $src  = $configurator->copyTestFolders[$i][0];
+            $dest = $configurator->copyTestFolders[$i][1];
+            $utility::xcopy($src, $dest);
+        }
+    }
+
+
+
+    redirect_header('../admin/index.php', 0, _CM_ACTIVE);
 }
