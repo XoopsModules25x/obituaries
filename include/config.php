@@ -76,9 +76,8 @@ return (object)[
         '/css',
         '/js',
         '/tcpdf',
-        '/images',
     ],
     'modCopyright'    => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
                      <img src='" . XOOPS_URL . '/modules/' . $moduleDirName . '_AUTHOR_LOGOIMG' . '\' alt=\'XOOPS Project\' /></a>',
-];
 
+];

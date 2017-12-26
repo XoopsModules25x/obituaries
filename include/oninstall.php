@@ -69,6 +69,7 @@ function xoops_module_install_obituaries(\XoopsModule $module)
     $helper       = obituaries\Helper::getInstance();
     $utility      = new obituaries\Utility();
     $configurator = new common\Configurator();
+
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');

@@ -3,7 +3,7 @@
 
 use Xoopsmodules\obituaries;
 
-include __DIR__ . '/preloads/autoloader.php';
+require_once __DIR__ . '/preloads/autoloader.php';
 
 $helper = obituaries\Helper::getInstance();
 $helper->loadLanguage('common');

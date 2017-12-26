@@ -164,4 +164,3 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
     }
     return true;
 }
-
