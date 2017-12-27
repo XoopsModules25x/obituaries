@@ -193,13 +193,33 @@ $modversion['config'][] = [
  * Mime Types
  * Default values : Web pictures (png, jpeg)
  */
+//$modversion['config'][] = [
+//    'name'        => 'mimetypes',
+//    'title'       => '_MI_OBITUARIES_MIMETYPES',
+//    'description' => '',
+//    'formtype'    => 'textarea',
+//    'valuetype'   => 'text',
+//    'default'     => "image/jpeg\nimage/pjpeg\nimage/x-png\nimage/png",
+//];
+
+
+//Uploads : mimetypes of images
 $modversion['config'][] = [
     'name'        => 'mimetypes',
     'title'       => '_MI_OBITUARIES_MIMETYPES',
     'description' => '',
-    'formtype'    => 'textarea',
-    'valuetype'   => 'text',
-    'default'     => "image/jpeg\nimage/pjpeg\nimage/x-png\nimage/png",
+    'formtype'    => 'select_multi',
+    'valuetype'   => 'array',
+    'default'     => ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'],
+    'options'     => [
+        'bmp'   => 'image/bmp',
+        'gif'   => 'image/gif',
+        'pjpeg' => 'image/pjpeg',
+        'jpeg'  => 'image/jpeg',
+        'jpg'   => 'image/jpg',
+        'jpe'   => 'image/jpe',
+        'png'   => 'image/png'
+    ]
 ];
 
 /**
@@ -252,11 +272,11 @@ $modversion['config'][] = [
  */
 $modversion['config'][] = [
     'name'        => 'displaySampleButton',
-    'title'       => '_MI_PUBLISHER_SHOW_SAMPLE_BUTTON',
-    'description' => '_MI_PUBLISHER_SHOW_SAMPLE_BUTTON_DESC',
+    'title'       => '_MI_OBITUARIES_SHOW_SAMPLE_BUTTON',
+    'description' => '_MI_OBITUARIES_SHOW_SAMPLE_BUTTON_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
-    'default'     => 0,
+    'default'     => 1,
 ];
 
 // ********************************************************************************************************************

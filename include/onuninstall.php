@@ -26,13 +26,14 @@ function xoops_module_pre_uninstall_obituaries(\XoopsModule $module)
 /**
  *
  * Performs tasks required during uninstallation of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if uninstallation successful, false if not
  */
 function xoops_module_uninstall_obituaries(\XoopsModule $module)
 {
     include __DIR__ . '/../preloads/autoloader.php';
+
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
     /** @var obituaries\Helper $helper */

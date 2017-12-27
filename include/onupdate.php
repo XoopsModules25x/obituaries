@@ -18,6 +18,7 @@
  */
 
 use Xoopsmodules\obituaries;
+use Xoopsmodules\obituaries\common;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()
@@ -74,14 +75,15 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
 
     /** @var obituaries\Helper $helper */
     /** @var obituaries\Utility $utility */
-    /** @var obituaries\common\Configurator $configurator */
+    /** @var common\Configurator $configurator */
     $helper  = obituaries\Helper::getInstance();
     $utility = new obituaries\Utility();
-    $configurator = new obituaries\common\Configurator();
+    $configurator = new common\Configurator();
+
     $helper->loadLanguage('common');
 
     if ($previousVersion < 240) {
-
+/*
         //rename column EXAMPLE
         $tables     = new Tables();
         $table      = 'obituariesx_categories';
@@ -94,7 +96,7 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
                 echo '<br>' . _AM_XXXXX_UPGRADEFAILED0 . ' ' . $migrate->getLastError();
             }
         }
-
+*/
         //delete old HTML templates
         if (count($configurator->templateFolders) > 0) {
             foreach ($configurator->templateFolders as $folder) {

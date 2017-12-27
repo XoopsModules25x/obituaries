@@ -53,7 +53,7 @@ function xoops_module_pre_install_obituaries(\XoopsModule $module)
 /**
  *
  * Performs tasks required during installation of the module
- * @param XoopsModule $module {@link XoopsModule}
+ * @param \XoopsModule $module {@link XoopsModule}
  *
  * @return bool true if installation successful, false if not
  */
@@ -103,7 +103,7 @@ function xoops_module_install_obituaries(\XoopsModule $module)
         }
     }
 
-
+    /*
     //  ---  COPY test folder files ---------------
     if (count($configurator->copyTestFolders) > 0) {
         //        $file = __DIR__ . '/../testdata/images/';
@@ -113,6 +113,7 @@ function xoops_module_install_obituaries(\XoopsModule $module)
             $utility::xcopy($src, $dest);
         }
     }
+    */
 
 
     //delete .html entries from the tpl table

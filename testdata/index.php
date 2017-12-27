@@ -35,6 +35,7 @@ switch ($op) {
 function loadSampleData()
 {
     $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirNameUpper = strtoupper($moduleDirName); //$capsDirName
     $helper       = obituaries\Helper::getInstance();
     $utility      = new obituaries\Utility();
     $configurator = new common\Configurator();
@@ -61,5 +62,5 @@ function loadSampleData()
 
 
 
-    redirect_header('../admin/index.php', 0, _CM_ACTIVE);
+    redirect_header('../admin/index.php', 0, constant('CO_' . $moduleDirNameUpper . '_SAMPLEDATA_SUCCESS'));
 }

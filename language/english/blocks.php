@@ -13,3 +13,6 @@ define('_MB_OBITUARIES_RANDOM', 'Random obituaries');
 
 //aaded by mowafag
 define('_MB_OBITUARIES_LAST', 'Recent obituaries');
+//2.4
+define('_MB_BD_NOOBITUARIES', 'Obituaries');
+

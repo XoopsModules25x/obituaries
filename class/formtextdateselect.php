@@ -35,7 +35,7 @@
  * @author      Kazumi Ono  <onokazu@xoops.org>
  * @copyright   copyright (c) 2000-2003 XOOPS.org
  */
-class BD_XoopsFormTextDateSelect extends XoopsFormText
+class BD_XoopsFormTextDateSelect extends \XoopsFormText
 {
     /**
      * BD_XoopsFormTextDateSelect constructor.

@@ -1,7 +1,7 @@
 CREATE TABLE `users_obituaries` (
   `obituaries_id`          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `obituaries_uid`         INT(11) UNSIGNED NOT NULL DEFAULT '0',
-  `obituaries_date`        DATETIME         NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `obituaries_date`        DATETIME         NOT NULL ,
   `obituaries_photo`       VARCHAR(255)     NOT NULL,
   `obituaries_description` TEXT             NOT NULL,
   `obituaries_survivors`   TEXT             NOT NULL,

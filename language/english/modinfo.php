@@ -56,6 +56,6 @@ define('_MI_OBITUARIES_DISCLAIMER', 'Disclaimer');
 define('_MI_OBITUARIES_LICENSE', 'License');
 define('_MI_OBITUARIES_SUPPORT', 'Support');
 
-
+//2.4.0
 define('_MI_OBITUARIES_SHOW_SAMPLE_BUTTON', 'Show Sample Button?');
 define('_MI_OBITUARIES_SHOW_SAMPLE_BUTTON_DESC', 'If yes, the "Add Sample Data" button will be visible to the Admin. It is Yes as a default for first installation.');

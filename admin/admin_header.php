@@ -1,4 +1,4 @@
-<?php namespace bingo;
+<?php
 /**
  * Obituaries module
  *
@@ -23,6 +23,7 @@ require_once __DIR__ . '/../../../include/cp_header.php';
 include __DIR__ . '/../preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
+$moduleDirNameUpper = strtoupper($moduleDirName); //$capsDirName
 
 /** @var obituaries\Helper $helper */
 $helper = obituaries\Helper::getInstance();
