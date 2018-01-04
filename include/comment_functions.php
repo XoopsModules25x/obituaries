@@ -10,7 +10,7 @@
  * @param $total_num
  */
 
-use Xoopsmodules\obituaries;
+use XoopsModules\Obituaries;
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
@@ -19,7 +19,7 @@ function obituaries_com_update($userId, $total_num)
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     global $usersHandler;
 
-    $usersHandler = new obituaries\UsersHandler($db);
+    $usersHandler = new Obituaries\UsersHandler($db);
 
     $usersHandler->updateCommentsCount($userId, $total_num);
 }

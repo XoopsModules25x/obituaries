@@ -1,4 +1,4 @@
-<?php namespace Xoopsmodules\obituaries;
+<?php namespace XoopsModules\Obituaries;
 
 /**
  * ****************************************************************************

@@ -8,15 +8,15 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package
  * @since           2.5.9
  * @author          Michael Beck (aka Mamba)
  */
 
-use Xoopsmodules\obituaries;
-use Xoopsmodules\obituaries\common;
+use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\Common;
 
 require_once __DIR__ . '/../../../mainfile.php';
 
@@ -36,8 +36,8 @@ function loadSampleData()
 {
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = strtoupper($moduleDirName); //$capsDirName
-    $helper       = obituaries\Helper::getInstance();
-    $utility      = new obituaries\Utility();
+    $helper       = Obituaries\Helper::getInstance();
+    $utility      = new Obituaries\Utility();
     $configurator = new common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');

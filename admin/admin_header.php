@@ -16,7 +16,7 @@
  * @author              XOOPS Module Team
  **/
 
-use Xoopsmodules\obituaries;
+use XoopsModules\Obituaries;
 
 require_once __DIR__ . '/../../../include/cp_header.php';
 
@@ -25,8 +25,8 @@ include __DIR__ . '/../preloads/autoloader.php';
 $moduleDirName = basename(dirname(__DIR__));
 $moduleDirNameUpper = strtoupper($moduleDirName); //$capsDirName
 
-/** @var obituaries\Helper $helper */
-$helper = obituaries\Helper::getInstance();
+/** @var Obituaries\Helper $helper */
+$helper = Obituaries\Helper::getInstance();
 /** @var Xmf\Module\Admin $adminObject */
 $adminObject = \Xmf\Module\Admin::getInstance();
 $pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);

@@ -8,7 +8,7 @@
  * ****************************************************************************
  */
 
-use Xoopsmodules\obituaries;
+use XoopsModules\Obituaries;
 
 require_once __DIR__ . '/admin_header.php';
 //require_once __DIR__ . '/../../../include/cp_header.php';
@@ -27,11 +27,11 @@ if (isset($_POST['op'])) {
 }
 
 // Lecture de certains param�tres de l'application ********************************************************************
-$limit         =  obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
+$limit         =  Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
 $baseurl       = OBITUARIES_URL . 'admin/' . basename(__FILE__);    // URL de ce script
-$conf_msg      =  obituaries\ObituariesUtils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
-$images_width  =  obituaries\ObituariesUtils::getModuleOption('images_width');
-$images_height =  obituaries\ObituariesUtils::getModuleOption('images_height');
+$conf_msg      =  Obituaries\ObituariesUtils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
+$images_width  =  Obituaries\ObituariesUtils::getModuleOption('images_width');
+$images_height =  Obituaries\ObituariesUtils::getModuleOption('images_height');
 $destname      = '';
 
 $cacheFolder = XOOPS_UPLOAD_PATH . '/' . OBITUARIES_DIRNAME;
@@ -85,7 +85,7 @@ switch ($op) {
                 $action_delete = "<a href='$baseurl?op=delete&id=" . $id . "' title='" . _DELETE . "'" . $conf_msg . '>' . $birdthday_icones['delete'] . '</a>';
 
                 echo "<tr class='" . $class . "'>\n";
-                echo "<td align='center'>" .  obituaries\ObituariesUtils::SQLDateToHuman($item->getVar('obituaries_date')) . '</td>';
+                echo "<td align='center'>" .  Obituaries\ObituariesUtils::SQLDateToHuman($item->getVar('obituaries_date')) . '</td>';
                 echo "<td align='center'>" . $uname . '</td>';
                 echo "<td align='center'>" . $item->getFullName() . '</td>';
                 echo "<td align='center'>" . $action_edit . ' ' . $action_delete . '</td>';
@@ -118,9 +118,9 @@ switch ($op) {
             $xoopsDB->queryF('ANALYZE TABLE ' . $list);
             $xoopsDB->queryF('OPTIMIZE TABLE ' . $list);
         }
-         obituaries\ObituariesUtils::updateCache();
+         Obituaries\ObituariesUtils::updateCache();
         $usersHandler->forceCacheClean();
-         obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
+         Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
         break;
 
     // ****************************************************************************************************************
@@ -130,13 +130,13 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if (empty($id)) {
-             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
+             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
         // Item exits ?
         $item = null;
         $item = $usersHandler->get($id);
         if (!is_object($item)) {
-             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
+             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
         $form = $usersHandler->getForm($item, $baseurl);
         $form->display();
@@ -149,9 +149,9 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $result = $usersHandler->saveUser();
         if ($result) {
-             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
+             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
-             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
+             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
         break;
 
@@ -160,19 +160,19 @@ switch ($op) {
         // ****************************************************************************************************************
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if (empty($id)) {
-             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
+             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
         // Item exits ?
         $item = null;
         $item = $usersHandler->get($id);
         if (!is_object($item)) {
-             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
+             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
         $result = $usersHandler->deleteUser($item);
         if ($result) {
-             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
+             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
-             obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
+             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
 
 }

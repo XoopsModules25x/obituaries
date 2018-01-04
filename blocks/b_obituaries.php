@@ -4,15 +4,15 @@
  * @return array
  */
 
-use Xoopsmodules\obituaries;
-use Xoopsmodules\obituaries\common;
+use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\Common;
 
 function b_obituaries_show($options)
 {
     global $xoopsUser;
     $block = [];
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
-    $usersHandler = new obituaries\UsersHandler($db);
+    $usersHandler = new Obituaries\UsersHandler($db);
     $start      = 0;
     $limit      = (int)$options[0];
     $itemsCount = $usersHandler->getTodayObituariessCount();
@@ -75,7 +75,7 @@ function b_obituaries_random_show($options)
     $start = 0;
     $limit = (int)$options[0];
 
-    $usersHandler = new obituaries\UsersHandler($db);
+    $usersHandler = new Obituaries\UsersHandler($db);
     $users = $usersHandler->getRandomObituariess($start, $limit);
     if (count($users) > 0) {
         foreach ($users as $user) {
@@ -125,14 +125,14 @@ function b_obituaries_last_show($options)
     $start = 0;
     $limit = (int)$options[0];
 
-    if (1 ==  obituaries\ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
+    if (1 ==  Obituaries\ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
         $sort  = 'obituaries_date';
         $order = 'DESC';
     } else {
         $sort  = 'obituaries_lastname';
         $order = 'ASC';
     }
-    $usersHandler = new obituaries\UsersHandler($db);
+    $usersHandler = new Obituaries\UsersHandler($db);
     $users = $usersHandler->getLastObituariess($start, $limit, $sort, $order);
 
     if (count($users) > 0) {

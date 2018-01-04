@@ -10,7 +10,7 @@
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 
-use Xoopsmodules\obituaries;
+use XoopsModules\Obituaries;
 include __DIR__ . '/../preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
@@ -18,17 +18,17 @@ $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
 
 
 /** @var \XoopsDatabase $db */
-/** @var obituaries\Helper $helper */
-/** @var obituaries\Utility $utility */
+/** @var Obituaries\Helper $helper */
+/** @var Obituaries\Utility $utility */
 $db      = \XoopsDatabaseFactory::getDatabaseConnection();
-$helper  = obituaries\Helper::getInstance();
-$utility = new obituaries\Utility();
-//$configurator = new obituaries\common\Configurator();
+$helper  = Obituaries\Helper::getInstance();
+$utility = new Obituaries\Utility();
+//$configurator = new Obituaries\Common\Configurator();
 
 $helper->loadLanguage('common');
 
 //handlers
-$usersHandler = new obituaries\UsersHandler($db);
+$usersHandler = new Obituaries\UsersHandler($db);
 
 if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_DIRNAME', basename(dirname(__DIR__)));

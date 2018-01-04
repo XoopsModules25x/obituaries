@@ -20,8 +20,8 @@
  * ****************************************************************************
  */
 
-use Xoopsmodules\obituaries;
-use Xoopsmodules\obituaries\common;
+use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\Common;
 
 require_once __DIR__ . '/admin_header.php';
 // Display Admin header
@@ -30,7 +30,7 @@ xoops_cp_header();
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 //check for upload folders
-$utility = new obituaries\Utility();
+$utility = new Obituaries\Utility();
 $configurator = new common\Configurator();
 foreach (array_keys($configurator->uploadFolders) as $i) {
     $utility::createFolder($configurator->uploadFolders[$i]);

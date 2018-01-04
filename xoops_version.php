@@ -1,11 +1,11 @@
 <?php
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
-use Xoopsmodules\obituaries;
+use XoopsModules\Obituaries;
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
-$helper = obituaries\Helper::getInstance();
+$helper = Obituaries\Helper::getInstance();
 $helper->loadLanguage('common');
 
 $moduleDirName = basename(__DIR__);

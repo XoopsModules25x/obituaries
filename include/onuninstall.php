@@ -8,7 +8,7 @@
  * @link            https://xoops.org XOOPS
  */
 
-use Xoopsmodules\obituaries;
+use XoopsModules\Obituaries;
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -36,11 +36,11 @@ function xoops_module_uninstall_obituaries(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
-    /** @var obituaries\Helper $helper */
-    /** @var obituaries\Utility $utility */
-    $helper  = obituaries\Helper::getInstance();
-    $utility     = new obituaries\Utility();
-//    $configurator = new xoopstube\common\Configurator();
+    /** @var Obituaries\Helper $helper */
+    /** @var Obituaries\Utility $utility */
+    $helper  = Obituaries\Helper::getInstance();
+    $utility     = new Obituaries\Utility();
+//    $configurator = new xoopstube\Common\Configurator();
 
     // Load language files
     $helper->loadLanguage('admin');

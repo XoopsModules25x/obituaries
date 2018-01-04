@@ -17,8 +17,8 @@
  * @author       XOOPS Development Team
  */
 
-use Xoopsmodules\obituaries;
-use Xoopsmodules\obituaries\common;
+use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\Common;
 
 /**
  *
@@ -31,8 +31,8 @@ function xoops_module_pre_install_obituaries(\XoopsModule $module)
 {
 
     include __DIR__ . '/../preloads/autoloader.php';
-    /** @var obituaries\Utility $utility */
-    $utility = new obituaries\Utility();
+    /** @var Obituaries\Utility $utility */
+    $utility = new Obituaries\Utility();
 
     //check for minimum XOOPS version
     $xoopsSuccess = $utility::checkVerXoops($module);
@@ -63,11 +63,11 @@ function xoops_module_install_obituaries(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var obituaries\Helper $helper */
-    /** @var obituaries\Utility $utility */
+    /** @var Obituaries\Helper $helper */
+    /** @var Obituaries\Utility $utility */
    /** @var common\Configurator $configurator */
-    $helper       = obituaries\Helper::getInstance();
-    $utility      = new obituaries\Utility();
+    $helper       = Obituaries\Helper::getInstance();
+    $utility      = new Obituaries\Utility();
     $configurator = new common\Configurator();
 
     // Load language files

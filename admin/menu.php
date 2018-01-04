@@ -9,11 +9,11 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
-use Xoopsmodules\obituaries;
+use XoopsModules\Obituaries;
 
 include __DIR__ . '/../preloads/autoloader.php';
 
-$helper = obituaries\Helper::getInstance();
+$helper = Obituaries\Helper::getInstance();
 
 // get path to icons
 $pathIcon32    = \Xmf\Module\Admin::menuIconPath('');

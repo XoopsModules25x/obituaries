@@ -17,8 +17,8 @@
  * @author       XOOPS Development Team
  */
 
-use Xoopsmodules\obituaries;
-use Xoopsmodules\obituaries\common;
+use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\Common;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()
@@ -49,10 +49,10 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_obituaries(\XoopsModule $module)
 {
-    /** @var obituaries\Helper $helper */
-    /** @var obituaries\Utility $utility */
-    $helper       = obituaries\Helper::getInstance();
-    $utility      = new obituaries\Utility();
+    /** @var Obituaries\Helper $helper */
+    /** @var Obituaries\Utility $utility */
+    $helper       = Obituaries\Helper::getInstance();
+    $utility      = new Obituaries\Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -73,11 +73,11 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = strtoupper($moduleDirName);
 
-    /** @var obituaries\Helper $helper */
-    /** @var obituaries\Utility $utility */
+    /** @var Obituaries\Helper $helper */
+    /** @var Obituaries\Utility $utility */
     /** @var common\Configurator $configurator */
-    $helper  = obituaries\Helper::getInstance();
-    $utility = new obituaries\Utility();
+    $helper  = Obituaries\Helper::getInstance();
+    $utility = new Obituaries\Utility();
     $configurator = new common\Configurator();
 
     $helper->loadLanguage('common');
