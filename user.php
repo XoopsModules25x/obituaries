@@ -53,7 +53,7 @@ if (is_object($user)) {
     $pageTitle       = $user->getFullName() . ' - ' .  Obituaries\ObituariesUtils::getModuleName();
     $metaDescription = $pageTitle;
     $metaKeywords    =  Obituaries\ObituariesUtils::createMetaKeywords($user->getVar('obituaries_description'));
-     Obituaries\ObituariesUtils::setMetas($pageTitle, $metaDescription, $metaKeywords);
+    Obituaries\ObituariesUtils::setMetas($pageTitle, $metaDescription, $metaKeywords);
 }
 $path       = [OBITUARIES_URL . 'user.php' => $user->getFullName()];
 $breadcrumb =  Obituaries\ObituariesUtils::breadcrumb($path);

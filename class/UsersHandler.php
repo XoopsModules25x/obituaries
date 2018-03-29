@@ -11,8 +11,11 @@
 
 use Xmf\Request;
 use XoopsModules\Obituaries;
+/** @var Obituaries\Helper $helper */
+$helper = Obituaries\Helper::getInstance();
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 //if (!class_exists('Obituaries_XoopsPersistableObjectHandler')) {
@@ -45,7 +48,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         $criteria = new \Criteria('obituaries_uid', (int)$uid, '=');
         if ($this->getCount($criteria) > 0) {
             $temp = [];
-            $temp = $this->getObjects($criteria);
+            $temp =& $this->getObjects($criteria);
             if (count($temp) > 0) {
                 return $temp[0];
             }
@@ -66,7 +69,9 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     {
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/formtextdateselect.php';
-        global $xoopsModuleConfig;
+        /** @var Obituaries\Helper $helper */
+        $helper = Obituaries\Helper::getInstance();
+
         $edit = true;
         if ($item->isNew()) {
             $edit = false;
@@ -125,7 +130,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $options['cols']        = '100%';
             $options['width']       = '100%';
             $options['height']      = '600px';
-            $obituaries_description = new \XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
+            $obituaries_description = new \XoopsFormEditor('', $helper->getConfig('form_options'), $options, $nohtml = false, $onfailure = 'textarea');
             $options_tray1->addElement($obituaries_description);
         } else {
             $obituaries_description = new \XoopsFormDhtmlTextArea('', 'obituaries_description', $item->getVar('obituaries_description', 'e'), '100%', '100%');
@@ -142,7 +147,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $options['cols']      = '100%';
             $options['width']     = '100%';
             $options['height']    = '600px';
-            $obituaries_survivors = new \XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
+            $obituaries_survivors = new \XoopsFormEditor('', $helper->getConfig('form_options'), $options, $nohtml = false, $onfailure = 'textarea');
             $options_tray2->addElement($obituaries_survivors);
         } else {
             $obituaries_survivors = new \XoopsFormDhtmlTextArea('', 'contents_contents', $item->getVar('obituaries_survivors', 'e'), '100%', '100%');
@@ -159,7 +164,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $options['cols']    = '100%';
             $options['width']   = '100%';
             $options['height']  = '600px';
-            $obituaries_service = new \XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
+            $obituaries_service = new \XoopsFormEditor('', $helper->getConfig('form_options'), $options, $nohtml = false, $onfailure = 'textarea');
             $options_tray3->addElement($obituaries_service);
         } else {
             $obituaries_service = new \XoopsFormDhtmlTextArea('', 'obituaries_service', $item->getVar('obituaries_service', 'e'), '100%', '100%');
@@ -176,7 +181,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $options['cols']     = '100%';
             $options['width']    = '100%';
             $options['height']   = '600px';
-            $obituaries_memorial = new \XoopsFormEditor('', $xoopsModuleConfig['form_options'], $options, $nohtml = false, $onfailure = 'textarea');
+            $obituaries_memorial = new \XoopsFormEditor('', $helper->getConfig('form_options'), $options, $nohtml = false, $onfailure = 'textarea');
             $options_tray4->addElement($obituaries_memorial);
         } else {
             $obituaries_memorial = new \XoopsFormDhtmlTextArea('', 'obituaries_memorial', $item->getVar('obituaries_memorial', 'e'), '100%', '100%');

@@ -7,10 +7,11 @@
  * Version :
  * ****************************************************************************
  */
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
-
 
 use XoopsModules\Obituaries;
+
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
 include __DIR__ . '/../preloads/autoloader.php';
 
 $moduleDirName = basename(dirname(__DIR__));
@@ -46,8 +47,6 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_CACHE_PATH', XOOPS_UPLOAD_PATH . '/' . $moduleDirName . '/');
     define($moduleDirNameUpper . '_CONSTANTS_DEFINED', 1);
     define($moduleDirNameUpper . '_THUMB', 'thumb_');
-
-
 }
 
 
@@ -66,11 +65,9 @@ if (!defined('_OBITUARIES_EDIT')) {
     if (!isset($xoopsConfig)) {
         global $xoopsConfig;
     }
-    if (isset($xoopsConfig) && file_exists(OBITUARIES_PATH . 'language/' . $xoopsConfig['language'] . '/main.php')) {
-        require_once OBITUARIES_PATH . 'language/' . $xoopsConfig['language'] . '/main.php';
-    } else {
-        require_once OBITUARIES_PATH . 'language/english/main.php';
-    }
+    /** @var Obituaries\Helper $helper */
+    $helper = Obituaries\Helper::getInstance();
+    $helper->loadLanguage('main');
 
     $birdthday_icones = [
         'edit'   => "<img src='" . OBITUARIES_IMAGES_URL . "edit.png' alt='" . _AM_OBITUARIES_EDIT . "' align='middle'>",

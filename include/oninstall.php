@@ -29,7 +29,6 @@ use XoopsModules\Obituaries\Common;
  */
 function xoops_module_pre_install_obituaries(\XoopsModule $module)
 {
-
     include __DIR__ . '/../preloads/autoloader.php';
     /** @var Obituaries\Utility $utility */
     $utility = new Obituaries\Utility();
@@ -65,7 +64,7 @@ function xoops_module_install_obituaries(\XoopsModule $module)
 
     /** @var Obituaries\Helper $helper */
     /** @var Obituaries\Utility $utility */
-   /** @var common\Configurator $configurator */
+    /** @var common\Configurator $configurator */
     $helper       = Obituaries\Helper::getInstance();
     $utility      = new Obituaries\Utility();
     $configurator = new common\Configurator();
@@ -74,7 +73,7 @@ function xoops_module_install_obituaries(\XoopsModule $module)
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
 
-    // default Permission Settings ----------------------   
+    // default Permission Settings ----------------------
     $moduleId     = $module->getVar('mid');
     $moduleId2    = $helper->getModule()->mid();
     //$moduleName = $module->getVar('name');

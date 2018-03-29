@@ -8,7 +8,7 @@
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * A set of useful and common functions
@@ -279,7 +279,7 @@ class ObituariesUtils
         xoops_template_clear_module_cache($xoopsModule->getVar('mid'));            // Clear module's blocks cache
 
         foreach ($tpllist as $onetemplate) {    // Remove cache for each page.
-            if ('module' == $onetemplate->getVar('tpl_type')) {
+            if ('module' === $onetemplate->getVar('tpl_type')) {
                 //  Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
                 $files_del = [];
                 $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');
@@ -482,7 +482,7 @@ class ObituariesUtils
     public static function createUploadName($folder, $fileName, $trimName = false)
     {
         $workingfolder = $folder;
-        if ('/' != xoops_substr($workingfolder, strlen($workingfolder) - 1, 1)) {
+        if ('/' !== xoops_substr($workingfolder, strlen($workingfolder) - 1, 1)) {
             $workingfolder .= '/';
         }
         $ext  = basename($fileName);
@@ -676,10 +676,10 @@ class ObituariesUtils
                     if ($uploader->upload()) {
                         return true;
                     } else {
-                        return _ERRORS . ' ' . htmlentities($uploader->getErrors());
+                        return _ERRORS . ' ' . htmlentities($uploader->getErrors(), ENT_QUOTES | ENT_HTML5);
                     }
                 } else {
-                    return htmlentities($uploader->getErrors());
+                    return htmlentities($uploader->getErrors(), ENT_QUOTES | ENT_HTML5);
                 }
             } else {
                 return false;

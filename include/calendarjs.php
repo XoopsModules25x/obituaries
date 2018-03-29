@@ -1,5 +1,5 @@
 <?php
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/calendar.php';
 ?>
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo XOOPS_URL; ?>/include/calendar-blue.css">
@@ -33,10 +33,10 @@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'
             calendar.hide();
         } else {
             var cal = new \Calendar(true, "<?php if (isset($jstime)) {
-                echo $jstime;
-            } else {
-                echo 'null';
-            }?>", selected, closeHandler);
+    echo $jstime;
+} else {
+    echo 'null';
+}?>", selected, closeHandler);
             calendar = cal;
             cal.setRange(1900, 2100);
             calendar.create();

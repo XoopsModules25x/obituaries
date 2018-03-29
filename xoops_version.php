@@ -1,5 +1,5 @@
 <?php
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 use XoopsModules\Obituaries;
 
@@ -327,5 +327,3 @@ $modversion['config'][] = [
     'valuetype'   => 'text',
     'default'     => constant('CO_' . $moduleDirNameUpper . '_TITLE4'),
 ];
-
-

@@ -67,13 +67,13 @@ switch ($op) {
             $critere->setStart($start);
             $critere->setSort('obituaries_lastname');
             //                  $critere->setOrder($order);
-            //                  $tblItems = $this->getObjects($critere, $idAsKey);
+            //                  $tblItems =& $this->getObjects($critere, $idAsKey);
             $items = $usersHandler->getAllUsers($start, $limit, 'obituaries_lastname');
 
             echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
             echo "<tr><th align='center'>" . _AM_OBITUARIES_DATE . "</th><th align='center'>" . _AM_OBITUARIES_USERNAME . "</th><th align='center'>" . _AM_OBITUARIES_LASTNAME . ',  ' . _AM_OBITUARIES_FIRSTNAME . "</th><th align='center'>" . _AM_OBITUARIES_ACTION . '</th></tr>';
             foreach ($items as $item) {
-                $class = ('even' == $class) ? 'odd' : 'even';
+                $class = ('even' === $class) ? 'odd' : 'even';
                 $id    = $item->getVar('obituaries_id');
                 $user  = null;
                 $user  = $item->getXoopsUser();
@@ -130,13 +130,13 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if (empty($id)) {
-             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
+            Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
         // Item exits ?
         $item = null;
         $item = $usersHandler->get($id);
         if (!is_object($item)) {
-             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
+            Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
         $form = $usersHandler->getForm($item, $baseurl);
         $form->display();
@@ -149,9 +149,9 @@ switch ($op) {
         $adminObject->displayNavigation(basename(__FILE__));
         $result = $usersHandler->saveUser();
         if ($result) {
-             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
+            Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
-             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
+            Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
         break;
 
@@ -160,19 +160,19 @@ switch ($op) {
         // ****************************************************************************************************************
         $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
         if (empty($id)) {
-             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
+            Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
         // Item exits ?
         $item = null;
         $item = $usersHandler->get($id);
         if (!is_object($item)) {
-             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
+            Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_NOT_FOUND, $baseurl, 5);
         }
         $result = $usersHandler->deleteUser($item);
         if ($result) {
-             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
+            Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 1);
         } else {
-             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
+            Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
 
 }
