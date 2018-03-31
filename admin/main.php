@@ -47,7 +47,7 @@ switch ($op) {
         xoops_cp_header();
         // echo '<h1>'.ObituariesUtils::getModuleName().'</h1>';
         $adminObject->displayNavigation(basename(__FILE__));
-        $start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+        $start = \Xmf\Request::getInt('start', 0, 'GET');
         /** @var \UsersHandler $usersHandler */
         $itemsCount = $usersHandler->getCount();
         if ($itemsCount > $limit) {
@@ -128,7 +128,7 @@ switch ($op) {
         // ****************************************************************************************************************
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
-        $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        $id = \Xmf\Request::getInt('id', 0, 'GET');
         if (empty($id)) {
             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }
@@ -158,7 +158,7 @@ switch ($op) {
     // ****************************************************************************************************************
     case 'delete':    // Suppression d'un utilisateur
         // ****************************************************************************************************************
-        $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        $id = \Xmf\Request::getInt('id', 0, 'GET');
         if (empty($id)) {
             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_ERROR_1, $baseurl, 5);
         }

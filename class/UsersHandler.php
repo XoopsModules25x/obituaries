@@ -221,7 +221,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         global $destname;
         $images_width  = Obituaries\ObituariesUtils::getModuleOption('images_width');
         $images_height = Obituaries\ObituariesUtils::getModuleOption('images_height');
-        $id            = isset($_POST['obituaries_id']) ? (int)$_POST['obituaries_id'] : 0;
+        $id            = \Xmf\Request::getInt('obituaries_id', 0, 'POST');
         if (!empty($id)) {
             $edit = true;
             $item = $this->get($id);

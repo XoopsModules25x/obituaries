@@ -10,7 +10,7 @@
 
 require_once __DIR__ . '/../../mainfile.php';
 require_once __DIR__ . '/header.php';
-$com_itemid = isset($_GET['com_itemid']) ? (int)$_GET['com_itemid'] : 0;
+$com_itemid = \Xmf\Request::getInt('com_itemid', 0, 'GET');
 if ($com_itemid > 0) {
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $user = null;

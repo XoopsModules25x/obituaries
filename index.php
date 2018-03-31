@@ -13,7 +13,7 @@ require_once __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
-$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+$start = \Xmf\Request::getInt('start', 0, 'GET');
 $limit =  Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
 $users = [];
 
