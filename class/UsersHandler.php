@@ -11,9 +11,9 @@
 
 use Xmf\Request;
 use XoopsModules\Obituaries;
+
 /** @var Obituaries\Helper $helper */
 $helper = Obituaries\Helper::getInstance();
-
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -21,7 +21,6 @@ require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 //if (!class_exists('Obituaries_XoopsPersistableObjectHandler')) {
 //  require_once XOOPS_ROOT_PATH.'/modules/obituaries/class/PersistableObjectHandler.php';
 //}
-
 
 /**
  * Class UsersHandler
@@ -60,15 +59,15 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Cr�ation du formulaire de saisie
      *
-     * @param  Users $item           L'�l�ment � ajouter/modifier
-     * @param  string          $baseurl        L'url de destination
-     * @param  boolean         $withUserSelect Indique s'il faut inclure la liste de s�lection de l'utilisateur
+     * @param  Users   $item           L'�l�ment � ajouter/modifier
+     * @param  string  $baseurl        L'url de destination
+     * @param  boolean $withUserSelect Indique s'il faut inclure la liste de s�lection de l'utilisateur
      * @return object           Le formulaire � utiliser
      */
     public function getForm(Users $item, $baseurl, $withUserSelect = true)
     {
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-        require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/formtextdateselect.php';
+        require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/FormTextDateSelect.php';
         /** @var Obituaries\Helper $helper */
         $helper = Obituaries\Helper::getInstance();
 
@@ -120,7 +119,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         /** @var Obituaries\Helper $helper */
         $helper = Obituaries\Helper::getInstance();
 
-//        $options_tray1 = new \XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');
+        //        $options_tray1 = new \XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');
         $options_tray1 = new \XoopsFormElementTray($helper->getConfig('title1'), '<br>');
 
         if (class_exists('XoopsFormEditor')) {
@@ -138,7 +137,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         }
         $sform->addElement($options_tray1);
 
-//        $options_tray2 = new \XoopsFormElementTray(_AM_OBITUARIES_SURVIVORS, '<br>');
+        //        $options_tray2 = new \XoopsFormElementTray(_AM_OBITUARIES_SURVIVORS, '<br>');
         $options_tray2 = new \XoopsFormElementTray($helper->getConfig('title2'), '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']      = 'obituaries_survivors';
@@ -155,7 +154,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         }
         $sform->addElement($options_tray2);
 
-//        $options_tray3 = new \XoopsFormElementTray(_AM_OBITUARIES_SERVICE, '<br>');
+        //        $options_tray3 = new \XoopsFormElementTray(_AM_OBITUARIES_SERVICE, '<br>');
         $options_tray3 = new \XoopsFormElementTray($helper->getConfig('title3'), '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']    = 'obituaries_service';
@@ -172,7 +171,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         }
         $sform->addElement($options_tray3);
 
-//        $options_tray4 = new \XoopsFormElementTray(_AM_OBITUARIES_MEMORIAL, '<br>');
+        //        $options_tray4 = new \XoopsFormElementTray(_AM_OBITUARIES_MEMORIAL, '<br>');
         $options_tray4 = new \XoopsFormElementTray($helper->getConfig('title4'), '<br>');
         if (class_exists('XoopsFormEditor')) {
             $options['name']     = 'obituaries_memorial';
@@ -221,7 +220,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         global $destname;
         $images_width  = Obituaries\ObituariesUtils::getModuleOption('images_width');
         $images_height = Obituaries\ObituariesUtils::getModuleOption('images_height');
-        $id            = \Xmf\Request::getInt('obituaries_id', 0, 'POST');
+        $id            = Request::getInt('obituaries_id', 0, 'POST');
         if (!empty($id)) {
             $edit = true;
             $item = $this->get($id);
@@ -293,8 +292,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Mise � jour du compteur de commentaires pour un utilisateur
      *
-     * @param  intger $userId
-     * @param         $commentsCount
+     * @param  int $userId
+     * @param  int $commentsCount
      * @return void
      * @internal param int $total_num
      */

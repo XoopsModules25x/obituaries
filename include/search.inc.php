@@ -13,6 +13,17 @@
  * @param       $userid
  * @return array
  */
+
+use XoopsModules\Obituaries;
+
+/**
+ * @param $queryarray
+ * @param $andor
+ * @param $limit
+ * @param $offset
+ * @param $userid
+ * @return array
+ */
 function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
@@ -20,16 +31,18 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
     require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/Users.php';
 
     // Recherche dans les produits
-    $sql = 'SELECT obituaries_id, obituaries_firstname, obituaries_lastname, obituaries_date, obituaries_uid FROM ' . $xoopsDB->prefix('users_obituaries') . ' WHERE (obituaries_id <> 0 ';
+    $sql = 'SELECT obituaries_id, obituaries_firstname, obituaries_lastname, obituaries_date, obituaries_uid FROM ' . $xoopsDB->prefix('users_obituaries') . ' WHERE (obituaries_id <> 0 )';
     if (0 != $userid) {
         $sql .= '  AND obituaries_uid = ' . $userid;
     }
     $sql .= ') ';
 
-    $tmpObject = new Users();
+    /** @var Obituaries\UsersHandler $usersHandler */
+    $usersHandler = Obituaries\Helper::getInstance()->getHandler('Users');
+    $tmpObject    = $usersHandler->create();
     $datas     = $tmpObject->getVars();
-    $tblFields = [];
-    $cnt       = 0;
+    $tblFields    = [];
+    $cnt          = 0;
     foreach ($datas as $key => $value) {
         if (XOBJ_DTYPE_TXTBOX == $value['data_type'] || XOBJ_DTYPE_TXTAREA == $value['data_type']) {
             if (0 == $cnt) {

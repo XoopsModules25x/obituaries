@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Obituaries;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -35,10 +36,10 @@
  * @author      Kazumi Ono  <onokazu@xoops.org>
  * @copyright   copyright (c) 2000-2003 XOOPS.org
  */
-class BD_XoopsFormTextDateSelect extends \XoopsFormText
+class FormTextDateSelect extends \XoopsFormText
 {
     /**
-     * BD_XoopsFormTextDateSelect constructor.
+     * FormTextDateSelect constructor.
      * @param string $caption
      * @param string $name
      * @param int    $size

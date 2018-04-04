@@ -14,6 +14,10 @@ use XoopsModules\Obituaries;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
+/**
+ * @param $userId
+ * @param $total_num
+ */
 function obituaries_com_update($userId, $total_num)
 {
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';

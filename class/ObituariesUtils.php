@@ -65,7 +65,7 @@ class ObituariesUtils
                 $retval = $xoopsModuleConfig[$option];
             }
         } else {
-            /** @var XoopsModuleHandler $moduleHandler */
+            /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler = xoops_getHandler('module');
             $module        = $moduleHandler->getByDirname($repmodule);
             $configHandler = xoops_getHandler('config');
@@ -360,7 +360,7 @@ class ObituariesUtils
     /**
      * Verify that the current user is a member of the Admin group
      *
-     * @return booleean Admin or not
+     * @return bool Admin or not
      */
     public static function isAdmin()
     {
@@ -431,10 +431,10 @@ class ObituariesUtils
         if (self::isX22() || self::isX23()) {
             return false;
         }
-        if (false !== strpos(strtolower(XOOPS_VERSION), 'impresscms')) {
+        if (false !== stripos(XOOPS_VERSION, 'impresscms')) {
             return false;
         }
-        if (false === strpos(strtolower(XOOPS_VERSION), 'legacy')) {
+        if (false === stripos(XOOPS_VERSION, 'legacy')) {
             $xv = xoops_trim(str_replace('XOOPS ', '', XOOPS_VERSION));
             if ((int)substr($xv, 4, 2) >= 17) {
                 return false;
@@ -779,6 +779,14 @@ class ObituariesUtils
         }
     }
 
+    /**
+     * @param $string
+     * @return string
+     */
+    /**
+     * @param $string
+     * @return string
+     */
     public static function close_tags($string)
     {
         // match opened tags
@@ -811,6 +819,20 @@ class ObituariesUtils
         return $string;
     }
 
+    /**
+     * @param        $string
+     * @param int    $length
+     * @param string $etc
+     * @param bool   $break_words
+     * @return null|string|string[]
+     */
+    /**
+     * @param        $string
+     * @param int    $length
+     * @param string $etc
+     * @param bool   $break_words
+     * @return null|string|string[]
+     */
     public static function truncate_tagsafe($string, $length = 80, $etc = '...', $break_words = false)
     {
         if (0 == $length) {

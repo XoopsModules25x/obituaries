@@ -13,7 +13,6 @@ require_once __DIR__ . '/header.php';
 $com_itemid = \Xmf\Request::getInt('com_itemid', 0, 'GET');
 if ($com_itemid > 0) {
     include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
-    $user = null;
     $user = $usersHandler->get($com_itemid);
     if (is_object($user)) {
         $com_replytitle = $user->getFullName();

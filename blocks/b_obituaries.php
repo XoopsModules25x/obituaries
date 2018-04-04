@@ -7,6 +7,10 @@
 use XoopsModules\Obituaries;
 use XoopsModules\Obituaries\Common;
 
+/**
+ * @param $options
+ * @return array
+ */
 function b_obituaries_show($options)
 {
     global $xoopsUser;
