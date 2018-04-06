@@ -54,7 +54,7 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
         }
     }
 
-    //    $count = count($queryarray);
+    $count = is_array($queryarray) ? count($queryarray) : 0;
     $more = '';
     if (is_array($queryarray) && count($queryarray) > 0) {
         $cnt  = 0;

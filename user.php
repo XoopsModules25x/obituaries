@@ -23,10 +23,10 @@ $helper = Obituaries\Helper::getInstance();
 
 $case = 0;
 if (isset($_GET['obituaries_id'])) {
-    $uid  = (int)$_GET['obituaries_id'];
+    $uid  = \Xmf\Request::getInt('obituaries_id', 0, 'GET');
     $case = 1;
 } elseif (isset($_GET['obituaries_uid'])) {
-    $uid  = (int)$_GET['obituaries_uid'];
+    $uid  = \Xmf\Request::getInt('obituaries_uid', 0, 'GET');
     $case = 2;
 } elseif (isset($xoopsUser) && is_object($xoopsUser)) {
     $uid  = $xoopsUser->getVar('uid');

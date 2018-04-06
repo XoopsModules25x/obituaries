@@ -47,7 +47,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         $criteria = new \Criteria('obituaries_uid', (int)$uid, '=');
         if ($this->getCount($criteria) > 0) {
             $temp = [];
-            $temp =& $this->getObjects($criteria);
+            $temp = $this->getObjects($criteria);
             if (count($temp) > 0) {
                 return $temp[0];
             }
@@ -237,7 +237,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             global $xoopsUser;
             $item->setVar('obituaries_uid', $xoopsUser->getVar('uid'));
         }
-        if (isset($_POST['delpicture']) && 1 == (int)$_POST['delpicture']) {
+        if (isset($_POST['delpicture']) && 1 == \Xmf\Request::getInt('delpicture', 0, 'POST')) {
             if ('' != trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
                 $item->deletePicture();
             }

@@ -67,7 +67,7 @@ switch ($op) {
             $critere->setStart($start);
             $critere->setSort('obituaries_lastname');
             //                  $critere->setOrder($order);
-            //                  $tblItems =& $this->getObjects($critere, $idAsKey);
+            //                  $tblItems = $this->getObjects($critere, $idAsKey);
             $items = $usersHandler->getAllUsers($start, $limit, 'obituaries_lastname');
 
             echo "<table width='100%' cellspacing='1' cellpadding='3' border='0' class='outer'>";
