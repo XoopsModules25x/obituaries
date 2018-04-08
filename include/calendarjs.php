@@ -21,7 +21,7 @@ require_once XOOPS_ROOT_PATH . '/language/' . $GLOBALS['xoopsConfig']['language'
         var el = Calendar.is_ie ? Calendar.getElement(ev) : Calendar.getTargetElement(ev);
         for (; el != null; el = el.parentNode)
             if (el == calendar.element || el.tagName == "A") break;
-        if (el == null) {
+        if (el === null) {
             calendar.callCloseHandler();
             Calendar.stopEvent(ev);
         }
