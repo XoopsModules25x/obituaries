@@ -5,11 +5,13 @@ use XoopsModules\Obituaries;
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
-$helper = Obituaries\Helper::getInstance();
-$helper->loadLanguage('common');
-
 $moduleDirName = basename(__DIR__);
 $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
+
+$helper = Obituaries\Helper::getInstance();
+//$helper->loadLanguage('common');
+xoops_loadLanguage('common', $moduleDirName);
+
 
 $modversion['version']             = 2.40;
 $modversion['module_status']       = 'Beta 1';
