@@ -5,7 +5,6 @@
  */
 
 use XoopsModules\Obituaries;
-use XoopsModules\Obituaries\Common;
 
 /**
  * @param $options
@@ -15,13 +14,13 @@ function b_obituaries_show($options)
 {
     global $xoopsUser;
     $block = [];
-    include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $usersHandler = new Obituaries\UsersHandler($db);
-    $start      = 0;
-    $limit      = (int)$options[0];
-    $itemsCount = $usersHandler->getTodayObituariessCount();
-    $users      = $usersHandler->getTodayObituariess($start, $limit);
-    if (is_array($users) && count($users) > 0) {
+    $start        = 0;
+    $limit        = (int)$options[0];
+    $itemsCount   = $usersHandler->getTodayObituariessCount();
+    $users        = $usersHandler->getTodayObituariess($start, $limit);
+    if ($users && is_array($users)) {
         foreach ($users as $user) {
             $block['obituaries_today_users'][] = $user->toArray();
         }
@@ -49,7 +48,7 @@ function b_obituaries_show($options)
  */
 function b_obituaries_edit($options)
 {
-    include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $form = '';
     $form .= "<table border='0'>";
     $form .= '<tr><td>' . _MB_OBITUARIES_MAX_ITEMS . "</td><td><input type='text' name='options[]' id='options' value='" . $options[0] . "'></td></tr>\n";
@@ -75,12 +74,12 @@ function b_obituaries_edit($options)
 function b_obituaries_random_show($options)
 {
     $block = [];
-    include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $start = 0;
     $limit = (int)$options[0];
 
     $usersHandler = new Obituaries\UsersHandler($db);
-    $users = $usersHandler->getRandomObituariess($start, $limit);
+    $users        = $usersHandler->getRandomObituariess($start, $limit);
     if (count($users) > 0) {
         foreach ($users as $user) {
             $block['obituaries_random_users'][] = $user->toArray();
@@ -99,7 +98,7 @@ function b_obituaries_random_show($options)
  */
 function b_obituaries_random_edit($options)
 {
-    include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $form = '';
     $form .= "<table border='0'>";
     $form .= '<tr><td>' . _MB_OBITUARIES_MAX_ITEMS . "</td><td><input type='text' name='options[]' id='options' value='" . $options[0] . "'></td></tr>\n";
@@ -125,11 +124,11 @@ function b_obituaries_random_edit($options)
 function b_obituaries_last_show($options)
 {
     $block = [];
-    include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $start = 0;
     $limit = (int)$options[0];
 
-    if (1 ==  Obituaries\ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
+    if (1 == Obituaries\ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
         $sort  = 'obituaries_date';
         $order = 'DESC';
     } else {
@@ -137,7 +136,7 @@ function b_obituaries_last_show($options)
         $order = 'ASC';
     }
     $usersHandler = new Obituaries\UsersHandler($db);
-    $users = $usersHandler->getLastObituariess($start, $limit, $sort, $order);
+    $users        = $usersHandler->getLastObituariess($start, $limit, $sort, $order);
 
     if (count($users) > 0) {
         foreach ($users as $user) {
@@ -157,7 +156,7 @@ function b_obituaries_last_show($options)
  */
 function b_obituaries_last_edit($options)
 {
-    include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     $form = '';
     $form .= "<table border='0'>";
     $form .= '<tr><td>' . _MB_OBITUARIES_MAX_ITEMS . "</td><td><input type='text' name='options[]' id='options' value='" . $options[0] . "'></td></tr>\n";

@@ -40,7 +40,7 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
     /** @var Obituaries\UsersHandler $usersHandler */
     $usersHandler = Obituaries\Helper::getInstance()->getHandler('Users');
     $tmpObject    = $usersHandler->create();
-    $datas     = $tmpObject->getVars();
+    $datas        = $tmpObject->getVars();
     $tblFields    = [];
     $cnt          = 0;
     foreach ($datas as $key => $value) {
@@ -55,8 +55,8 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
     }
 
     $count = is_array($queryarray) ? count($queryarray) : 0;
-    $more = '';
-    if (is_array($queryarray) && count($queryarray) > 0) {
+    $more  = '';
+    if ($queryarray && is_array($queryarray)) {
         $cnt  = 0;
         $sql  .= ' AND (';
         $more = ')';

@@ -16,7 +16,6 @@ use XoopsModules\Obituaries;
  *
  * @return bool true if ready to uninstall, false if not
  */
-
 function xoops_module_pre_uninstall_obituaries(\XoopsModule $module)
 {
     // Do some synchronization if needed
@@ -24,7 +23,6 @@ function xoops_module_pre_uninstall_obituaries(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during uninstallation of the module
  * @param \XoopsModule $module {@link XoopsModule}
  *
@@ -32,15 +30,15 @@ function xoops_module_pre_uninstall_obituaries(\XoopsModule $module)
  */
 function xoops_module_uninstall_obituaries(\XoopsModule $module)
 {
-    include  dirname(__DIR__) . '/preloads/autoloader.php';
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
-    $moduleDirName = basename(dirname(__DIR__));
-    $moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
+    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
     /** @var Obituaries\Helper $helper */
     /** @var Obituaries\Utility $utility */
     $helper  = Obituaries\Helper::getInstance();
-    $utility     = new Obituaries\Utility();
-//    $configurator = new xoopstube\Common\Configurator();
+    $utility = new Obituaries\Utility();
+    //    $configurator = new xoopstube\Common\Configurator();
 
     // Load language files
     $helper->loadLanguage('admin');

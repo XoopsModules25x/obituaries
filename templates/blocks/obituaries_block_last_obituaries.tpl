@@ -114,7 +114,7 @@
 
 </script>
 
-<{if count($block.obituaries_last_users) >0 }>
+<{if $block.obituaries_last_users|is_array && count($block.obituaries_last_users) > 0 }>
     <div style="width:<{$block.obituaries_picture_width}>px;margin:0 auto;" class="obituaries_last">
         <ul>
             <{foreach item=user from=$block.obituaries_last_users}>

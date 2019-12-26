@@ -14,10 +14,10 @@ require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
 $start = \Xmf\Request::getInt('start', 0, 'GET');
-$limit =  Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
+$limit = Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
 $users = [];
 
-if (isset($_GET['op']) && 'today' === $_GET['op']) {    // Les utilisateurs dont l'anniversaire est aujourd'hui
+if (\Xmf\Request::hasVar('op', 'GET') && 'today' === $_GET['op']) {    // Les utilisateurs dont l'anniversaire est aujourd'hui
     $itemsCount = $usersHandler->getTodayObituariessCount();
     if ($itemsCount > $limit) {
         $pagenav = new \XoopsPageNav($itemsCount, $limit, $start, 'start', 'op=today');
@@ -28,7 +28,7 @@ if (isset($_GET['op']) && 'today' === $_GET['op']) {    // Les utilisateurs dont
     if ($itemsCount > $limit) {
         $pagenav = new \XoopsPageNav($itemsCount, $limit, $start, 'start');
     }
-    if (1 ==  Obituaries\ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
+    if (1 == Obituaries\ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
         $sort  = 'obituaries_date';
         $order = 'DESC';
     } else {
@@ -45,13 +45,13 @@ if (count($users) > 0) {
 if (isset($pagenav) && is_object($pagenav)) {
     $xoopsTpl->assign('pagenav', $pagenav->renderNav());
 }
-$pageTitle       = _AM_OBITUARIES_USERS_LIST . ' - ' .  Obituaries\ObituariesUtils::getModuleName();
+$pageTitle       = _AM_OBITUARIES_USERS_LIST . ' - ' . Obituaries\ObituariesUtils::getModuleName();
 $metaDescription = $pageTitle;
 $metaKeywords    = '';
 Obituaries\ObituariesUtils::setMetas($pageTitle, $metaDescription, $metaKeywords);
 
 $path       = [OBITUARIES_URL . 'index.php' => _AM_OBITUARIES_USERS_LIST];
-$breadcrumb =  Obituaries\ObituariesUtils::breadcrumb($path);
+$breadcrumb = Obituaries\ObituariesUtils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
 
 require_once XOOPS_ROOT_PATH . '/footer.php';

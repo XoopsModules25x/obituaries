@@ -1,8 +1,6 @@
-<?php namespace XoopsModules\Obituaries;
+<?php
 
-use Xmf\Request;
-use XoopsModules\Obituaries;
-use XoopsModules\Obituaries\Common;
+namespace XoopsModules\Obituaries;
 
 /**
  * Class Utility

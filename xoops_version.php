@@ -5,13 +5,13 @@ use XoopsModules\Obituaries;
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
-$moduleDirName = basename(__DIR__);
-$moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
+$moduleDirName      = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
-$helper = Obituaries\Helper::getInstance();
+/** @var \XoopsModules\Obituaries\Helper $helper */
+$helper = \XoopsModules\Obituaries\Helper::getInstance();
 //$helper->loadLanguage('common');
 xoops_loadLanguage('common', $moduleDirName);
-
 
 $modversion['version']             = 2.40;
 $modversion['module_status']       = 'Beta 1';
@@ -30,8 +30,8 @@ $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.9';
+$modversion['min_php']             = '5.6';
+$modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
 
@@ -133,7 +133,6 @@ $cpto = 0;
 /**
  * Images width
  */
-
 $modversion['config'][] = [
     'name'        => 'images_width',
     'title'       => '_MI_OBITUARIES_IMAGES_WIDTH',
@@ -204,7 +203,6 @@ $modversion['config'][] = [
 //    'default'     => "image/jpeg\nimage/pjpeg\nimage/x-png\nimage/png",
 //];
 
-
 //Uploads : mimetypes of images
 $modversion['config'][] = [
     'name'        => 'mimetypes',
@@ -220,8 +218,8 @@ $modversion['config'][] = [
         'jpeg'  => 'image/jpeg',
         'jpg'   => 'image/jpg',
         'jpe'   => 'image/jpe',
-        'png'   => 'image/png'
-    ]
+        'png'   => 'image/png',
+    ],
 ];
 
 /**
@@ -250,7 +248,7 @@ $modversion['config'][] = [
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'options'     => $editorList,
-    'default'     => 'dhtml'
+    'default'     => 'dhtml',
 ];
 
 /**
@@ -264,7 +262,7 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'options'     => [
         _MI_OBITUARIES_SORT_ORDER1 => 1,
-        _MI_OBITUARIES_SORT_ORDER2 => 2
+        _MI_OBITUARIES_SORT_ORDER2 => 2,
     ],
     'default'     => 1,
 ];
@@ -292,7 +290,6 @@ $modversion['comments']['pageName'] = 'user.php';
 $modversion['comments']['callbackFile']        = 'include/comment_functions.php';
 $modversion['comments']['callback']['approve'] = 'obituaries_com_approve';
 $modversion['comments']['callback']['update']  = 'obituaries_com_update';
-
 
 $modversion['config'][] = [
     'name'        => 'title1',

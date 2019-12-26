@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Obituaries;
+<?php
+
+namespace XoopsModules\Obituaries;
 
 /**
  * ****************************************************************************
@@ -18,7 +20,6 @@
  * @copyright (c) Instant Zero
  *
  * Note: You should be able to use it without the need to instanciate it.
- *
  */
 class ObituariesUtils
 {
@@ -84,13 +85,13 @@ class ObituariesUtils
     /**
      * Is Xoops 2.2.x ?
      *
-     * @return boolean need to say it ?
+     * @return bool need to say it ?
      */
     public static function isX22()
     {
         $x22 = false;
         $xv  = str_replace('XOOPS ', '', XOOPS_VERSION);
-        if ('2' == substr($xv, 2, 1)) {
+        if ('2' == mb_substr($xv, 2, 1)) {
             $x22 = true;
         }
 
@@ -100,13 +101,13 @@ class ObituariesUtils
     /**
      * Is Xoops 2.3.x ?
      *
-     * @return boolean need to say it ?
+     * @return bool need to say it ?
      */
     public static function isX23()
     {
         $x23 = false;
         $xv  = str_replace('XOOPS ', '', XOOPS_VERSION);
-        if ('3' == substr($xv, 2, 1)) {
+        if ('3' == mb_substr($xv, 2, 1)) {
             $x23 = true;
         }
 
@@ -122,116 +123,118 @@ class ObituariesUtils
      * @param  string $width   Editor's width
      * @param  string $height  Editor's height
      * @param string  $supplemental
+     * @param mixed   $message
+     * @param mixed   $form
      * @return object The editor to use
      */
-//    public static function &getWysiwygForm(
-//        $caption,
-//        $name,
-//        $value = '',
-//        $width = '100%',
-//        $height = '400px',
-//        $supplemental = '')
-//    {
-//        $editor                   = false;
-//        $x22                      = self::isX22();
-//        $editor_configs           = [];
-//        $editor_configs['name']   = $name;
-//        $editor_configs['value']  = $value;
-//        $editor_configs['rows']   = 35;
-//        $editor_configs['cols']   = 60;
-//        $editor_configs['width']  = $width;
-//        $editor_configs['height'] = $height;
-//
-//        $editor_option = self::getModuleOption('form_options');
-//
-//        switch (strtolower($editor_option)) {
-//            case 'spaw':
-//                if (!$x22) {
-//                    if (is_readable(XOOPS_ROOT_PATH . '/class/spaw/formspaw.php')) {
-//                        require_once XOOPS_ROOT_PATH . '/class/spaw/formspaw.php';
-//                        $editor = new \XoopsFormSpaw($caption, $name, $value);
-//                    }
-//                } else {
-//                    $editor = new \XoopsFormEditor($caption, 'spaw', $editor_configs);
-//                }
-//                break;
-//
-//            case 'fck':
-//                if (!$x22) {
-//                    if (is_readable(XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php')) {
-//                        require_once XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php';
-//                        $editor = new \XoopsFormFckeditor($caption, $name, $value);
-//                    }
-//                } else {
-//                    $editor = new \XoopsFormEditor($caption, 'fckeditor', $editor_configs);
-//                }
-//                break;
-//
-//            case 'htmlarea':
-//                if (!$x22) {
-//                    if (is_readable(XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php')) {
-//                        require_once XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php';
-//                        $editor = new \XoopsFormHtmlarea($caption, $name, $value);
-//                    }
-//                } else {
-//                    $editor = new \XoopsFormEditor($caption, 'htmlarea', $editor_configs);
-//                }
-//                break;
-//
-//            case 'dhtml':
-//                if (!$x22) {
-//                    $editor = new \XoopsFormDhtmlTextArea($caption, $name, $value, 10, 50, $supplemental);
-//                } else {
-//                    $editor = new \XoopsFormEditor($caption, 'dhtmltextarea', $editor_configs);
-//                }
-//                break;
-//
-//            case 'textarea':
-//                $editor = new \XoopsFormTextArea($caption, $name, $value);
-//                break;
-//
-//            case 'tinyeditor':
-//                if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php')) {
-//                    require_once XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php';
-//                    $editor = new \XoopsFormTinyeditorTextArea([
-//                                                                  'caption' => $caption,
-//                                                                  'name'    => $name,
-//                                                                  'value'   => $value,
-//                                                                  'width'   => '100%',
-//                                                                  'height'  => '400px'
-//                                                              ]);
-//                }
-//                break;
-//
-//            case 'koivi':
-//                if (!$x22) {
-//                    if (is_readable(XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php')) {
-//                        require_once XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php';
-//                        $editor = new \XoopsFormWysiwygTextArea($caption, $name, $value, '100%', '250px', '');
-//                    }
-//                } else {
-//                    $editor = new \XoopsFormEditor($caption, 'koivi', $editor_configs);
-//                }
-//                break;
-//        }
-//
-//        return $editor;
-//    }
+    //    public static function &getWysiwygForm(
+    //        $caption,
+    //        $name,
+    //        $value = '',
+    //        $width = '100%',
+    //        $height = '400px',
+    //        $supplemental = '')
+    //    {
+    //        $editor                   = false;
+    //        $x22                      = self::isX22();
+    //        $editor_configs           = [];
+    //        $editor_configs['name']   = $name;
+    //        $editor_configs['value']  = $value;
+    //        $editor_configs['rows']   = 35;
+    //        $editor_configs['cols']   = 60;
+    //        $editor_configs['width']  = $width;
+    //        $editor_configs['height'] = $height;
+    //
+    //        $editor_option = self::getModuleOption('form_options');
+    //
+    //        switch (strtolower($editor_option)) {
+    //            case 'spaw':
+    //                if (!$x22) {
+    //                    if (is_readable(XOOPS_ROOT_PATH . '/class/spaw/formspaw.php')) {
+    //                        require_once XOOPS_ROOT_PATH . '/class/spaw/formspaw.php';
+    //                        $editor = new \XoopsFormSpaw($caption, $name, $value);
+    //                    }
+    //                } else {
+    //                    $editor = new \XoopsFormEditor($caption, 'spaw', $editor_configs);
+    //                }
+    //                break;
+    //
+    //            case 'fck':
+    //                if (!$x22) {
+    //                    if (is_readable(XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php')) {
+    //                        require_once XOOPS_ROOT_PATH . '/class/fckeditor/formfckeditor.php';
+    //                        $editor = new \XoopsFormFckeditor($caption, $name, $value);
+    //                    }
+    //                } else {
+    //                    $editor = new \XoopsFormEditor($caption, 'fckeditor', $editor_configs);
+    //                }
+    //                break;
+    //
+    //            case 'htmlarea':
+    //                if (!$x22) {
+    //                    if (is_readable(XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php')) {
+    //                        require_once XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php';
+    //                        $editor = new \XoopsFormHtmlarea($caption, $name, $value);
+    //                    }
+    //                } else {
+    //                    $editor = new \XoopsFormEditor($caption, 'htmlarea', $editor_configs);
+    //                }
+    //                break;
+    //
+    //            case 'dhtml':
+    //                if (!$x22) {
+    //                    $editor = new \XoopsFormDhtmlTextArea($caption, $name, $value, 10, 50, $supplemental);
+    //                } else {
+    //                    $editor = new \XoopsFormEditor($caption, 'dhtmltextarea', $editor_configs);
+    //                }
+    //                break;
+    //
+    //            case 'textarea':
+    //                $editor = new \XoopsFormTextArea($caption, $name, $value);
+    //                break;
+    //
+    //            case 'tinyeditor':
+    //                if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php')) {
+    //                    require_once XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinyeditortextarea.php';
+    //                    $editor = new \XoopsFormTinyeditorTextArea([
+    //                                                                  'caption' => $caption,
+    //                                                                  'name'    => $name,
+    //                                                                  'value'   => $value,
+    //                                                                  'width'   => '100%',
+    //                                                                  'height'  => '400px'
+    //                                                              ]);
+    //                }
+    //                break;
+    //
+    //            case 'koivi':
+    //                if (!$x22) {
+    //                    if (is_readable(XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php')) {
+    //                        require_once XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php';
+    //                        $editor = new \XoopsFormWysiwygTextArea($caption, $name, $value, '100%', '250px', '');
+    //                    }
+    //                } else {
+    //                    $editor = new \XoopsFormEditor($caption, 'koivi', $editor_configs);
+    //                }
+    //                break;
+    //        }
+    //
+    //        return $editor;
+    //    }
 
     /**
      * Create (in a link) a javascript confirmation's box
      *
-     * @param  string  $message Message to display
-     * @param  boolean $form    Is this a confirmation for a form ?
+     * @param  string $message Message to display
+     * @param  bool   $form    Is this a confirmation for a form ?
      * @return string  the javascript code to insert in the link (or in the form)
      */
     public static function javascriptLinkConfirm($message, $form = false)
     {
         if (!$form) {
             return "onclick=\"javascript:return confirm('" . str_replace("'", ' ', $message) . "')\"";
-        } else {
-            return "onSubmit=\"javascript:return confirm('" . str_replace("'", ' ', $message) . "')\"";
         }
+
+        return "onSubmit=\"javascript:return confirm('" . str_replace("'", ' ', $message) . "')\"";
     }
 
     /**
@@ -241,7 +244,6 @@ class ObituariesUtils
      * @param  string $pageTitle       Page's Title
      * @param  string $metaDescription Page's meta description
      * @param  string $metaKeywords    Page's meta keywords
-     * @return void
      */
     public static function setMetas($pageTitle = '', $metaDescription = '', $metaKeywords = '')
     {
@@ -283,7 +285,7 @@ class ObituariesUtils
                 //  Note, I've been testing all the other methods (like the one of Smarty) and none of them run, that's why I have used this code
                 $files_del = [];
                 $files_del = glob(XOOPS_CACHE_PATH . '/*' . $onetemplate->getVar('tpl_file') . '*');
-                if (is_array($files_del) && count($files_del) > 0) {
+                if ($files_del && is_array($files_del)) {
                     foreach ($files_del as $one_file) {
                         if (is_file($one_file)) {
                             unlink($one_file);
@@ -299,7 +301,7 @@ class ObituariesUtils
      *
      * @param string $message message to display
      * @param string $url     The place where to go
-     * @param        integer         timeout Time to wait before to redirect
+     * @param mixed  $time
      */
     public static function redirect($message = '', $url = 'index.php', $time = 2)
     {
@@ -318,10 +320,10 @@ class ObituariesUtils
             global $xoopsModule;
             if (isset($xoopsModule) && is_object($xoopsModule)
                 && OBITUARIES_DIRNAME == $xoopsModule->getVar('dirname')) {
-                $mymodule =& $xoopsModule;
+                $mymodule = &$xoopsModule;
             } else {
-                $hModule  = xoops_getHandler('module');
-                $mymodule = $hModule->getByDirname(OBITUARIES_DIRNAME);
+                $moduleHandler = xoops_getHandler('module');
+                $mymodule      = $moduleHandler->getByDirname(OBITUARIES_DIRNAME);
             }
         }
 
@@ -368,20 +370,19 @@ class ObituariesUtils
         if (is_object($xoopsUser)) {
             if (in_array(XOOPS_GROUP_ADMIN, $xoopsUser->getGroups())) {
                 return true;
-            } else {
-                if (isset($xoopsModule)) {
-                    if ($xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
             }
-        } else {
+            if (isset($xoopsModule)) {
+                if ($xoopsUser->isAdmin($xoopsModule->getVar('mid'))) {
+                    return true;
+                }
+
+                return false;
+            }
+
             return false;
         }
+
+        return false;
     }
 
     /**
@@ -405,15 +406,15 @@ class ObituariesUtils
     {
         if ('0000-00-00' != $date && '' != xoops_trim($date)) {
             return formatTimestamp(strtotime($date), $format);
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
      * Convert a timestamp to a Mysql date
      *
-     * @param  integer $timestamp The timestamp to use
+     * @param  int $timestamp The timestamp to use
      * @return string  The date in the Mysql format
      */
     public static function timestampToMysqlDate($timestamp)
@@ -424,19 +425,19 @@ class ObituariesUtils
     /**
      * This function indicates if the current Xoops version needs to add asterisks to required fields in forms
      *
-     * @return boolean Yes = we need to add them, false = no
+     * @return bool Yes = we need to add them, false = no
      */
     public static function needsAsterisk()
     {
         if (self::isX22() || self::isX23()) {
             return false;
         }
-        if (false !== stripos(XOOPS_VERSION, 'impresscms')) {
+        if (false !== mb_stripos(XOOPS_VERSION, 'impresscms')) {
             return false;
         }
-        if (false === stripos(XOOPS_VERSION, 'legacy')) {
+        if (false === mb_stripos(XOOPS_VERSION, 'legacy')) {
             $xv = xoops_trim(str_replace('XOOPS ', '', XOOPS_VERSION));
-            if ((int)substr($xv, 4, 2) >= 17) {
+            if ((int)mb_substr($xv, 4, 2) >= 17) {
                 return false;
             }
         }
@@ -459,7 +460,7 @@ class ObituariesUtils
                 $tblRequired[] = $item->_name;
             }
             $tblElements = [];
-            $tblElements =& $sform->getElements();
+            $tblElements = &$sform->getElements();
             $cnt         = count($tblElements);
             for ($i = 0; $i < $cnt; ++$i) {
                 if (is_object($tblElements[$i]) && in_array($tblElements[$i]->_name, $tblRequired)) {
@@ -474,15 +475,15 @@ class ObituariesUtils
     /**
      * Create a unique upload filename
      *
-     * @param  string  $folder   The folder where the file will be saved
-     * @param  string  $fileName Original filename (coming from the user)
-     * @param  boolean $trimName Do we need to create a short unique name ?
+     * @param  string $folder   The folder where the file will be saved
+     * @param  string $fileName Original filename (coming from the user)
+     * @param  bool   $trimName Do we need to create a short unique name ?
      * @return string  The unique filename to use (with its extension)
      */
     public static function createUploadName($folder, $fileName, $trimName = false)
     {
         $workingfolder = $folder;
-        if ('/' !== xoops_substr($workingfolder, strlen($workingfolder) - 1, 1)) {
+        if ('/' !== xoops_substr($workingfolder, mb_strlen($workingfolder) - 1, 1)) {
             $workingfolder .= '/';
         }
         $ext  = basename($fileName);
@@ -492,8 +493,8 @@ class ObituariesUtils
         while ($true) {
             $ipbits = explode('.', $_SERVER['REMOTE_ADDR']);
             list($usec, $sec) = explode(' ', microtime());
-            $usec = (integer)($usec * 65536);
-            $sec  = ((integer)$sec) & 0xFFFF;
+            $usec = ($usec * 65536);
+            $sec  = ((int)$sec) & 0xFFFF;
 
             if ($trimName) {
                 $uid = sprintf('%06x%04x%04x', ($ipbits[0] << 24) | ($ipbits[1] << 16) | ($ipbits[2] << 8) | $ipbits[3], $sec, $usec);
@@ -521,7 +522,7 @@ class ObituariesUtils
 
         $tmp = [];
         // Search for the "Minimum keyword length"
-        if (isset($_SESSION['obituaries_keywords_limit'])) {
+        if (\Xmf\Request::hasVar('obituaries_keywords_limit', 'SESSION')) {
             $limit = $_SESSION['obituaries_keywords_limit'];
         } else {
             $configHandler                         = xoops_getHandler('config');
@@ -533,7 +534,7 @@ class ObituariesUtils
         $content         = str_replace('<br>', ' ', $content);
         $content         = $myts->undoHtmlSpecialChars($content);
         $content         = strip_tags($content);
-        $content         = strtolower($content);
+        $content         = mb_strtolower($content);
         $search_pattern  = [
             '&nbsp;',
             "\t",
@@ -561,7 +562,7 @@ class ObituariesUtils
             '-',
             '_',
             '\\',
-            '*'
+            '*',
         ];
         $replace_pattern = [
             ' ',
@@ -590,7 +591,7 @@ class ObituariesUtils
             '',
             '',
             '',
-            ''
+            '',
         ];
         $content         = str_replace($search_pattern, $replace_pattern, $content);
         $keywords        = explode(' ', $content);
@@ -618,44 +619,43 @@ class ObituariesUtils
         }
 
         foreach ($keywords as $keyword) {
-            if (strlen($keyword) >= $limit && !is_numeric($keyword)) {
+            if (mb_strlen($keyword) >= $limit && !is_numeric($keyword)) {
                 $tmp[] = $keyword;
             }
         }
         $tmp = array_slice($tmp, 0, $keywordscount);
         if (count($tmp) > 0) {
             return implode(',', $tmp);
-        } else {
-            if (!isset($configHandler) || !is_object($configHandler)) {
-                $configHandler = xoops_getHandler('config');
-            }
-            $xoopsConfigMetaFooter = $configHandler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
-            if (isset($xoopsConfigMetaFooter['meta_keywords'])) {
-                return $xoopsConfigMetaFooter['meta_keywords'];
-            } else {
-                return '';
-            }
         }
+        if (!isset($configHandler) || !is_object($configHandler)) {
+            $configHandler = xoops_getHandler('config');
+        }
+        $xoopsConfigMetaFooter = $configHandler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
+        if (isset($xoopsConfigMetaFooter['meta_keywords'])) {
+            return $xoopsConfigMetaFooter['meta_keywords'];
+        }
+
+        return '';
     }
 
     /**
      * Fonction chargée de gérer l'upload
      *
-     * @param  integer $indice L'indice du fichier à télécharger
-     * @param string   $dstpath
-     * @param null     $mimeTypes
-     * @param null     $uploadMaxSize
+     * @param  int   $indice L'indice du fichier à télécharger
+     * @param string $dstpath
+     * @param null   $mimeTypes
+     * @param null   $uploadMaxSize
      * @return mixed True si l'upload s'est bien déroulé sinon le message d'erreur correspondant
      */
     public static function uploadFile($indice, $dstpath = XOOPS_UPLOAD_PATH, $mimeTypes = null, $uploadMaxSize = null)
     {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         global $destname;
-        if (isset($_POST['xoops_upload_file'])) {
+        if (\Xmf\Request::hasVar('xoops_upload_file', 'POST')) {
             require_once XOOPS_ROOT_PATH . '/class/uploader.php';
             $fldname = '';
             $fldname = $_FILES[$_POST['xoops_upload_file'][$indice]];
-            $fldname = get_magic_quotes_gpc() ? stripslashes($fldname['name']) : $fldname['name'];
+            $fldname = @get_magic_quotes_gpc() ? stripslashes($fldname['name']) : $fldname['name'];
             if (xoops_trim('' != $fldname)) {
                 $destname = self::createUploadName($dstpath, $fldname, true);
                 if (null === $mimeTypes) {
@@ -675,29 +675,29 @@ class ObituariesUtils
                 if ($uploader->fetchMedia($_POST['xoops_upload_file'][$indice])) {
                     if ($uploader->upload()) {
                         return true;
-                    } else {
-                        return _ERRORS . ' ' . htmlentities($uploader->getErrors(), ENT_QUOTES | ENT_HTML5);
                     }
-                } else {
-                    return htmlentities($uploader->getErrors(), ENT_QUOTES | ENT_HTML5);
+
+                    return _ERRORS . ' ' . htmlentities($uploader->getErrors(), ENT_QUOTES | ENT_HTML5);
                 }
-            } else {
-                return false;
+
+                return htmlentities($uploader->getErrors(), ENT_QUOTES | ENT_HTML5);
             }
-        } else {
+
             return false;
         }
+
+        return false;
     }
 
     /**
      * Resize a Picture to some given dimensions
      *
      * @author GIJOE
-     * @param string  $src_path     Picture's source
-     * @param string  $dst_path     Picture's destination
-     * @param integer $param_width  Maximum picture's width
-     * @param integer $param_height Maximum picture's height
-     * @param bool    $keep_original
+     * @param string $src_path     Picture's source
+     * @param string $dst_path     Picture's destination
+     * @param int    $param_width  Maximum picture's width
+     * @param int    $param_height Maximum picture's height
+     * @param bool   $keep_original
      * @return int
      */
     public static function resizePicture($src_path, $dst_path, $param_width, $param_height, $keep_original = false)
@@ -770,19 +770,19 @@ class ObituariesUtils
             }
 
             return 3;
-        } else {
-            if (!$keep_original) {
-                @unlink($src_path);
-            }
-
-            return 1;
         }
+        if (!$keep_original) {
+            @unlink($src_path);
+        }
+
+        return 1;
     }
 
     /**
      * @param $string
      * @return string
      */
+
     /**
      * @param $string
      * @return string
@@ -799,7 +799,7 @@ class ObituariesUtils
                 $end_tags      = $end_tags[1];
 
                 foreach ($start_tags as $key => $val) {
-                    $posb = array_search($val, $end_tags);
+                    $posb = array_search($val, $end_tags, true);
                     if (is_int($posb)) {
                         unset($end_tags[$posb]);
                     } else {
@@ -826,6 +826,7 @@ class ObituariesUtils
      * @param bool   $break_words
      * @return null|string|string[]
      */
+
     /**
      * @param        $string
      * @param int    $length
@@ -839,18 +840,18 @@ class ObituariesUtils
             return '';
         }
 
-        if (strlen($string) > $length) {
-            $length -= strlen($etc);
+        if (mb_strlen($string) > $length) {
+            $length -= mb_strlen($etc);
             if (!$break_words) {
-                $string = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $length + 1));
+                $string = preg_replace('/\s+?(\S+)?$/', '', mb_substr($string, 0, $length + 1));
                 $string = preg_replace('/<[^>]*$/', '', $string);
                 $string = self::close_tags($string);
             }
 
             return $string . $etc;
-        } else {
-            return $string;
         }
+
+        return $string;
     }
 
     /**

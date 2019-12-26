@@ -12,11 +12,10 @@ use XoopsModules\Obituaries;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-include  dirname(__DIR__) . '/preloads/autoloader.php';
+require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
-$moduleDirName = basename(dirname(__DIR__));
-$moduleDirNameUpper   = strtoupper($moduleDirName); //$capsDirName
-
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
 /** @var \XoopsDatabase $db */
 /** @var Obituaries\Helper $helper */
@@ -49,8 +48,6 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_THUMB', 'thumb_');
 }
 
-
-
 // Chargement des handler et des autres classes
 require_once OBITUARIES_PATH . 'class/ObituariesUtils.php';
 
@@ -58,7 +55,6 @@ require_once OBITUARIES_PATH . 'class/ObituariesUtils.php';
 //    if (!class_exists('PEAR')) {
 //require_once OBITUARIES_PATH.'class/PEAR.php';
 //}
-
 
 // D�finition des images
 if (!defined('_OBITUARIES_EDIT')) {
@@ -71,17 +67,12 @@ if (!defined('_OBITUARIES_EDIT')) {
 
     $birdthday_icones = [
         'edit'   => "<img src='" . OBITUARIES_IMAGES_URL . "edit.png' alt='" . _AM_OBITUARIES_EDIT . "' align='middle'>",
-        'delete' => "<img src='" . OBITUARIES_IMAGES_URL . "delete.png' alt='" . _AM_OBITUARIES_DELETE . "' align='middle'>"
+        'delete' => "<img src='" . OBITUARIES_IMAGES_URL . "delete.png' alt='" . _AM_OBITUARIES_DELETE . "' align='middle'>",
     ];
 }
 
-
-
-
-
-
-$pathIcon16    = Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16 = Xmf\Module\Admin::iconUrl('', 16);
+$pathIcon32 = Xmf\Module\Admin::iconUrl('', 32);
 //$pathModIcon16 = $helper->getModule()->getInfo('modicons16');
 //$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 

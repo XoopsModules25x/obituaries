@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Obituaries;
+<?php
+
+namespace XoopsModules\Obituaries;
 
 /**
  * ****************************************************************************
@@ -9,7 +11,6 @@
  * ****************************************************************************
  */
 
-use Xmf\Request;
 use XoopsModules\Obituaries;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
@@ -52,9 +53,9 @@ class Users extends \XoopsObject
     {
         if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
             return Obituaries\ObituariesUtils::getModuleOption('folder_url') . '/' . $this->getVar('obituaries_photo');
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
@@ -65,15 +66,15 @@ class Users extends \XoopsObject
     {
         if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
             return Obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo');
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
      * Indique si l'image existe
      *
-     * @return boolean Vrai si l'image existe sinon faux
+     * @return bool Vrai si l'image existe sinon faux
      */
     public function pictureExists()
     {
@@ -88,7 +89,6 @@ class Users extends \XoopsObject
 
     /**
      * Supprime l'image associ�e
-     * @return void
      */
     public function deletePicture()
     {
@@ -110,7 +110,6 @@ class Users extends \XoopsObject
 
     /**
      * Retourne l'utilisateur Xoops li� � l'enregistrement courant
-     *
      */
     public function getXoopsUser()
     {

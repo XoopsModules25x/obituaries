@@ -20,7 +20,7 @@ use XoopsModules\Obituaries;
  */
 function obituaries_com_update($userId, $total_num)
 {
-    include XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
+    require_once XOOPS_ROOT_PATH . '/modules/obituaries/include/common.php';
     global $usersHandler;
 
     $usersHandler = new Obituaries\UsersHandler($db);

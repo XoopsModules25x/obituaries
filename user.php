@@ -17,15 +17,14 @@ require_once __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'obituaries_user.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
-/** @var Obituaries\Helper $helper */
-$helper = Obituaries\Helper::getInstance();
-
+/** @var \XoopsModules\Obituaries\Helper $helper */
+$helper = \XoopsModules\Obituaries\Helper::getInstance();
 
 $case = 0;
-if (isset($_GET['obituaries_id'])) {
+if (\Xmf\Request::hasVar('obituaries_id', 'GET')) {
     $uid  = \Xmf\Request::getInt('obituaries_id', 0, 'GET');
     $case = 1;
-} elseif (isset($_GET['obituaries_uid'])) {
+} elseif (\Xmf\Request::hasVar('obituaries_uid', 'GET')) {
     $uid  = \Xmf\Request::getInt('obituaries_uid', 0, 'GET');
     $case = 2;
 } elseif (isset($xoopsUser) && is_object($xoopsUser)) {
@@ -36,13 +35,11 @@ if (isset($_GET['obituaries_id'])) {
 $user = null;
 switch ($case) {
     case 0:    // Unknow user
-         Obituaries\ObituariesUtils::redirect(_OBITUARIES_ERROR2, 'index.php', 3);
+        Obituaries\ObituariesUtils::redirect(_OBITUARIES_ERROR2, 'index.php', 3);
         break;
-
     case 1:    // obituaries_id
         $user = $usersHandler->get($uid);
         break;
-
     case 2:    // obituaries_uid
     case 3:    // uid
         $user = $usersHandler->getFromUid($uid);
@@ -50,13 +47,13 @@ switch ($case) {
 }
 if (is_object($user)) {
     $xoopsTpl->assign('obituaries_user', $user->toArray());
-    $pageTitle       = $user->getFullName() . ' - ' .  Obituaries\ObituariesUtils::getModuleName();
+    $pageTitle       = $user->getFullName() . ' - ' . Obituaries\ObituariesUtils::getModuleName();
     $metaDescription = $pageTitle;
-    $metaKeywords    =  Obituaries\ObituariesUtils::createMetaKeywords($user->getVar('obituaries_description'));
+    $metaKeywords    = Obituaries\ObituariesUtils::createMetaKeywords($user->getVar('obituaries_description'));
     Obituaries\ObituariesUtils::setMetas($pageTitle, $metaDescription, $metaKeywords);
 }
 $path       = [OBITUARIES_URL . 'user.php' => $user->getFullName()];
-$breadcrumb =  Obituaries\ObituariesUtils::breadcrumb($path);
+$breadcrumb = Obituaries\ObituariesUtils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
 
 $xoopsTpl->assign('title1', $helper->getConfig('title1'));

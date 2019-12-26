@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Obituaries;
+<?php
+
+namespace XoopsModules\Obituaries;
 
 /**
  * ****************************************************************************
@@ -39,7 +41,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Retourne un utilisateur � partir de son uid
      *
-     * @param  integer $uid L'ID Xoops recherch�
+     * @param  int $uid L'ID Xoops recherch�
      * @return object
      */
     public function getFromUid($uid)
@@ -59,9 +61,9 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Cr�ation du formulaire de saisie
      *
-     * @param  Users   $item           L'�l�ment � ajouter/modifier
-     * @param  string  $baseurl        L'url de destination
-     * @param  boolean $withUserSelect Indique s'il faut inclure la liste de s�lection de l'utilisateur
+     * @param  Users  $item           L'�l�ment � ajouter/modifier
+     * @param  string $baseurl        L'url de destination
+     * @param  bool   $withUserSelect Indique s'il faut inclure la liste de s�lection de l'utilisateur
      * @return object           Le formulaire � utiliser
      */
     public function getForm(Users $item, $baseurl, $withUserSelect = true)
@@ -200,10 +202,10 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         }
         $sform->addElement(new \XoopsFormFile(_AM_OBITUARIES_PICTURE, 'attachedfile', Obituaries\ObituariesUtils::getModuleOption('maxuploadsize')), false);
 
-        $button_tray = new \XoopsFormElementTray('', '');
-        $submit_btn  = new \XoopsFormButton('', 'post', $labelSubmit, 'submit');
-        $button_tray->addElement($submit_btn);
-        $sform->addElement($button_tray);
+        $buttonTray = new \XoopsFormElementTray('', '');
+        $submit_btn = new \XoopsFormButton('', 'post', $labelSubmit, 'submit');
+        $buttonTray->addElement($submit_btn);
+        $sform->addElement($buttonTray);
         $sform = Obituaries\ObituariesUtils::formMarkRequiredFields($sform);
 
         return $sform;
@@ -212,8 +214,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Enregistre un utilisateur apr�s modification (ou ajout)
      *
-     * @param  boolean $withCurrentUser Indique s'il faut prendre l'utilisateur courant ou pas
-     * @return boolean Vrai si l'enregistrement a r�ussi sinon faux
+     * @param  bool $withCurrentUser Indique s'il faut prendre l'utilisateur courant ou pas
+     * @return bool Vrai si l'enregistrement a r�ussi sinon faux
      */
     public function saveUser($withCurrentUser = false)
     {
@@ -237,7 +239,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             global $xoopsUser;
             $item->setVar('obituaries_uid', $xoopsUser->getVar('uid'));
         }
-        if (isset($_POST['delpicture']) && 1 == \Xmf\Request::getInt('delpicture', 0, 'POST')) {
+        if (\Xmf\Request::hasVar('delpicture', 'POST') && 1 == \Xmf\Request::getInt('delpicture', 0, 'POST')) {
             if ('' != trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
                 $item->deletePicture();
             }
@@ -276,7 +278,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
      * Suppression d'un utilisateur
      *
      * @param  Users $user L'utilisateur � supprimer
-     * @return boolean          Le r�sultat de la suppression
+     * @return bool          Le r�sultat de la suppression
      */
     public function deleteUser(Users $user)
     {
@@ -294,7 +296,6 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
      *
      * @param  int $userId
      * @param  int $commentsCount
-     * @return void
      * @internal param int $total_num
      */
     public function updateCommentsCount($userId, $commentsCount)
@@ -376,7 +377,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
 
     /**
      * Retourne le nombre total d'anniversaires du jour
-     * @return integer
+     * @return int
      */
     public function getTodayObituariessCount()
     {
@@ -390,7 +391,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Retourne le nombre total d'utilisateurs
      *
-     * @return integer
+     * @return int
      */
     public function getAllUsersCount()
     {
@@ -400,10 +401,10 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Retourne la liste de tous les utilisateurs
      *
-     * @param  integer $start Position de d�part
-     * @param  integer $limit Nombre maximum d'enregistrements
-     * @param  string  $sort  Champ � utiliser pour le tri
-     * @param  string  $order Ordre de tri
+     * @param  int    $start Position de d�part
+     * @param  int    $limit Nombre maximum d'enregistrements
+     * @param  string $sort  Champ � utiliser pour le tri
+     * @param  string $order Ordre de tri
      * @return array   Objets de type Users
      */
     public function getAllUsers($start = 0, $limit = 0, $sort = 'obituaries_lastname', $order = 'ASC')

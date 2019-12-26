@@ -38,7 +38,7 @@ function listejour($name, $select = 1)
         '28',
         '29',
         '30',
-        '31'
+        '31',
     ];
     $stop  = count($j);
     $liste = "<select name='$name'>";
@@ -74,7 +74,7 @@ function listemois($name, $select = 1)
         'Septembre',
         'Octobre',
         'Novembre',
-        'Décembre'
+        'Décembre',
     ];
     $m     = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     $liste = "<select name=\"$name\">";

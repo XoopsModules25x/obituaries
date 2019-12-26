@@ -12,26 +12,25 @@ use XoopsModules\Obituaries;
 
 require_once __DIR__ . '/admin_header.php';
 //require_once  dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
-require_once  dirname(__DIR__) . '/include/common.php';
+require_once dirname(__DIR__) . '/include/common.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-
 
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 $op = 'default';
-if (isset($_POST['op'])) {
+if (\Xmf\Request::hasVar('op', 'POST')) {
     $op = $_POST['op'];
-} elseif (isset($_GET['op'])) {
+} elseif (\Xmf\Request::hasVar('op', 'GET')) {
     $op = $_GET['op'];
 }
 
 // Lecture de certains param�tres de l'application ********************************************************************
-$limit         =  Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
+$limit         = Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
 $baseurl       = OBITUARIES_URL . 'admin/' . basename(__FILE__);    // URL de ce script
-$conf_msg      =  Obituaries\ObituariesUtils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
-$images_width  =  Obituaries\ObituariesUtils::getModuleOption('images_width');
-$images_height =  Obituaries\ObituariesUtils::getModuleOption('images_height');
+$conf_msg      = Obituaries\ObituariesUtils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
+$images_width  = Obituaries\ObituariesUtils::getModuleOption('images_width');
+$images_height = Obituaries\ObituariesUtils::getModuleOption('images_height');
 $destname      = '';
 
 $cacheFolder = XOOPS_UPLOAD_PATH . '/' . OBITUARIES_DIRNAME;
@@ -85,7 +84,7 @@ switch ($op) {
                 $action_delete = "<a href='$baseurl?op=delete&id=" . $id . "' title='" . _DELETE . "'" . $conf_msg . '>' . $birdthday_icones['delete'] . '</a>';
 
                 echo "<tr class='" . $class . "'>\n";
-                echo "<td align='center'>" .  Obituaries\ObituariesUtils::SQLDateToHuman($item->getVar('obituaries_date')) . '</td>';
+                echo "<td align='center'>" . Obituaries\ObituariesUtils::SQLDateToHuman($item->getVar('obituaries_date')) . '</td>';
                 echo "<td align='center'>" . $uname . '</td>';
                 echo "<td align='center'>" . $item->getFullName() . '</td>';
                 echo "<td align='center'>" . $action_edit . ' ' . $action_delete . '</td>';
@@ -101,13 +100,12 @@ switch ($op) {
         $form = $usersHandler->getForm($item, $baseurl);
         $form->display();
         break;
-
     // ****************************************************************************************************************
     case 'maintain':    // Maintenance des tables et du cache
         // ****************************************************************************************************************
         xoops_cp_header();
         $adminObject->displayNavigation(basename(__FILE__));
-        require_once  dirname(__DIR__) . '/xoops_version.php';
+        require_once dirname(__DIR__) . '/xoops_version.php';
         $tables = [];
         foreach ($modversion['tables'] as $table) {
             $tables[] = $xoopsDB->prefix($table);
@@ -118,11 +116,10 @@ switch ($op) {
             $xoopsDB->queryF('ANALYZE TABLE ' . $list);
             $xoopsDB->queryF('OPTIMIZE TABLE ' . $list);
         }
-         Obituaries\ObituariesUtils::updateCache();
+        Obituaries\ObituariesUtils::updateCache();
         $usersHandler->forceCacheClean();
-         Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
+        Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_OK, $baseurl, 2);
         break;
-
     // ****************************************************************************************************************
     case 'edit':    // Edition d'un utilisateur existant
         // ****************************************************************************************************************
@@ -141,7 +138,6 @@ switch ($op) {
         $form = $usersHandler->getForm($item, $baseurl);
         $form->display();
         break;
-
     // ****************************************************************************************************************
     case 'saveedit':    // Enregistrement des modifications
         // ****************************************************************************************************************
@@ -154,7 +150,6 @@ switch ($op) {
             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
         break;
-
     // ****************************************************************************************************************
     case 'delete':    // Suppression d'un utilisateur
         // ****************************************************************************************************************
@@ -174,6 +169,5 @@ switch ($op) {
         } else {
             Obituaries\ObituariesUtils::redirect(_AM_OBITUARIES_SAVE_PB, $baseurl, 3);
         }
-
 }
 xoops_cp_footer();

@@ -21,7 +21,6 @@ use XoopsModules\Obituaries;
 use XoopsModules\Obituaries\Common;
 
 /**
- *
  * Prepares system prior to attempting to install module
  * @param \XoopsModule $module {@link XoopsModule}
  *
@@ -29,7 +28,7 @@ use XoopsModules\Obituaries\Common;
  */
 function xoops_module_pre_install_obituaries(\XoopsModule $module)
 {
-    include  dirname(__DIR__) . '/preloads/autoloader.php';
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
     /** @var Obituaries\Utility $utility */
     $utility = new Obituaries\Utility();
 
@@ -37,10 +36,10 @@ function xoops_module_pre_install_obituaries(\XoopsModule $module)
     $xoopsSuccess = $utility::checkVerXoops($module);
 
     // check for minimum PHP version
-    $phpSuccess   = $utility::checkVerPhp($module);
+    $phpSuccess = $utility::checkVerPhp($module);
 
-    if (false !== $xoopsSuccess && false !==  $phpSuccess) {
-        $moduleTables =& $module->getInfo('tables');
+    if (false !== $xoopsSuccess && false !== $phpSuccess) {
+        $moduleTables = &$module->getInfo('tables');
         foreach ($moduleTables as $table) {
             $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
         }
@@ -50,7 +49,6 @@ function xoops_module_pre_install_obituaries(\XoopsModule $module)
 }
 
 /**
- *
  * Performs tasks required during installation of the module
  * @param \XoopsModule $module {@link XoopsModule}
  *
@@ -58,24 +56,24 @@ function xoops_module_pre_install_obituaries(\XoopsModule $module)
  */
 function xoops_module_install_obituaries(\XoopsModule $module)
 {
-    include  dirname(__DIR__) . '/preloads/autoloader.php';
+    require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var Obituaries\Helper $helper */
+    /** @var \XoopsModules\Obituaries\Helper $helper */
     /** @var Obituaries\Utility $utility */
-    /** @var common\Configurator $configurator */
+    /** @var Common\Configurator $configurator */
     $helper       = \XoopsModules\Obituaries\Helper::getInstance();
     $utility      = new Obituaries\Utility();
-    $configurator = new common\Configurator();
+    $configurator = new Common\Configurator();
 
     // Load language files
     $helper->loadLanguage('admin');
     $helper->loadLanguage('modinfo');
 
     // default Permission Settings ----------------------
-    $moduleId     = $module->getVar('mid');
-    $moduleId2    = $helper->getModule()->mid();
+    $moduleId  = $module->getVar('mid');
+
     //$moduleName = $module->getVar('name');
     $grouppermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
@@ -95,7 +93,7 @@ function xoops_module_install_obituaries(\XoopsModule $module)
 
     //  ---  COPY blank.png FILES ---------------
     if (count($configurator->copyBlankFiles) > 0) {
-        $file =  dirname(__DIR__) . '/assets/images/blank.png';
+        $file = dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
             $utility::copyFile($file, $dest);
@@ -109,11 +107,10 @@ function xoops_module_install_obituaries(\XoopsModule $module)
         foreach (array_keys($configurator->copyTestFolders) as $i) {
             $src  = $configurator->copyTestFolders[$i][0];
             $dest = $configurator->copyTestFolders[$i][1];
-            $utility::xcopy($src, $dest);
+            $utility::rcopy($src, $dest);
         }
     }
     */
-
 
     //delete .html entries from the tpl table
     $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
