@@ -39,9 +39,9 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     }
 
     /**
-     * Retourne un utilisateur � partir de son uid
+     * Retourne un utilisateur ŕ partir de son uid
      *
-     * @param  int $uid L'ID Xoops recherch�
+     * @param  int $uid L'ID Xoops recherché
      * @return object
      */
     public function getFromUid($uid)
@@ -59,12 +59,12 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     }
 
     /**
-     * Cr�ation du formulaire de saisie
+     * Création du formulaire de saisie
      *
-     * @param  Users  $item           L'�l�ment � ajouter/modifier
-     * @param  string $baseurl        L'url de destination
-     * @param  bool   $withUserSelect Indique s'il faut inclure la liste de s�lection de l'utilisateur
-     * @return object           Le formulaire � utiliser
+     * @param Users   $item           L'élément ŕ ajouter/modifier
+     * @param string  $baseurl        L'url de destination
+     * @param boolean $withUserSelect Indique s'il faut inclure la liste de sélection de l'utilisateur
+     * @return \XoopsThemeForm Le formulaire ŕ utiliser
      */
     public function getForm(Users $item, $baseurl, $withUserSelect = true)
     {
@@ -85,7 +85,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $labelSubmit = _AM_OBITUARIES_ADD;
             $title       = _AM_OBITUARIES_ADD_ITEM;
         }
-        // Formulaire de cr�ation
+        // Formulaire de création
         $sform = new \XoopsThemeForm($title, 'frmadd', $baseurl);
         $sform->setExtra('enctype="multipart/form-data"');
         $sform->addElement(new \XoopsFormHidden('op', 'saveedit'));
@@ -212,10 +212,10 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     }
 
     /**
-     * Enregistre un utilisateur apr�s modification (ou ajout)
+     * Enregistre un utilisateur aprčs modification (ou ajout)
      *
      * @param  bool $withCurrentUser Indique s'il faut prendre l'utilisateur courant ou pas
-     * @return bool Vrai si l'enregistrement a r�ussi sinon faux
+     * @return bool Vrai si l'enregistrement a réussi sinon faux
      */
     public function saveUser($withCurrentUser = false)
     {
@@ -277,8 +277,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Suppression d'un utilisateur
      *
-     * @param  Users $user L'utilisateur � supprimer
-     * @return bool          Le r�sultat de la suppression
+     * @param  Users $user L'utilisateur ŕ supprimer
+     * @return bool          Le résultat de la suppression
      */
     public function deleteUser(Users $user)
     {
@@ -292,7 +292,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     }
 
     /**
-     * Mise � jour du compteur de commentaires pour un utilisateur
+     * Mise ŕ jour du compteur de commentaires pour un utilisateur
      *
      * @param  int $userId
      * @param  int $commentsCount
@@ -401,10 +401,11 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Retourne la liste de tous les utilisateurs
      *
-     * @param  int    $start Position de d�part
-     * @param  int    $limit Nombre maximum d'enregistrements
-     * @param  string $sort  Champ � utiliser pour le tri
+     * @param int     $start Position de départ
+     * @param integer $limit Nombre maximum d'enregistrements
+     * @param string  $sort  Champ ŕ utiliser pour le tri
      * @param  string $order Ordre de tri
+     *
      * @return array   Objets de type Users
      */
     public function getAllUsers($start = 0, $limit = 0, $sort = 'obituaries_lastname', $order = 'ASC')

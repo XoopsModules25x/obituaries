@@ -56,7 +56,7 @@ require_once OBITUARIES_PATH . 'class/ObituariesUtils.php';
 //require_once OBITUARIES_PATH.'class/PEAR.php';
 //}
 
-// D�finition des images
+// Définition des images
 if (!defined('_OBITUARIES_EDIT')) {
     if (!isset($xoopsConfig)) {
         global $xoopsConfig;
