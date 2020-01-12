@@ -31,9 +31,9 @@ function obituaries_search($queryarray, $andor, $limit, $offset, $userid)
     require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/Users.php';
 
     // Recherche dans les produits
-    $sql = 'SELECT obituaries_id, obituaries_firstname, obituaries_lastname, obituaries_date, obituaries_uid FROM ' . $xoopsDB->prefix('users_obituaries') . ' WHERE (obituaries_id <> 0 )';
+    $sql = 'SELECT obituaries_id, obituaries_firstname, obituaries_lastname, obituaries_date, obituaries_uid FROM ' . $xoopsDB->prefix('users_obituaries') . ' WHERE (obituaries_id <> 0 ';
     if (0 != $userid) {
-        $sql .= '  AND obituaries_uid = ' . $userid;
+        $sql .= ' AND obituaries_uid = ' . $userid;
     }
     $sql .= ') ';
 
