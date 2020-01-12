@@ -25,8 +25,8 @@ if (\Xmf\Request::hasVar('op', 'POST')) {
     $op = $_GET['op'];
 }
 
-// Lecture de certains param�tres de l'application ********************************************************************
-$limit         = Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
+// Lecture de certains paramètres de l'application ********************************************************************
+$limit         = Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'éléments à afficher
 $baseurl       = OBITUARIES_URL . 'admin/' . basename(__FILE__);    // URL de ce script
 $conf_msg      = Obituaries\ObituariesUtils::javascriptLinkConfirm(_AM_OBITUARIES_CONF_DELITEM);
 $images_width  = Obituaries\ObituariesUtils::getModuleOption('images_width');

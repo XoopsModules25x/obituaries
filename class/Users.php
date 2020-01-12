@@ -88,7 +88,7 @@ class Users extends \XoopsObject
     }
 
     /**
-     * Supprime l'image associ�e
+     * Supprime l'image associée
      */
     public function deletePicture()
     {
@@ -99,7 +99,7 @@ class Users extends \XoopsObject
     }
 
     /**
-     * Rentourne la chaine � envoyer dans une balise <a> pour l'attribut href
+     * Rentourne la chaine ŕ envoyer dans une balise <a> pour l'attribut href
      *
      * @return string
      */
@@ -109,7 +109,7 @@ class Users extends \XoopsObject
     }
 
     /**
-     * Retourne l'utilisateur Xoops li� � l'enregistrement courant
+     * Retourne l'utilisateur Xoops lié ŕ l'enregistrement courant
      */
     public function getXoopsUser()
     {
@@ -137,10 +137,10 @@ class Users extends \XoopsObject
     }
 
     /**
-     * Retourne les �l�ments format�s pour affichage
+     * Retourne les éléments formatés pour affichage
      *
-     * @param  string $format Le format � utiliser
-     * @return array  Les donn�es formatt�es
+     * @param  string $format Le format ŕ utiliser
+     * @return array  Les données formattées
      */
     public function toArray($format = 's')
     {
