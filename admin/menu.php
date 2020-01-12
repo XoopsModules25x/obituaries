@@ -7,7 +7,7 @@
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 use XoopsModules\Obituaries;
 

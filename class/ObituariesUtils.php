@@ -10,7 +10,7 @@ namespace XoopsModules\Obituaries;
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * A set of useful and common functions

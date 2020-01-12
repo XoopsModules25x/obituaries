@@ -12,7 +12,7 @@
 
 use XoopsModules\Obituaries;
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * @param $userId

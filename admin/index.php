@@ -12,7 +12,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       Hervé Thouzard (http://www.herve-thouzard.com)
- * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
+ * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @package         Obituaries
  * @author          Hervé Thouzard (http://www.herve-thouzard.com)
  *

@@ -17,7 +17,7 @@ use XoopsModules\Obituaries;
 /** @var Obituaries\Helper $helper */
 $helper = Obituaries\Helper::getInstance();
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 //if (!class_exists('Obituaries_XoopsPersistableObjectHandler')) {
