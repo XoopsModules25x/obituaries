@@ -37,7 +37,9 @@ $destname      = '';
 
 $cacheFolder = XOOPS_UPLOAD_PATH . '/' . OBITUARIES_DIRNAME;
 if (!is_dir($cacheFolder)) {
-    mkdir($cacheFolder, 0777);
+    if (!mkdir($cacheFolder, 0777) && !is_dir($cacheFolder)) {
+        throw new \RuntimeException(sprintf('Directory "%s" was not created', $cacheFolder));
+    }
     file_put_contents($cacheFolder . '/index.html', '<script>history.go(-1);</script>');
 }
 
