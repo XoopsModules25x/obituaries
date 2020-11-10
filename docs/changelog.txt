@@ -1,9 +1,62 @@
+<h5>2.4.0 Final  [2020-12-26]</h5>  Dev: XOOPS 2.5.11, PHP 7.4.12, PHP 8.0 RC 3
+<hr>
+<hr>
+- replaced index.html with index.php (geekwright/mamba)
+- PHP 8 tests (mamba)
+- code cosmetics (mamba)
+- blocksadmin (mamba)
+
+
+<h5>2.4.0 RC 1  [2020-12-26]</h5>  Dev: Xoops 2.5.10, PHP 7.4.1
+<hr>
+- Fix file case for autoloading (geekwright)
+- Fix generated SQL in search (geekwright)
+- Fix Unicode Replacement Character (geekwright)
+- code cosmetics (mamba)
+- added common.php language file (mamba)
+
+<h5>2.4.0 Beta 1  [2017-12-26]</h5>  Dev: Xoops 2.5.9, PHP 7.2.1
+<hr>
+- namespaces (mamba)
+- added option to customize section titles in Preferences (mamba)
+- added test data (mamba)
+- XOOPS 2.5.9, PHP 7 (mamba)
+- PSR-2 code cosmetics (mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- replaced < br /> with < br > (mamba)
+- Unnecessary double quotes (mamba)
+- reference mismatch (mamba)
+- Hardening to type safe (mamba)
+- update Help, .html to .tpl (mamba)
+- changed _handler to Handler (mamba)
+- removed '/' from void HTML elements (&lt;br&gt;, &lt;img&gt;, etc) (mamba)
+- HTML 5: removed 'selected' and 'checked' (mamba)
+- updated file headers for consistency (mamba)
+- renamed several $indexAdmin with $adminObject for consistency (mamba)
+- Updates for PayPal changes (zyspec)
+- added Contributing.md (mamba)
+- moved functions to Utility class (mamba)
+- include_once to require_once (mamba)
+- php-cs-fixer updates (mamba)
+- short array syntax (mamba)
+- Yoda notation (mamba)
+- started conversion to XMF (mamba)
+    &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
+    &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)
+    &nbsp;&nbsp;- changed to ->displayButton('left') (mamba)
+
+2.3.2 Beta 1       2014-04-23
+=================================
+- moved all images, CSS, and JS files to /assets (mamba)
+- renamed .html Smarty templates to .tpl (mamba)
+
 2.31 Final 2012-12-17
 ===================
-- Converted to standard XoopsPersistableObjectHandler
-- Removed Cache Lite
-- Removed PEAR.php
-- fixed upload folder bug
+- Converted to standard XoopsPersistableObjectHandler (mamba)
+- Removed Cache Lite (mamba)
+- Removed PEAR.php (mamba)
+- fixed upload folder bug (mamba)
 
 2.3 - 30-03-2012
 ===================
@@ -16,7 +69,7 @@
 
 2.1 - 13-8-2010
 ===================
-- Added option to order users list by name or date (Herv�/Mariane)
+- Added option to order users list by name or date (Hervet/Mariane)
 - Added edit link in obituary page (Mowaffaq)
 
 2.0 - 7-6-2009

@@ -1,10 +1,10 @@
 #########################################################
-#				            			                #	
-#  Obituaries 1.0				                        #
-#	by Mariane Antoun (www.maitsco.com)	                #
-#  Based on birthday module (www.instant-zero.com)	    # 
-#  							                            #
-#  Copyright © 2009					                    #
+#                                                       #
+#  Obituaries 1.0                                       #
+#   by Mariane Antoun (www.maitsco.com)                 #
+#  Based on birthday module (www.instant-zero.com)      #
+#                                                       #
+#  Copyright Â© 2009                                        #
 #########################################################
 
 Obituaries 1.0
@@ -12,7 +12,7 @@ Obituaries 1.0
 
 
 "Obituaries" is a new xoops module to announce death and show services to be held.
-Obituaries module was based on birthday module by instant zero, and has been totaly transformed with the 
+Obituaries module was based on birthday module by instant zero, and has been totaly transformed with the
 precious colaborations and helps of Mowaffak ali (www.arabxoops.com).
 
 Short description :
@@ -20,9 +20,9 @@ This module allows you to show :
 - Date of death
 - Deceased's Full Name
 - Deceased's Picture (automaticly resized)
-- Short Biography: This typically includes the person's date and place of birth, schools attended, degrees achieved, vocation and hobbies. It can be written as a perfunctory, chronological list or as a more prose-like tribute. 
-Names of Survivors: This typically includes the deceased's parents, children, spouse or domestic partner. Some people even include the name of a beloved pet. 
--Service Announcement: or Services to be held:  When and where the funeral, memorial service, viewing or wake will take place. 
+- Short Biography: This typically includes the person's date and place of birth, schools attended, degrees achieved, vocation and hobbies. It can be written as a perfunctory, chronological list or as a more prose-like tribute.
+Names of Survivors: This typically includes the deceased's parents, children, spouse or domestic partner. Some people even include the name of a beloved pet.
+-Service Announcement: or Services to be held:  When and where the funeral, memorial service, viewing or wake will take place.
 -Memorial Contributions: Where people can make donations in remembrance of the deceased or send flowers.
 - Sincere Condolences : users can use the comment system to write their Condolences
 

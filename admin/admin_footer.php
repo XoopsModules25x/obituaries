@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Obituaries module
  *
@@ -9,19 +10,16 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright	The XOOPS Project http://sourceforge.net/projects/xoops/
- * @license             http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package	obituaris
- * @since		2.3.0
- * @author 	XOOPS Module Team
- * @version	$Id $
-**/
+ * @copyright           XOOPS Project (https://xoops.org)
+ * @license             https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
+ * @package             obituaris
+ * @since               2.3.0
+ * @author              XOOPS Module Team
+ **/
 
-echo "<div class='adminfooter'>\n"
-    ."  <div style='text-align: center;'>\n"
-    ."    <a href='http://www.xoops.org' rel='external'><img src='{$pathIcon32}/xoopsmicrobutton.gif' alt='XOOPS' title='XOOPS'></a>\n"
-    ."  </div>\n"
-    ."  " . _AM_MODULEADMIN_ADMIN_FOOTER . "\n"
-    ."</div>";
+use Xmf\Module\Admin;
+
+$pathIcon32 = Admin::iconUrl('', 32);
+echo "<div class='adminfooter'>\n" . "  <div style='text-align: center;'>\n" . "    <a href='https://xoops.org' rel='external'><img src='{$pathIcon32}/xoopsmicrobutton.gif' alt='XOOPS' title='XOOPS'></a>\n" . "  </div>\n" . '  ' . _AM_MODULEADMIN_ADMIN_FOOTER . "\n" . '</div>';
 
 xoops_cp_footer();

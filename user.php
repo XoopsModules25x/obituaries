@@ -2,56 +2,66 @@
 /**
  * ****************************************************************************
  * Obituaries - MODULE FOR XOOPS
- * Copyright (c) Hervé Thouzard of Instant Zero (http://www.instant-zero.com)
+ * Copyright (c) HervÃ© Thouzard of Instant Zero (http://www.instant-zero.com)
  * Created on 10 juil. 08 at 18:39:52
- * Version : $Id:
+ * Version :
  * ****************************************************************************
  */
 
+use Xmf\Request;
+use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\Helper;
+
 /**
- * Affichage de la page d'un utilisateur
+ * Viewing a user's page
  */
-require 'header.php';
-$xoopsOption['template_main'] = 'obituaries_user.html';
-require_once XOOPS_ROOT_PATH.'/header.php';
+
+$GLOBALS['xoopsOption']['template_main'] = 'obituaries_user.tpl';
+require_once __DIR__ . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
+
+$helper = Helper::getInstance();
 
 $case = 0;
-if(isset($_GET['obituaries_id'])) {
-    $uid = intval($_GET['obituaries_id']);
+if (Request::hasVar('obituaries_id', 'GET')) {
+    $uid  = Request::getInt('obituaries_id', 0, 'GET');
     $case = 1;
-} elseif(isset($_GET['obituaries_uid'])) {
-    $uid = intval($_GET['obituaries_uid']);
+} elseif (Request::hasVar('obituaries_uid', 'GET')) {
+    $uid  = Request::getInt('obituaries_uid', 0, 'GET');
     $case = 2;
-} elseif(isset($xoopsUser) && is_object($xoopsUser)) {
-    $uid = $xoopsUser->getVar('uid');
+} elseif (isset($xoopsUser) && is_object($xoopsUser)) {
+    $uid  = $xoopsUser->getVar('uid');
     $case = 3;
 }
 
 $user = null;
-switch($case) {
+switch ($case) {
     case 0:    // Unknow user
-        obituaries_utils::redirect(_OBITUARIES_ERROR2, 'index.php', 3);
+        Obituaries\ObituariesUtils::redirect(_OBITUARIES_ERROR2, 'index.php', 3);
         break;
-
     case 1:    // obituaries_id
-        $user = $hBdUsersObituaries->get($uid);
+        $user = $usersHandler->get($uid);
         break;
-
     case 2:    // obituaries_uid
     case 3:    // uid
-        $user = $hBdUsersObituaries->getFromUid($uid);
+        $user = $usersHandler->getFromUid($uid);
         break;
 }
-if(is_object($user)) {
+if (is_object($user)) {
     $xoopsTpl->assign('obituaries_user', $user->toArray());
-    $pageTitle = $user->getFullName().' - '.obituaries_utils::getModuleName();
+    $pageTitle       = $user->getFullName() . ' - ' . Obituaries\ObituariesUtils::getModuleName();
     $metaDescription = $pageTitle;
-    $metaKeywords = obituaries_utils::createMetaKeywords($user->getVar('obituaries_description'));
-    obituaries_utils::setMetas($pageTitle, $metaDescription, $metaKeywords);
+    $metaKeywords    = Obituaries\ObituariesUtils::createMetaKeywords($user->getVar('obituaries_description'));
+    Obituaries\ObituariesUtils::setMetas($pageTitle, $metaDescription, $metaKeywords);
 }
-$path = array(  OBITUARIES_URL.'user.php' => $user->getFullName()
-               );
-$breadcrumb = obituaries_utils::breadcrumb($path);
+$path       = [OBITUARIES_URL . 'user.php' => $user->getFullName()];
+$breadcrumb = Obituaries\ObituariesUtils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
-include_once XOOPS_ROOT_PATH.'/include/comment_view.php';
-require_once XOOPS_ROOT_PATH.'/footer.php';
+
+$xoopsTpl->assign('title1', $helper->getConfig('title1'));
+$xoopsTpl->assign('title2', $helper->getConfig('title2'));
+$xoopsTpl->assign('title3', $helper->getConfig('title3'));
+$xoopsTpl->assign('title4', $helper->getConfig('title4'));
+
+require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

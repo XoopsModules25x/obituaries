@@ -1,7 +1,6 @@
 <?php
+
 /**
- * XOOPS Profile module
- *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
  * which is considered copyrighted (c) material of the original comment or credit authors.
@@ -9,23 +8,20 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright    The XOOPS Project (http://www.xoops.org)
- * @license      GNU GPL (http://www.gnu.org/licenses/gpl-2.0.html/)
- * @package    xoopsPoll
+ * @copyright    XOOPS Project (https://xoops.org)
+ * @license      GNU GPL (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
  * @since        2.5.0
- * @author     Mage, Mamba
- * @version    $Id $
+ * @author       Mage, Mamba
  **/
+use Xmf\Module\Admin;
+/** @var Admin $adminObject */
 
-include '../../../include/cp_header.php';
-include 'admin_header.php';
+require __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-$module_info =& $module_handler->get($xoopsModule->getVar("mid"));
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject::setPaypal('xoopsfoundation@gmail.com');
+$adminObject->displayAbout(false);
 
-$aboutAdmin = new ModuleAdmin();
-
-echo $aboutAdmin->addNavigation('about.php');
-echo $aboutAdmin->renderabout('xoopsfoundation@gmail.com', false);
-
-include 'admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

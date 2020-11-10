@@ -1,0 +1,49 @@
+users_obituaries:
+    options: 'ENGINE=MyISAM DEFAULT CHARSET=utf8'
+    columns:
+        -
+            name: obituaries_id
+            attributes: ' int(10) unsigned  NOT NULL auto_increment'
+        -
+            name: obituaries_uid
+            attributes: ' int(11) unsigned  NOT NULL  DEFAULT ''0'' '
+        -
+            name: obituaries_date
+            attributes: ' datetime  NOT NULL '
+        -
+            name: obituaries_photo
+            attributes: ' varchar(255)  NOT NULL '
+        -
+            name: obituaries_description
+            attributes: ' text  NOT NULL '
+        -
+            name: obituaries_survivors
+            attributes: ' text  NOT NULL '
+        -
+            name: obituaries_service
+            attributes: ' text  NOT NULL '
+        -
+            name: obituaries_memorial
+            attributes: ' text  NOT NULL '
+        -
+            name: obituaries_firstname
+            attributes: ' varchar(150)  NOT NULL '
+        -
+            name: obituaries_lastname
+            attributes: ' varchar(150)  NOT NULL '
+        -
+            name: obituaries_comments
+            attributes: ' int(10) unsigned  NOT NULL '
+    keys:
+        obituaries_date:
+            columns: obituaries_date
+            unique: false
+        obituaries_lastname:
+            columns: obituaries_lastname
+            unique: false
+        obituaries_uid:
+            columns: obituaries_uid
+            unique: false
+        PRIMARY:
+            columns: obituaries_id
+            unique: true

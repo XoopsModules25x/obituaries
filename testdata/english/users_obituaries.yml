@@ -1,0 +1,24 @@
+-
+    obituaries_id: '1'
+    obituaries_uid: '1'
+    obituaries_date: '1882-04-19 00:00:00'
+    obituaries_photo: 7f0000012d3b21dd.png
+    obituaries_description: 'Charles Robert Darwin, FRS FRGS FLS FZS[2] (/ˈdɑːrwɪn/;[3] 12 February 1809 – 19 April 1882) was an English naturalist, geologist and biologist,[4] best known for his contributions to the science of evolution.[I] He established that all species of life have descended over time from common ancestors[5] and, in a joint publication with Alfred Russel Wallace, introduced his scientific theory that this branching pattern of evolution resulted from a process that he called natural selection, in which the struggle for existence has a similar effect to the artificial selection involved in selective breeding.[6]'
+    obituaries_survivors: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+    obituaries_service: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+    obituaries_memorial: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+    obituaries_firstname: Charles
+    obituaries_lastname: Darwin
+    obituaries_comments: '1'
+-
+    obituaries_id: '2'
+    obituaries_uid: '0'
+    obituaries_date: '1955-04-18 00:00:00'
+    obituaries_photo: 7f0000012ae90cff.png
+    obituaries_description: "Einstein developed the theory of relativity, one of the two pillars of modern physics (alongside quantum mechanics). \r\nEinstein's work is also known for its influence on the philosophy of science. Einstein is best known by the general public for his mass–energy equivalence formula E = mc2 (which has been dubbed \"the world's most famous equation\"). He received the 1921 Nobel Prize in Physics \"for his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect\", a pivotal step in the evolution of quantum theory."
+    obituaries_survivors: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.'
+    obituaries_service: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.'
+    obituaries_memorial: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mattis, nulla id pretium malesuada, dui est laoreet risus, ac rhoncus eros diam id odio.'
+    obituaries_firstname: Albert
+    obituaries_lastname: Einstein
+    obituaries_comments: '0'

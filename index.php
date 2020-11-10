@@ -1,51 +1,58 @@
 <?php
 
 /**
- * Permet � l'utilisateur courant de modifier sa fiche (si l'option ad�quate est activ�e)
+ * Permet à l'utilisateur courant de modifier sa fiche (si l'option adéquate est activée)
  */
-require 'header.php';
-$xoopsOption['template_main'] = 'obituaries_users.html';
-require_once XOOPS_ROOT_PATH.'/header.php';
-require_once XOOPS_ROOT_PATH.'/class/pagenav.php';
 
-$start = isset($_GET['start']) ? intval($_GET['start']) : 0;
-$limit = obituaries_utils::getModuleOption('perpage');    // Nombre maximum d'�l�ments � afficher
-$users = array();
+use Xmf\Request;
+use XoopsModules\Obituaries;
 
-if(isset($_GET['op']) && $_GET['op'] == 'today') {    // Les utilisateurs dont l'anniversaire est aujourd'hui
-    $itemsCount = $hBdUsersObituaries->getTodayObituariessCount();
-    if($itemsCount > $limit) {
-        $pagenav = new XoopsPageNav($itemsCount, $limit, $start, 'start', 'op=today');
+$GLOBALS['xoopsOption']['template_main'] = 'obituaries_users.tpl';
+
+require_once __DIR__ . '/header.php';
+
+require_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+
+$start = Request::getInt('start', 0, 'GET');
+$limit = Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'éléments à afficher
+$users = [];
+
+if (Request::hasVar('op', 'GET') && 'today' === $_GET['op']) {    // Les utilisateurs dont l'anniversaire est aujourd'hui
+    $itemsCount = $usersHandler->getTodayObituariessCount();
+    if ($itemsCount > $limit) {
+        $pagenav = new \XoopsPageNav($itemsCount, $limit, $start, 'start', 'op=today');
     }
-    $users = $hBdUsersObituaries->getTodayObituariess($start, $limit);
+    $users = $usersHandler->getTodayObituariess($start, $limit);
 } else {    // Tous les utilisateurs
-    $itemsCount = $hBdUsersObituaries->getAllUsersCount();
-    if($itemsCount > $limit) {
-        $pagenav = new XoopsPageNav($itemsCount, $limit, $start, 'start');
+    $itemsCount = $usersHandler->getAllUsersCount();
+    if ($itemsCount > $limit) {
+        $pagenav = new \XoopsPageNav($itemsCount, $limit, $start, 'start');
     }
-    if(obituaries_utils::getModuleOption('userslist_sortorder') == 1) {    // Sort by date
-        $sort = 'obituaries_date';
+    if (1 == Obituaries\ObituariesUtils::getModuleOption('userslist_sortorder')) {    // Sort by date
+        $sort  = 'obituaries_date';
         $order = 'DESC';
     } else {
-        $sort = 'obituaries_lastname';
+        $sort  = 'obituaries_lastname';
         $order = 'ASC';
     }
-    $users = $hBdUsersObituaries->getAllUsers($start, $limit, $sort, $order);
+    $users = $usersHandler->getAllUsers($start, $limit, $sort, $order);
 }
-if(count($users) > 0) {
-    foreach($users as $user) {
+if (count($users) > 0) {
+    foreach ($users as $user) {
         $xoopsTpl->append('obituaries_users', $user->toArray());
     }
 }
-if(isset($pagenav) && is_object($pagenav)) {
+if (isset($pagenav) && is_object($pagenav)) {
     $xoopsTpl->assign('pagenav', $pagenav->renderNav());
 }
-$pageTitle = _AM_OBITUARIES_USERS_LIST.' - '.obituaries_utils::getModuleName();
+$pageTitle       = _AM_OBITUARIES_USERS_LIST . ' - ' . Obituaries\ObituariesUtils::getModuleName();
 $metaDescription = $pageTitle;
-$metaKeywords = '';
-obituaries_utils::setMetas($pageTitle, $metaDescription, $metaKeywords);
+$metaKeywords    = '';
+Obituaries\ObituariesUtils::setMetas($pageTitle, $metaDescription, $metaKeywords);
 
-$path = array(OBITUARIES_URL.'index.php' => _AM_OBITUARIES_USERS_LIST);
-$breadcrumb = obituaries_utils::breadcrumb($path);
+$path       = [OBITUARIES_URL . 'index.php' => _AM_OBITUARIES_USERS_LIST];
+$breadcrumb = Obituaries\ObituariesUtils::breadcrumb($path);
 $xoopsTpl->assign('breadcrumb', $breadcrumb);
-require_once XOOPS_ROOT_PATH.'/footer.php';
+
+require_once XOOPS_ROOT_PATH . '/footer.php';
