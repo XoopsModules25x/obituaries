@@ -69,6 +69,7 @@ class ObituariesUtils
             /** @var \XoopsModuleHandler $moduleHandler */
             $moduleHandler = \xoops_getHandler('module');
             $module        = $moduleHandler->getByDirname($repmodule);
+            /** @var \XoopsConfigHandler $configHandler */
             $configHandler = \xoops_getHandler('config');
             if ($module) {
                 $moduleConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
@@ -276,6 +277,7 @@ class ObituariesUtils
         $tpllist = [];
         require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
         require_once XOOPS_ROOT_PATH . '/class/template.php';
+        /** @var \XoopsTplfileHandler $tplfileHandler */
         $tplfileHandler = \xoops_getHandler('tplfile');
         $tpllist        = $tplfileHandler->find(null, null, null, $folder);
         \xoops_template_clear_module_cache($xoopsModule->getVar('mid'));            // Clear module's blocks cache
@@ -322,6 +324,7 @@ class ObituariesUtils
                 && OBITUARIES_DIRNAME == $xoopsModule->getVar('dirname')) {
                 $mymodule = &$xoopsModule;
             } else {
+                /** @var \XoopsModuleHandler $moduleHandler */
                 $moduleHandler = \xoops_getHandler('module');
                 $mymodule      = $moduleHandler->getByDirname(OBITUARIES_DIRNAME);
             }

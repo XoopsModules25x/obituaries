@@ -12,9 +12,16 @@ namespace XoopsModules\Obituaries;
  */
 
 use Xmf\Request;
-use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\{
+    Helper,
+    ObituariesUtils,
+    Users
+};
 
-$helper = Obituaries\Helper::getInstance();
+/** @var Helper $helper */
+/** @var Users $item */
+
+$helper = Helper::getInstance();
 
 
 
@@ -69,7 +76,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     {
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/FormTextDateSelect.php';
-        $helper = Obituaries\Helper::getInstance();
+        $helper = Helper::getInstance();
 
         $edit = true;
         if ($item->isNew()) {
@@ -98,10 +105,10 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         $sform->addElement(new \XoopsFormText(_AM_OBITUARIES_FIRSTNAME, 'obituaries_firstname', 50, 150, $item->getVar('obituaries_firstname', 'e')), false);
         $sform->addElement(new \XoopsFormText(_AM_OBITUARIES_LASTNAME, 'obituaries_lastname', 50, 150, $item->getVar('obituaries_lastname', 'e')), false);
 
-        //      $editor1 = Obituaries\ObituariesUtils::getWysiwygForm(_OBITUARIES_DESCRIPTION, 'obituaries_description', $item->getVar('obituaries_description', 'e'), 15, 60, 'description_hidden');
-        //        $editor2 = Obituaries\ObituariesUtils::getWysiwygForm(_OBITUARIES_SURVIVORS, 'obituaries_survivors', $item->getVar('obituaries_survivors', 'e'), 15, 60, 'survivors_hidden');
-        //      $editor3 = Obituaries\ObituariesUtils::getWysiwygForm(_OBITUARIES_SERVICE, 'obituaries_service', $item->getVar('obituaries_service', 'e'), 15, 60, 'service_hidden');
-        //      $editor4 = Obituaries\ObituariesUtils::getWysiwygForm(_OBITUARIES_MEMORIAL, 'obituaries_memorial', $item->getVar('obituaries_memorial', 'e'), 15, 60, 'memorial_hidden');
+        //      $editor1 = ObituariesUtils::getWysiwygForm(_OBITUARIES_DESCRIPTION, 'obituaries_description', $item->getVar('obituaries_description', 'e'), 15, 60, 'description_hidden');
+        //        $editor2 = ObituariesUtils::getWysiwygForm(_OBITUARIES_SURVIVORS, 'obituaries_survivors', $item->getVar('obituaries_survivors', 'e'), 15, 60, 'survivors_hidden');
+        //      $editor3 = ObituariesUtils::getWysiwygForm(_OBITUARIES_SERVICE, 'obituaries_service', $item->getVar('obituaries_service', 'e'), 15, 60, 'service_hidden');
+        //      $editor4 = ObituariesUtils::getWysiwygForm(_OBITUARIES_MEMORIAL, 'obituaries_memorial', $item->getVar('obituaries_memorial', 'e'), 15, 60, 'memorial_hidden');
         //      if ($editor1) {
         //            $sform->addElement($editor1, false);
         //        }
@@ -116,7 +123,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         //        }
         //
 
-        $helper = Obituaries\Helper::getInstance();
+        $helper = Helper::getInstance();
 
         //        $options_tray1 = new \XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');
         $options_tray1 = new \XoopsFormElementTray($helper->getConfig('title1'), '<br>');
@@ -197,13 +204,13 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $sform->addElement($pictureTray);
             unset($pictureTray, $deleteCheckbox);
         }
-        $sform->addElement(new \XoopsFormFile(_AM_OBITUARIES_PICTURE, 'attachedfile', Obituaries\ObituariesUtils::getModuleOption('maxuploadsize')), false);
+        $sform->addElement(new \XoopsFormFile(_AM_OBITUARIES_PICTURE, 'attachedfile', ObituariesUtils::getModuleOption('maxuploadsize')), false);
 
         $buttonTray = new \XoopsFormElementTray('', '');
         $submit_btn = new \XoopsFormButton('', 'post', $labelSubmit, 'submit');
         $buttonTray->addElement($submit_btn);
         $sform->addElement($buttonTray);
-        $sform = Obituaries\ObituariesUtils::formMarkRequiredFields($sform);
+        $sform = ObituariesUtils::formMarkRequiredFields($sform);
 
         return $sform;
     }
@@ -217,8 +224,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     public function saveUser($withCurrentUser = false)
     {
         global $destname;
-        $images_width  = Obituaries\ObituariesUtils::getModuleOption('images_width');
-        $images_height = Obituaries\ObituariesUtils::getModuleOption('images_height');
+        $images_width  = ObituariesUtils::getModuleOption('images_width');
+        $images_height = ObituariesUtils::getModuleOption('images_height');
         $id            = Request::getInt('obituaries_id', 0, 'POST');
         if (!empty($id)) {
             $edit = true;
@@ -243,13 +250,13 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $item->setVar('obituaries_photo', '');
         }
 
-        $uploadFolder = Obituaries\ObituariesUtils::getModuleOption('folder_path');
+        $uploadFolder = ObituariesUtils::getModuleOption('folder_path');
 
-        $return = Obituaries\ObituariesUtils::uploadFile(0, $uploadFolder);
+        $return = ObituariesUtils::uploadFile(0, $uploadFolder);
         if (true === $return) {
-            $newDestName = Obituaries\ObituariesUtils::createUploadName($uploadFolder, \basename($destname), true);
+            $newDestName = ObituariesUtils::createUploadName($uploadFolder, \basename($destname), true);
 
-            $retval = Obituaries\ObituariesUtils::resizePicture($uploadFolder . '/' . $destname, $uploadFolder . '/' . $newDestName, $images_width, $images_height);
+            $retval = ObituariesUtils::resizePicture($uploadFolder . '/' . $destname, $uploadFolder . '/' . $newDestName, $images_width, $images_height);
             if (1 == $retval || 3 == $retval) {
                 $item->setVar('obituaries_photo', $newDestName);
             }
@@ -265,7 +272,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
 
         $res = $this->insert($item);
         if ($res) {
-            Obituaries\ObituariesUtils::updateCache();
+            ObituariesUtils::updateCache();
         }
 
         return $res;
@@ -282,7 +289,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         $user->deletePicture();
         $res = $this->delete($user, true);
         if ($res) {
-            Obituaries\ObituariesUtils::updateCache();
+            ObituariesUtils::updateCache();
         }
 
         return $res;
@@ -339,7 +346,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     public function getRandomObituariess($start = 0, $limit = 0)
     {
         //disable cache for this one
-        $this->setCachingOptions(['caching' => false]);
+//        $this->setCachingOptions(['caching' => false]);
 
         $criteria = new \CriteriaCompo(null);
         $criteria->setStart($start);
