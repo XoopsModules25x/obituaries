@@ -19,21 +19,21 @@
     <div style="margin-left: 10px; text-align: justify;">
 
         <{if trim($obituaries_user.obituaries_full_imgurl) != ''}>
-            <div style="margin-left:10px; margin-top: 5px; margin-bottom: 5px; margin-right: 10px; float: left;">
+            <div style="margin: 5px 10px;float: left;">
 
                 <img src="<{$obituaries_user.obituaries_full_imgurl}>"
                      alt="<{$obituaries_user.obituaries_href_title}>">
 
             </div>
         <{elseif trim($obituaries_user.obituaries_user_user_avatar) != ''}>
-            <div style="margin-left:10px; margin-top: 5px; margin-bottom: 5px; margin-right: 10px; float: left;">
+            <div style="margin: 5px 10px;float: left;">
 
                 <img src="<{$xoops_url}>/uploads/<{$obituaries_user.obituaries_user_user_avatar}>"
                      alt="<{$obituaries_user.obituaries_href_title}>">
 
             </div>
         <{else}>
-            <div style="margin-left:10px; margin-top: 5px; margin-bottom: 5px; margin-right: 10px; float: left;">
+            <div style="margin: 5px 10px;float: left;">
 
                 <img src="<{$xoops_url}>/modules/obituaries/assets/images/nophoto.jpg"
                      alt="<{$obituaries_user.obituaries_href_title}>" width="130">
