@@ -9,7 +9,6 @@ require_once __DIR__ . '/preloads/autoloader.php';
 $moduleDirName      = basename(__DIR__);
 $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
-/** @var \XoopsModules\Obituaries\Helper $helper */
 $helper = Helper::getInstance();
 //$helper->loadLanguage('common');
 xoops_loadLanguage('common', $moduleDirName);

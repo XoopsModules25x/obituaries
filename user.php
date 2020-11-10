@@ -19,7 +19,6 @@ require_once __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'obituaries_user.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
-/** @var \XoopsModules\Obituaries\Helper $helper */
 $helper = Helper::getInstance();
 
 $case = 0;

@@ -30,7 +30,6 @@ use XoopsModules\Obituaries\Helper;
 function xoops_module_pre_install_obituaries(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var Obituaries\Utility $utility */
     $utility = new Obituaries\Utility();
 
     //check for minimum XOOPS version

@@ -74,7 +74,6 @@ function b_obituaries_edit($options)
  */
 function b_obituaries_random_show($options)
 {
-    /** @var Obituaries\Helper $helper */
     $helper = Obituaries\Helper::getInstance();
 
     $block = [];
@@ -129,7 +128,6 @@ function b_obituaries_random_edit($options)
  */
 function b_obituaries_last_show($options)
 {
-    /** @var Obituaries\Helper $helper */
     $helper = Obituaries\Helper::getInstance();
 
     $block = [];

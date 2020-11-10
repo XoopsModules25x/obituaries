@@ -61,7 +61,6 @@ if (!defined('_OBITUARIES_EDIT')) {
     if (!isset($xoopsConfig)) {
         global $xoopsConfig;
     }
-    /** @var Obituaries\Helper $helper */
     $helper = Obituaries\Helper::getInstance();
     $helper->loadLanguage('main');
 

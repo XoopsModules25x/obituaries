@@ -14,7 +14,6 @@ namespace XoopsModules\Obituaries;
 use Xmf\Request;
 use XoopsModules\Obituaries;
 
-/** @var Obituaries\Helper $helper */
 $helper = Obituaries\Helper::getInstance();
 
 
@@ -70,7 +69,6 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     {
         require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
         require_once XOOPS_ROOT_PATH . '/modules/obituaries/class/FormTextDateSelect.php';
-        /** @var Obituaries\Helper $helper */
         $helper = Obituaries\Helper::getInstance();
 
         $edit = true;
@@ -118,7 +116,6 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         //        }
         //
 
-        /** @var Obituaries\Helper $helper */
         $helper = Obituaries\Helper::getInstance();
 
         //        $options_tray1 = new \XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');

@@ -15,7 +15,6 @@ require_once dirname(__DIR__) . '/preloads/autoloader.php';
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-/** @var Obituaries\Helper $helper */
 $helper = Obituaries\Helper::getInstance();
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');

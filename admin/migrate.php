@@ -58,10 +58,8 @@ EOF;
 
 //XoopsLoad::load('migrate', 'newbb');
 
-/** @var Obituaries\Common\Configurator $configurator */
 $configurator = new Obituaries\Common\Configurator();
 
-/** @var \XoopsModules\Obituaries\Common\Migrate $migrator */
 $migrator = new Migrate($configurator);
 
 $op        = Request::getCmd('op', 'show');

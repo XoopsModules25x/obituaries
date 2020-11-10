@@ -24,7 +24,6 @@ $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 xoops_loadLanguage('common', $moduleDirName);
 
-/** @var \XoopsModules\Obituaries\Helper $helper */
 $helper = Helper::getInstance();
 
 return (object)[
