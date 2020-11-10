@@ -41,13 +41,12 @@ function listejour($name, $select = 1)
         '30',
         '31',
     ];
-    $stop  = count($j);
     $liste = "<select name='$name'>";
-    for ($i = 0; $i < $stop; ++$i) {
+    foreach ($j as $i => $iValue) {
         if ($select == $i) {
-            $liste .= "<option value='$j[$i]' selected>$j[$i]</option>";
+            $liste .= "<option value='$iValue' selected>$iValue</option>";
         } else {
-            $liste .= "<option value='$j[$i]'>$j[$i]</option>";
+            $liste .= "<option value='$iValue'>$iValue</option>";
         }
     }
     $liste .= '</select>';
