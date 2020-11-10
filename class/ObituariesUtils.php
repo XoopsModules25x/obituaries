@@ -10,7 +10,7 @@ namespace XoopsModules\Obituaries;
  * ****************************************************************************
  */
 
-
+use Xmf\Request;
 
 /**
  * A set of useful and common functions
@@ -525,9 +525,10 @@ class ObituariesUtils
 
         $tmp = [];
         // Search for the "Minimum keyword length"
-        if (\Xmf\Request::hasVar('obituaries_keywords_limit', 'SESSION')) {
+        if (Request::hasVar('obituaries_keywords_limit', 'SESSION')) {
             $limit = $_SESSION['obituaries_keywords_limit'];
         } else {
+            /** @var \XoopsConfigHandler $configHandler */
             $configHandler                         = \xoops_getHandler('config');
             $xoopsConfigSearch                     = $configHandler->getConfigsByCat(\XOOPS_CONF_SEARCH);
             $limit                                 = $xoopsConfigSearch['keyword_min'];
@@ -654,7 +655,7 @@ class ObituariesUtils
     {
         require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         global $destname;
-        if (\Xmf\Request::hasVar('xoops_upload_file', 'POST')) {
+        if (Request::hasVar('xoops_upload_file', 'POST')) {
             require_once XOOPS_ROOT_PATH . '/class/uploader.php';
             $fldname = '';
             $fldname = $_FILES[$_POST['xoops_upload_file'][$indice]];

@@ -12,11 +12,6 @@ namespace XoopsModules\Obituaries;
  */
 
 use Xmf\Request;
-use XoopsModules\Obituaries\{
-    Helper,
-    ObituariesUtils,
-    Users
-};
 
 /** @var Helper $helper */
 /** @var Users $item */
@@ -243,7 +238,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             global $xoopsUser;
             $item->setVar('obituaries_uid', $xoopsUser->getVar('uid'));
         }
-        if (\Xmf\Request::hasVar('delpicture', 'POST') && 1 == \Xmf\Request::getInt('delpicture', 0, 'POST')) {
+        if (Request::hasVar('delpicture', 'POST') && 1 == Request::getInt('delpicture', 0, 'POST')) {
             if ('' != \trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
                 $item->deletePicture();
             }
