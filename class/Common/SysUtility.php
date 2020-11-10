@@ -26,7 +26,8 @@ namespace XoopsModules\Obituaries\Common;
 use MyTextSanitizer;
 use XoopsFormDhtmlTextArea;
 use XoopsFormTextArea;
-use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\Helper;
+/** @var Helper $helper */
 
 /**
  * Class SysUtility
@@ -160,7 +161,6 @@ class SysUtility
      */
     public static function getEditor($helper = null, $options = null)
     {
-        /** @var Helper $helper */
         if (null === $options) {
             $options           = [];
             $options['name']   = 'Editor';
