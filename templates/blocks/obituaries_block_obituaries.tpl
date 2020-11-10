@@ -1,4 +1,4 @@
-<{if ($block.obituaries_today_users|@count)}>
+<{if isset($block.obituaries_today_users) && ($block.obituaries_today_users|is_array) && count($block.obituaries_today_users) > 0}>
     <table cellspacing="1" class="outer">
         <{foreach item=user from=$block.obituaries_today_users}>
             <tr class="<{cycle values="even,odd"}>" valign="middle">
