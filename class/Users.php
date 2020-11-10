@@ -13,7 +13,7 @@ namespace XoopsModules\Obituaries;
 
 use XoopsModules\Obituaries;
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 //if (!class_exists('Obituaries_XoopsPersistableObjectHandler')) {
@@ -30,19 +30,19 @@ class Users extends \XoopsObject
      */
     public function __construct()
     {
-        $this->initVar('obituaries_id', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('obituaries_uid', XOBJ_DTYPE_INT, null, false);
-        $this->initVar('obituaries_date', XOBJ_DTYPE_TIMESTAMP, null, false);
-        $this->initVar('obituaries_photo', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('obituaries_description', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('obituaries_survivors', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('obituaries_service', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('obituaries_memorial', XOBJ_DTYPE_TXTAREA, null, false);
-        $this->initVar('obituaries_firstname', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('obituaries_lastname', XOBJ_DTYPE_TXTBOX, null, false);
-        $this->initVar('obituaries_comments', XOBJ_DTYPE_INT, null, false);
+        $this->initVar('obituaries_id', \XOBJ_DTYPE_INT, null, false);
+        $this->initVar('obituaries_uid', \XOBJ_DTYPE_INT, null, false);
+        $this->initVar('obituaries_date', \XOBJ_DTYPE_TIMESTAMP, null, false);
+        $this->initVar('obituaries_photo', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('obituaries_description', \XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar('obituaries_survivors', \XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar('obituaries_service', \XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar('obituaries_memorial', \XOBJ_DTYPE_TXTAREA, null, false);
+        $this->initVar('obituaries_firstname', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('obituaries_lastname', \XOBJ_DTYPE_TXTBOX, null, false);
+        $this->initVar('obituaries_comments', \XOBJ_DTYPE_INT, null, false);
         // Pour autoriser le html
-        $this->initVar('dohtml', XOBJ_DTYPE_INT, 1, false);
+        $this->initVar('dohtml', \XOBJ_DTYPE_INT, 1, false);
     }
 
     /**
@@ -51,7 +51,7 @@ class Users extends \XoopsObject
      */
     public function getPictureUrl()
     {
-        if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
+        if ('' != \xoops_trim($this->getVar('obituaries_photo'))) {
             return Obituaries\ObituariesUtils::getModuleOption('folder_url') . '/' . $this->getVar('obituaries_photo');
         }
 
@@ -64,7 +64,7 @@ class Users extends \XoopsObject
      */
     public function getPicturePath()
     {
-        if ('' != xoops_trim($this->getVar('obituaries_photo'))) {
+        if ('' != \xoops_trim($this->getVar('obituaries_photo'))) {
             return Obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo');
         }
 
@@ -79,8 +79,8 @@ class Users extends \XoopsObject
     public function pictureExists()
     {
         $return = false;
-        if ('' != xoops_trim($this->getVar('obituaries_photo'))
-            && file_exists(Obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'))) {
+        if ('' != \xoops_trim($this->getVar('obituaries_photo'))
+            && \file_exists(Obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'))) {
             $return = true;
         }
 
@@ -93,7 +93,7 @@ class Users extends \XoopsObject
     public function deletePicture()
     {
         if ($this->pictureExists()) {
-            @unlink(Obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'));
+            @\unlink(Obituaries\ObituariesUtils::getModuleOption('folder_path') . '/' . $this->getVar('obituaries_photo'));
         }
         $this->setVar('obituaries_photo', '');
     }
@@ -105,7 +105,7 @@ class Users extends \XoopsObject
      */
     public function getHrefTitle()
     {
-        return Obituaries\ObituariesUtils::makeHrefTitle(xoops_trim($this->getVar('obituaries_lastname')) . ' ' . xoops_trim($this->getVar('obituaries_firstname')));
+        return Obituaries\ObituariesUtils::makeHrefTitle(\xoops_trim($this->getVar('obituaries_lastname')) . ' ' . \xoops_trim($this->getVar('obituaries_firstname')));
     }
 
     /**
@@ -117,10 +117,10 @@ class Users extends \XoopsObject
         static $memberHandler;
         if ($this->getVar('obituaries_uid') > 0) {
             if (null === $memberHandler) {
-                $memberHandler = xoops_getHandler('member');
+                $memberHandler = \xoops_getHandler('member');
             }
             $user = $memberHandler->getUser($this->getVar('obituaries_uid'));
-            if (is_object($user)) {
+            if (\is_object($user)) {
                 $ret = $user;
             }
         }
@@ -133,13 +133,13 @@ class Users extends \XoopsObject
      */
     public function getFullName()
     {
-        return xoops_trim($this->getVar('obituaries_lastname')) . ' ' . xoops_trim($this->getVar('obituaries_firstname'));
+        return \xoops_trim($this->getVar('obituaries_lastname')) . ' ' . \xoops_trim($this->getVar('obituaries_firstname'));
     }
 
     /**
      * Retourne les éléments formatés pour affichage
      *
-     * @param  string $format Le format ŕ utiliser
+     * @param string $format Le format ŕ utiliser
      * @return array  Les données formattées
      */
     public function toArray($format = 's')
@@ -152,7 +152,7 @@ class Users extends \XoopsObject
         $ret['obituaries_href_title']  = $this->getHrefTitle();
         $user                          = null;
         $user                          = $this->getXoopsUser();
-        if (is_object($user)) {
+        if (\is_object($user)) {
             $ret['obituaries_user_name']        = $user->getVar('name');
             $ret['obituaries_user_uname']       = $user->getVar('uname');
             $ret['obituaries_user_email']       = $user->getVar('email');
@@ -163,7 +163,7 @@ class Users extends \XoopsObject
 
         $ret['obituaries_picture_url'] = $this->getPictureUrl();
 
-        $ret['obituaries_formated_date'] = formatTimestamp(strtotime($this->getVar('obituaries_date')), 's');
+        $ret['obituaries_formated_date'] = \formatTimestamp(\strtotime($this->getVar('obituaries_date')), 's');
         $ret['obituaries_fullname']      = $this->getFullName();
 
         return $ret;

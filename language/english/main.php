@@ -1,4 +1,5 @@
 <?php
+
 define('_MI_OBITUARIES_TITRE_2', 'Obituaries');
 define('_MI_OBITUARIES_VOTRE_DATE', 'death date');
 define('_MI_OBITUARIES_JOUR', 'Day');

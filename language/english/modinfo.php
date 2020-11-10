@@ -1,4 +1,5 @@
 <?php
+
 define('_MI_OBITUARIES_TITRE', 'Obituaries');
 define('_MI_OBITUARIES_DESC', "Show Members' Obituaries");
 
@@ -24,6 +25,12 @@ define('_MI_OBITUARIES_FORM_KOIVI', 'Koivi Editor');
 define('_MI_OBITUARIES_FORM_TINYEDITOR', 'TinyEditor');
 define('_MI_OBITUARIES_HOME', 'Home');
 define('_MI_OBITUARIES_USERS_LIST', "Deceased's Lists");
+
+//Config
+define('_MI_OBITUARIES_EDITOR_ADMIN', 'Editor: Admin');
+define('_MI_OBITUARIES_EDITOR_ADMIN_DESC', 'Select the Editor to use by the Admin');
+define('_MI_OBITUARIES_EDITOR_USER', 'Editor: User');
+define('_MI_OBITUARIES_EDITOR_USER_DESC', 'Select the Editor to use by the User');
 
 //added by trabis
 define('_MI_OBITUARIES_RANDOM', 'Random Obituaries');

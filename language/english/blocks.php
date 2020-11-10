@@ -1,4 +1,5 @@
 <?php
+
 define('_MB_OBITUARIES_TITRE', "Today's obituaries");
 define('_MB_OBITUARIES_DESC', "Show Members\' Obituaries");
 define('_MD_OBITUARIES_FELICI', 'Obituaries ');

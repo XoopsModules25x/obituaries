@@ -16,7 +16,7 @@
         <li><a href="index.php"><{$breadcrumb}></a></li>
     </ol>
     <p align="center">
-        <a href="<{$xoops_url}>/modules/obituaries/index.php"><img src="<{$xoops_url}>/modules/obituaries/images/logo.png" alt="" class="img-thumbnail"/></a>
+        <a href="<{$xoops_url}>/modules/obituaries/index.php"><img src="<{$xoops_url}>/modules/obituaries/images/logo.png" alt="" class="img-thumbnail"></a>
     </p>
     <br>
     <ul class="heyula">
@@ -28,10 +28,10 @@
                         <img src="<{$obituaries_user.obituaries_full_imgurl}>" alt="<{$obituaries_user.obituaries_href_title}>" class="img-thumbnail">
                     <{elseif trim($obituaries_user.obituaries_user_user_avatar) != ''}>
                         <img src="<{$xoops_url}>/uploads/<{$obituaries_user.obituaries_user_user_avatar}>" alt="<{$obituaries_user.obituaries_href_title}>"
-                             class="img-thumbnail"/>
+                             class="img-thumbnail">
                     <{else}>
                         <img src="<{$xoops_url}>/modules/obituaries/images/nophoto.jpg" alt="<{$obituaries_user.obituaries_href_title}>" width="130"
-                             class="img-thumbnail"/>
+                             class="img-thumbnail">
                     <{/if}>
 
                     <div class="caption">

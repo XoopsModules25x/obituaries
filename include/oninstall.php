@@ -60,8 +60,7 @@ function xoops_module_install_obituaries(\XoopsModule $module)
 
     $moduleDirName = basename(dirname(__DIR__));
 
-    /** @var \XoopsModules\Obituaries\Helper $helper */
-    /** @var Obituaries\Utility $utility */
+    /** @var \XoopsModules\Obituaries\Helper $helper */ /** @var Obituaries\Utility $utility */
     /** @var Common\Configurator $configurator */
     $helper       = \XoopsModules\Obituaries\Helper::getInstance();
     $utility      = new Obituaries\Utility();
@@ -72,10 +71,11 @@ function xoops_module_install_obituaries(\XoopsModule $module)
     $helper->loadLanguage('modinfo');
 
     // default Permission Settings ----------------------
-    $moduleId  = $module->getVar('mid');
+    $moduleId = $module->getVar('mid');
 
     //$moduleName = $module->getVar('name');
-    $grouppermHandler = xoops_getHandler('groupperm');
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+$grouppermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
     $grouppermHandler->addRight($moduleDirName . '_approve', 1, XOOPS_GROUP_ADMIN, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_submit', 1, XOOPS_GROUP_ADMIN, $moduleId);

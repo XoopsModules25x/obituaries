@@ -1,5 +1,5 @@
 <?php
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
 
 use XoopsModules\Obituaries;
 
@@ -14,13 +14,12 @@ $helper = \XoopsModules\Obituaries\Helper::getInstance();
 xoops_loadLanguage('common', $moduleDirName);
 
 $modversion['version']             = 2.40;
-$modversion['module_status']       = 'Beta 1';
-$modversion['release_date']        = '2017/11/23';
+$modversion['module_status']       = 'Final';
+$modversion['release_date']        = '2020/11/10';
 $modversion['name']                = _MI_OBITUARIES_TITRE;
 $modversion['description']         = _MI_OBITUARIES_DESC;
 $modversion['author']              = 'Mariane Antoun based on Birthday module by Herve Thouzard';
 $modversion['credits']             = 'XOOPS Project';
-$modversion['help']                = 'page=help';
 $modversion['license']             = 'GNU GPL 2.0';
 $modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html';
 $modversion['official']            = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
@@ -30,7 +29,7 @@ $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.6';
+$modversion['min_php']             = '7.2';
 $modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
@@ -44,6 +43,7 @@ $modversion['adminmenu']   = 'admin/menu.php';
 $modversion['system_menu'] = 1;
 
 // ------------------- Help files ------------------- //
+$modversion['help']        = 'page=help';
 $modversion['helpsection'] = [
     ['name' => _MI_OBITUARIES_OVERVIEW, 'link' => 'page=help'],
     ['name' => _MI_OBITUARIES_DISCLAIMER, 'link' => 'page=disclaimer'],
@@ -243,13 +243,33 @@ $editorList    = array_flip($editorHandler->getList());
 
 $modversion['config'][] = [
     'name'        => 'form_options',
-    'title'       => '_MI_BIRTHDAY_FORM_OPTIONS',
-    'description' => '_MI_BIRTHDAY_FORM_OPTIONS_DESC',
+    'title'       => '_MI_OBITUARIES_FORM_OPTIONS',
+    'description' => '_MI_OBITUARIES_FORM_OPTIONS_DESC',
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'options'     => $editorList,
-    'default'     => 'dhtml',
+    'default'     => 'dhtmltextarea',
 ];
+
+//$modversion['config'][] = [
+//    'name'        => 'editorAdmin',
+//    'title'       => '_MI_OBITUARIES_EDITOR_ADMIN',
+//    'description' => '_MI_OBITUARIES_EDITOR_ADMIN_DESC',
+//    'formtype'    => 'select',
+//    'valuetype'   => 'text',
+//    'default'     => 'dhtmltextarea',
+//    'options'     => $editorList,
+//];
+//
+//$modversion['config'][] = [
+//    'name'        => 'editorAdmin',
+//    'title'       => '_MI_OBITUARIES_EDITOR_USER',
+//    'description' => '_MI_OBITUARIES_EDITOR_USER_DESC',
+//    'formtype'    => 'select',
+//    'valuetype'   => 'text',
+//    'default'     => 'dhtmltextarea',
+//    'options'     => $editorList,
+//];
 
 /**
  * Sort order
@@ -272,24 +292,24 @@ $modversion['config'][] = [
  */
 $modversion['config'][] = [
     'name'        => 'displaySampleButton',
-    'title'       => '_MI_OBITUARIES_SHOW_SAMPLE_BUTTON',
-    'description' => '_MI_OBITUARIES_SHOW_SAMPLE_BUTTON_DESC',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 1,
 ];
 
-// ********************************************************************************************************************
-// Comments ***********************************************************************************************************
-// ********************************************************************************************************************
-$modversion['hasComments']          = 1;
-$modversion['comments']['itemName'] = 'obituaries_id';
-$modversion['comments']['pageName'] = 'user.php';
-
-// Comment callback functions
-$modversion['comments']['callbackFile']        = 'include/comment_functions.php';
-$modversion['comments']['callback']['approve'] = 'obituaries_com_approve';
-$modversion['comments']['callback']['update']  = 'obituaries_com_update';
+/**
+ * Show Developer Tools?
+ */
+$modversion['config'][] = [
+    'name'        => 'displayDeveloperTools',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
 
 $modversion['config'][] = [
     'name'        => 'title1',
@@ -326,3 +346,16 @@ $modversion['config'][] = [
     'valuetype'   => 'text',
     'default'     => constant('CO_' . $moduleDirNameUpper . '_TITLE4'),
 ];
+
+// ********************************************************************************************************************
+// Comments ***********************************************************************************************************
+// ********************************************************************************************************************
+$modversion['hasComments']          = 1;
+$modversion['comments']['itemName'] = 'obituaries_id';
+$modversion['comments']['pageName'] = 'user.php';
+
+// Comment callback functions
+$modversion['comments']['callbackFile']        = 'include/comment_functions.php';
+$modversion['comments']['callback']['approve'] = 'obituaries_com_approve';
+$modversion['comments']['callback']['update']  = 'obituaries_com_update';
+

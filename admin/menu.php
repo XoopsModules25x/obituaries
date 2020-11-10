@@ -7,14 +7,19 @@
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
 
 use XoopsModules\Obituaries;
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
+$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
 /** @var Obituaries\Helper $helper */
 $helper = Obituaries\Helper::getInstance();
+$helper->loadLanguage('modinfo');
+$helper->loadLanguage('common');
 
 // get path to icons
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
@@ -39,6 +44,14 @@ $adminmenu[] = [
 //$adminmenu[$i]["link"]  = "admin/main.php?op=maintain";
 //$adminmenu[$i]["icon"] = './assets/images/maintenance.png';
 //];
+
+if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools')) {
+    $adminmenu[] = [
+        'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE'),
+        'link'  => 'admin/migrate.php',
+        'icon'  => $pathIcon32 . '/database_go.png',
+    ];
+}
 
 $adminmenu[] = [
     'title' => _MI_OBITUARIES_ABOUT,

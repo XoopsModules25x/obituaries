@@ -21,7 +21,7 @@ use XoopsModules\Obituaries;
 use XoopsModules\Obituaries\Common;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
-    || !$GLOBALS['xoopsUser']->IsAdmin()) {
+    || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
 
@@ -68,8 +68,7 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
     $moduleDirName      = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    /** @var Obituaries\Helper $helper */
-    /** @var Obituaries\Utility $utility */
+    /** @var Obituaries\Helper $helper */ /** @var Obituaries\Utility $utility */
     /** @var Common\Configurator $configurator */
     $helper       = Obituaries\Helper::getInstance();
     $utility      = new Obituaries\Utility();
@@ -101,7 +100,7 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
                     foreach ($templateList as $k => $v) {
                         $fileInfo = new \SplFileInfo($templateFolder . $v);
                         if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
-                            if (file_exists($templateFolder . $v)) {
+                            if (is_file($templateFolder . $v)) {
                                 unlink($templateFolder . $v);
                             }
                         }
@@ -154,8 +153,8 @@ function xoops_module_update_obituaries(\XoopsModule $module, $previousVersion =
         $sql = 'DELETE FROM ' . $GLOBALS['xoopsDB']->prefix('tplfile') . " WHERE `tpl_module` = '" . $module->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
         $GLOBALS['xoopsDB']->queryF($sql);
 
-        /** @var \XoopsGroupPermHandler $grouppermHandler */
-        $grouppermHandler = xoops_getHandler('groupperm');
+    /** @var \XoopsGroupPermHandler $grouppermHandler */
+$grouppermHandler = xoops_getHandler('groupperm');
 
         return $grouppermHandler->deleteByModule($module->getVar('mid'), 'item_read');
     }

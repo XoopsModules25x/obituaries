@@ -20,7 +20,7 @@ namespace XoopsModules\Obituaries;
  * @author       XOOPS Development Team, Kazumi Ono (AKA onokazu)
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
 /**
  * @package     kernel
  * @subpackage  form
@@ -49,7 +49,7 @@ class FormTextDateSelect extends \XoopsFormText
      */
     public function __construct($caption, $name, $size = 15, $value = 0)
     {
-        $value = !is_numeric($value) ? time() : (int)$value;
+        $value = !\is_numeric($value) ? \time() : (int)$value;
         parent::__construct($caption, $name, $size, 25, $value);
     }
 
@@ -60,7 +60,7 @@ class FormTextDateSelect extends \XoopsFormText
     {
         $ele_name  = $this->getName();
         $ele_value = $this->getValue(false);
-        $jstime    = formatTimestamp($ele_value, 'F j Y, H:i:s');
+        $jstime    = \formatTimestamp($ele_value, 'F j Y, H:i:s');
         require_once XOOPS_ROOT_PATH . '/modules/obituaries/include/calendarjs.php';
 
         return "<input type='text' name='"
@@ -72,7 +72,7 @@ class FormTextDateSelect extends \XoopsFormText
                . "' maxlength='"
                . $this->getMaxlength()
                . "' value='"
-               . date('Y-m-d', $ele_value)
+               . \date('Y-m-d', $ele_value)
                . "'"
                . $this->getExtra()
                . "><input type='reset' value=' ... ' onclick='return showCalendar(\""

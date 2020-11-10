@@ -16,13 +16,13 @@
         <{elseif trim($obituaries_user.obituaries_user_user_avatar) != ''}>
             <div style="margin: 5px 10px;float: left;">
 
-                <img src="<{$xoops_url}>/uploads/<{$obituaries_user.obituaries_user_user_avatar}>" alt="<{$obituaries_user.obituaries_href_title}>"/>
+                <img src="<{$xoops_url}>/uploads/<{$obituaries_user.obituaries_user_user_avatar}>" alt="<{$obituaries_user.obituaries_href_title}>">
 
             </div>
         <{else}>
             <div style="margin: 5px 10px;float: left;">
 
-                <img src="<{$xoops_url}>/modules/obituaries/images/nophoto.jpg" alt="<{$obituaries_user.obituaries_href_title}>" width="130"/>
+                <img src="<{$xoops_url}>/modules/obituaries/images/nophoto.jpg" alt="<{$obituaries_user.obituaries_href_title}>" width="130">
 
             </div>
         <{/if}>

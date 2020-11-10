@@ -33,8 +33,7 @@ function xoops_module_uninstall_obituaries(\XoopsModule $module)
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
     $moduleDirName      = basename(dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
-    /** @var Obituaries\Helper $helper */
+    $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName /** @var Obituaries\Helper $helper */
     /** @var Obituaries\Utility $utility */
     $helper  = Obituaries\Helper::getInstance();
     $utility = new Obituaries\Utility();

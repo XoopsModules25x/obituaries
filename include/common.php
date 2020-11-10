@@ -10,7 +10,7 @@
 
 use XoopsModules\Obituaries;
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 

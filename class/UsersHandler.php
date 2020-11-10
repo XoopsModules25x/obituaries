@@ -17,7 +17,7 @@ use XoopsModules\Obituaries;
 /** @var Obituaries\Helper $helper */
 $helper = Obituaries\Helper::getInstance();
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+
 
 require_once XOOPS_ROOT_PATH . '/kernel/object.php';
 //if (!class_exists('Obituaries_XoopsPersistableObjectHandler')) {
@@ -33,7 +33,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
      * UsersHandler constructor.
      * @param null|\XoopsDatabase $db
      */
-    public function __construct($db)
+    public function __construct(\XoopsDatabase $db)
     {    //                             Table           Classe          Id              Description
         parent::__construct($db, 'users_obituaries', Users::class, 'obituaries_id', 'obituaries_lastname');
     }
@@ -41,7 +41,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Retourne un utilisateur ŕ partir de son uid
      *
-     * @param  int $uid L'ID Xoops recherché
+     * @param int $uid L'ID Xoops recherché
      * @return object
      */
     public function getFromUid($uid)
@@ -50,7 +50,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         if ($this->getCount($criteria) > 0) {
             $temp = [];
             $temp = $this->getObjects($criteria);
-            if (count($temp) > 0) {
+            if (\count($temp) > 0) {
                 return $temp[0];
             }
         }
@@ -95,7 +95,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $selectUser->setDescription(_AM_OBITUARIES_USE_ANONYMOUS);
             $sform->addElement($selectUser);
         }
-        $date = strtotime($item->getVar('obituaries_date'));
+        $date = \strtotime($item->getVar('obituaries_date'));
         $sform->addElement(new \XoopsFormTextDateSelect(_AM_OBITUARIES_DATE, 'obituaries_date', 15, $date));
         $sform->addElement(new \XoopsFormText(_AM_OBITUARIES_FIRSTNAME, 'obituaries_firstname', 50, 150, $item->getVar('obituaries_firstname', 'e')), false);
         $sform->addElement(new \XoopsFormText(_AM_OBITUARIES_LASTNAME, 'obituaries_lastname', 50, 150, $item->getVar('obituaries_lastname', 'e')), false);
@@ -124,7 +124,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         //        $options_tray1 = new \XoopsFormElementTray(_AM_OBITUARIES_DESCRIPTION, '<br>');
         $options_tray1 = new \XoopsFormElementTray($helper->getConfig('title1'), '<br>');
 
-        if (class_exists('XoopsFormEditor')) {
+        if (\class_exists('XoopsFormEditor')) {
             $options['name']        = 'obituaries_description';
             $options['value']       = $item->getVar('obituaries_description', 'e');
             $options['rows']        = 10;
@@ -141,7 +141,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
 
         //        $options_tray2 = new \XoopsFormElementTray(_AM_OBITUARIES_SURVIVORS, '<br>');
         $options_tray2 = new \XoopsFormElementTray($helper->getConfig('title2'), '<br>');
-        if (class_exists('XoopsFormEditor')) {
+        if (\class_exists('XoopsFormEditor')) {
             $options['name']      = 'obituaries_survivors';
             $options['value']     = $item->getVar('obituaries_survivors', 'e');
             $options['rows']      = 10;
@@ -158,7 +158,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
 
         //        $options_tray3 = new \XoopsFormElementTray(_AM_OBITUARIES_SERVICE, '<br>');
         $options_tray3 = new \XoopsFormElementTray($helper->getConfig('title3'), '<br>');
-        if (class_exists('XoopsFormEditor')) {
+        if (\class_exists('XoopsFormEditor')) {
             $options['name']    = 'obituaries_service';
             $options['value']   = $item->getVar('obituaries_service', 'e');
             $options['rows']    = 10;
@@ -175,7 +175,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
 
         //        $options_tray4 = new \XoopsFormElementTray(_AM_OBITUARIES_MEMORIAL, '<br>');
         $options_tray4 = new \XoopsFormElementTray($helper->getConfig('title4'), '<br>');
-        if (class_exists('XoopsFormEditor')) {
+        if (\class_exists('XoopsFormEditor')) {
             $options['name']     = 'obituaries_memorial';
             $options['value']    = $item->getVar('obituaries_memorial', 'e');
             $options['rows']     = 10;
@@ -191,7 +191,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
 
         $sform->addElement($options_tray4);
 
-        if ($edit && '' != trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
+        if ($edit && '' != \trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
             $pictureTray = new \XoopsFormElementTray(_AM_OBITUARIES_CURRENT_PICTURE, '<br>');
             $pictureTray->addElement(new \XoopsFormLabel('', "<img src='" . $item->getPictureUrl() . "' alt='' border='0'>"));
             $deleteCheckbox = new \XoopsFormCheckBox('', 'delpicture');
@@ -214,7 +214,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Enregistre un utilisateur aprčs modification (ou ajout)
      *
-     * @param  bool $withCurrentUser Indique s'il faut prendre l'utilisateur courant ou pas
+     * @param bool $withCurrentUser Indique s'il faut prendre l'utilisateur courant ou pas
      * @return bool Vrai si l'enregistrement a réussi sinon faux
      */
     public function saveUser($withCurrentUser = false)
@@ -226,7 +226,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         if (!empty($id)) {
             $edit = true;
             $item = $this->get($id);
-            if (!is_object($item)) {
+            if (!\is_object($item)) {
                 return false;
             }
             $item->unsetNew();
@@ -240,7 +240,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             $item->setVar('obituaries_uid', $xoopsUser->getVar('uid'));
         }
         if (\Xmf\Request::hasVar('delpicture', 'POST') && 1 == \Xmf\Request::getInt('delpicture', 0, 'POST')) {
-            if ('' != trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
+            if ('' != \trim($item->getVar('obituaries_photo')) && $item->pictureExists()) {
                 $item->deletePicture();
             }
             $item->setVar('obituaries_photo', '');
@@ -250,7 +250,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
 
         $return = Obituaries\ObituariesUtils::uploadFile(0, $uploadFolder);
         if (true === $return) {
-            $newDestName = Obituaries\ObituariesUtils::createUploadName($uploadFolder, basename($destname), true);
+            $newDestName = Obituaries\ObituariesUtils::createUploadName($uploadFolder, \basename($destname), true);
 
             $retval = Obituaries\ObituariesUtils::resizePicture($uploadFolder . '/' . $destname, $uploadFolder . '/' . $newDestName, $images_width, $images_height);
             if (1 == $retval || 3 == $retval) {
@@ -262,7 +262,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
             }
         }
 
-        $tempDate = date(_SHORTDATESTRING, strtotime(Request::getString('obituaries_date', '', 'POST')));
+        $tempDate = \date(_SHORTDATESTRING, \strtotime(Request::getString('obituaries_date', '', 'POST')));
 
         $item->setVar('obituaries_date', $tempDate);
 
@@ -277,7 +277,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Suppression d'un utilisateur
      *
-     * @param  Users $user L'utilisateur ŕ supprimer
+     * @param Users $user L'utilisateur ŕ supprimer
      * @return bool          Le résultat de la suppression
      */
     public function deleteUser(Users $user)
@@ -294,8 +294,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     /**
      * Mise ŕ jour du compteur de commentaires pour un utilisateur
      *
-     * @param  int $userId
-     * @param  int $commentsCount
+     * @param int $userId
+     * @param int $commentsCount
      * @internal param int $total_num
      */
     public function updateCommentsCount($userId, $commentsCount)
@@ -304,7 +304,7 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
         $commentsCount = (int)$commentsCount;
         $user          = null;
         $user          = $this->get($userId);
-        if (is_object($user)) {
+        if (\is_object($user)) {
             $criteria = new \Criteria('obituaries_id', $userId, '=');
             $this->updateAll('prod_comments', $commentsCount, $criteria, true);
         }
@@ -321,8 +321,8 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     public function getTodayObituariess($start = 0, $limit = 0, $sort = 'obituaries_lastname', $order = 'ASC')
     {
         $criteria = new \CriteriaCompo();
-        $criteria->add(new \Criteria('day(obituaries_date)', date('j'), '='));
-        $criteria->add(new \Criteria('month(obituaries_date)', date('n'), '='));
+        $criteria->add(new \Criteria('day(obituaries_date)', \date('j'), '='));
+        $criteria->add(new \Criteria('month(obituaries_date)', \date('n'), '='));
         $criteria->setStart($start);
         if ($limit > 0) {
             $criteria->setLimit($limit);
@@ -382,14 +382,14 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     public function getTodayObituariessCount()
     {
         $criteria = new \CriteriaCompo();
-        $criteria->add(new \Criteria('day(obituaries_date)', date('j'), '='));
-        $criteria->add(new \Criteria('month(obituaries_date)', date('n'), '='));
+        $criteria->add(new \Criteria('day(obituaries_date)', \date('j'), '='));
+        $criteria->add(new \Criteria('month(obituaries_date)', \date('n'), '='));
 
         return $this->getCount($criteria);
     }
 
     /**
-     * Retourne le nombre total d'utilisateurs
+     * Returns the total number of users
      *
      * @return int
      */
@@ -399,12 +399,12 @@ class UsersHandler extends \XoopsPersistableObjectHandler //Obituaries_XoopsPers
     }
 
     /**
-     * Retourne la liste de tous les utilisateurs
+     * Returns the list of all users
      *
      * @param int     $start Position de départ
      * @param integer $limit Nombre maximum d'enregistrements
      * @param string  $sort  Champ ŕ utiliser pour le tri
-     * @param  string $order Ordre de tri
+     * @param string  $order Ordre de tri
      *
      * @return array   Objets de type Users
      */
