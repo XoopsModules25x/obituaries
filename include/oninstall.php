@@ -19,6 +19,7 @@
 
 use XoopsModules\Obituaries;
 use XoopsModules\Obituaries\Common;
+use XoopsModules\Obituaries\Helper;
 
 /**
  * Prepares system prior to attempting to install module
@@ -62,7 +63,7 @@ function xoops_module_install_obituaries(\XoopsModule $module)
 
     /** @var \XoopsModules\Obituaries\Helper $helper */ /** @var Obituaries\Utility $utility */
     /** @var Common\Configurator $configurator */
-    $helper       = \XoopsModules\Obituaries\Helper::getInstance();
+    $helper       = Helper::getInstance();
     $utility      = new Obituaries\Utility();
     $configurator = new Common\Configurator();
 

@@ -4,6 +4,7 @@
  * Permet à l'utilisateur courant de modifier sa fiche (si l'option adéquate est activée)
  */
 
+use Xmf\Request;
 use XoopsModules\Obituaries;
 
 $GLOBALS['xoopsOption']['template_main'] = 'obituaries_users.tpl';
@@ -13,11 +14,11 @@ require_once __DIR__ . '/header.php';
 require_once XOOPS_ROOT_PATH . '/header.php';
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 
-$start = \Xmf\Request::getInt('start', 0, 'GET');
+$start = Request::getInt('start', 0, 'GET');
 $limit = Obituaries\ObituariesUtils::getModuleOption('perpage');    // Nombre maximum d'éléments à afficher
 $users = [];
 
-if (\Xmf\Request::hasVar('op', 'GET') && 'today' === $_GET['op']) {    // Les utilisateurs dont l'anniversaire est aujourd'hui
+if (Request::hasVar('op', 'GET') && 'today' === $_GET['op']) {    // Les utilisateurs dont l'anniversaire est aujourd'hui
     $itemsCount = $usersHandler->getTodayObituariessCount();
     if ($itemsCount > $limit) {
         $pagenav = new \XoopsPageNav($itemsCount, $limit, $start, 'start', 'op=today');

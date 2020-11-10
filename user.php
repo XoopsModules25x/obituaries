@@ -8,7 +8,9 @@
  * ****************************************************************************
  */
 
+use Xmf\Request;
 use XoopsModules\Obituaries;
+use XoopsModules\Obituaries\Helper;
 
 /**
  * Affichage de la page d'un utilisateur
@@ -18,14 +20,14 @@ $GLOBALS['xoopsOption']['template_main'] = 'obituaries_user.tpl';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
 /** @var \XoopsModules\Obituaries\Helper $helper */
-$helper = \XoopsModules\Obituaries\Helper::getInstance();
+$helper = Helper::getInstance();
 
 $case = 0;
-if (\Xmf\Request::hasVar('obituaries_id', 'GET')) {
-    $uid  = \Xmf\Request::getInt('obituaries_id', 0, 'GET');
+if (Request::hasVar('obituaries_id', 'GET')) {
+    $uid  = Request::getInt('obituaries_id', 0, 'GET');
     $case = 1;
-} elseif (\Xmf\Request::hasVar('obituaries_uid', 'GET')) {
-    $uid  = \Xmf\Request::getInt('obituaries_uid', 0, 'GET');
+} elseif (Request::hasVar('obituaries_uid', 'GET')) {
+    $uid  = Request::getInt('obituaries_uid', 0, 'GET');
     $case = 2;
 } elseif (isset($xoopsUser) && is_object($xoopsUser)) {
     $uid  = $xoopsUser->getVar('uid');

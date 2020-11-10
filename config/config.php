@@ -17,12 +17,15 @@
  * @author       XOOPS Development Team
  */
 
+use Xmf\Module\Admin;
+use XoopsModules\Obituaries\Helper;
+
 $moduleDirName      = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 xoops_loadLanguage('common', $moduleDirName);
 
 /** @var \XoopsModules\Obituaries\Helper $helper */
-$helper = \XoopsModules\Obituaries\Helper::getInstance();
+$helper = Helper::getInstance();
 
 return (object)[
     'name'           => $moduleDirNameUpper . ' Module Configurator',
@@ -87,6 +90,6 @@ return (object)[
         //            'totalsubmitted'  => $helper->getHandler('Item')->getItemsCount(-1, [Constants::PUBLISHER_STATUS_SUBMITTED]),
     ],
     'modCopyright' => "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . \Xmf\Module\Admin::iconUrl('xoopsmicrobutton.gif') . "' alt='XOOPS Project'></a>",
+                     <img src='" . Admin::iconUrl('xoopsmicrobutton.gif') . "' alt='XOOPS Project'></a>",
 ];
 

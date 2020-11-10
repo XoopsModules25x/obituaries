@@ -16,6 +16,7 @@
  * @author              XOOPS Module Team
  **/
 
+use Xmf\Module\Admin;
 use XoopsModules\Obituaries;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
@@ -28,9 +29,9 @@ $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 /** @var Obituaries\Helper $helper */
 $helper = Obituaries\Helper::getInstance();
 /** @var Xmf\Module\Admin $adminObject */
-$adminObject   = \Xmf\Module\Admin::getInstance();
-$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
+$adminObject   = Admin::getInstance();
+$pathIcon16    = Admin::iconUrl('', 16);
+$pathIcon32    = Admin::iconUrl('', 32);
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
 // Load language files

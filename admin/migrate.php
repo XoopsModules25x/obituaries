@@ -33,6 +33,8 @@ use Xmf\Request;
 use XoopsModules\Obituaries;
 
 use Xmf\Module\Admin;
+use XoopsModules\Obituaries\Common\Migrate;
+
 /** @var Admin $adminObject */
 
 require __DIR__ . '/admin_header.php';
@@ -60,7 +62,7 @@ EOF;
 $configurator = new Obituaries\Common\Configurator();
 
 /** @var \XoopsModules\Obituaries\Common\Migrate $migrator */
-$migrator = new \XoopsModules\Obituaries\Common\Migrate($configurator);
+$migrator = new Migrate($configurator);
 
 $op        = Request::getCmd('op', 'show');
 $opShow    = Request::getCmd('show', null, 'POST');

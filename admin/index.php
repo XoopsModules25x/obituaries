@@ -20,6 +20,9 @@
  * ****************************************************************************
  */
 
+use Xmf\Module\Admin;
+use Xmf\Request;
+use Xmf\Yaml;
 use XoopsModules\Obituaries;
 use XoopsModules\Obituaries\Common;
 
@@ -27,7 +30,7 @@ require_once __DIR__ . '/admin_header.php';
 // Display Admin header
 xoops_cp_header();
 
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 
 $a  = dirname(__DIR__) . '/include/common.php';
 $b  = realpath(dirname(__DIR__) . '/include/common.php');
@@ -116,7 +119,7 @@ $adminObject->displayIndex();
  */
 function loadAdminConfig($yamlFile)
 {
-    $config = \Xmf\Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
+    $config = Yaml::readWrapped($yamlFile); // work with phpmyadmin YAML dumps
     return $config;
 }
 
@@ -126,7 +129,7 @@ function loadAdminConfig($yamlFile)
 function hideButtons($yamlFile)
 {
     $app['displaySampleButton'] = 0;
-    \Xmf\Yaml::save($app, $yamlFile);
+    Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');
 }
 
@@ -136,11 +139,11 @@ function hideButtons($yamlFile)
 function showButtons($yamlFile)
 {
     $app['displaySampleButton'] = 1;
-    \Xmf\Yaml::save($app, $yamlFile);
+    Yaml::save($app, $yamlFile);
     redirect_header('index.php', 0, '');
 }
 
-$op = \Xmf\Request::getString('op', 0, 'GET');
+$op = Request::getString('op', 0, 'GET');
 
 switch ($op) {
     case 'hide_buttons':

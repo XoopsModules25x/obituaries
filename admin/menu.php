@@ -7,8 +7,7 @@
  * ****************************************************************************
  */
 
-
-
+use Xmf\Module\Admin;
 use XoopsModules\Obituaries;
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
@@ -22,7 +21,7 @@ $helper->loadLanguage('modinfo');
 $helper->loadLanguage('common');
 
 // get path to icons
-$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+$pathIcon32 = Admin::menuIconPath('');
 if (is_object($helper->getModule())) {
     $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 }
