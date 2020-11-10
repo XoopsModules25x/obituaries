@@ -11,7 +11,7 @@
 
 use Xmf\Request;
 
-require_once dirname(dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(__DIR__, 2) . '/mainfile.php';
 require_once __DIR__ . '/header.php';
 $com_itemid = Request::getInt('com_itemid', 0, 'GET');
 if ($com_itemid > 0) {

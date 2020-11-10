@@ -51,7 +51,7 @@ define('_MI_OBITUARIES_MAINTAIN', 'Maintain cache/tables');
 define('_MI_OBITUARIES_ABOUT', 'About');
 //2.32
 //Help
-define('_MI_OBITUARIES_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_OBITUARIES_DIRNAME', basename(dirname(__DIR__, 2)));
 define('_MI_OBITUARIES_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_OBITUARIES_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_OBITUARIES_OVERVIEW', 'Overview');
