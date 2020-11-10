@@ -4,6 +4,7 @@
 - replaced index.html with index.php (geekwright/mamba)
 - PHP 8 tests (mamba)
 - code cosmetics (mamba)
+- blocksadmin (mamba)
 
 
 <h5>2.4.0 RC 1  [2020-12-26]</h5>  Dev: Xoops 2.5.10, PHP 7.4.1
