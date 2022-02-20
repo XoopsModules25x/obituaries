@@ -13,9 +13,9 @@ $helper = Helper::getInstance();
 //$helper->loadLanguage('common');
 xoops_loadLanguage('common', $moduleDirName);
 
-$modversion['version']             = 2.40;
-$modversion['module_status']       = 'Final';
-$modversion['release_date']        = '2020/11/10';
+$modversion['version']             = '2.4.1';
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2022/02/20';
 $modversion['name']                = _MI_OBITUARIES_TITRE;
 $modversion['description']         = _MI_OBITUARIES_DESC;
 $modversion['author']              = 'Mariane Antoun based on Birthday module by Herve Thouzard';
